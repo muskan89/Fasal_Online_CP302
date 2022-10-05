@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:anim_search_bar/anim_search_bar.dart';
 //import 'sign_up.dart';
 
 void main() {
@@ -19,11 +20,118 @@ class MyApp extends StatelessWidget {
         primarySwatch : Colors.teal,
       ),
       home: Scaffold(
-        body: const LoginScreen(),
+        //body: const LoginScreen(),
+        body: const HomeScreen(),
       ),
     );
   }
 }
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController textController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      //body: const LoginScreen(),
+
+      body: Container(
+          child: ListView(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: Image.asset(
+                    'assets/images/fasall.jpg',
+                    //width: 40,
+                    height: 200,
+                    fit: BoxFit.fill,
+                  )
+              ),
+
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                      child: SizedBox(
+                        height: 80,
+                        width: 50,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffffff),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  offset: const Offset(
+                                    1.0,
+                                    1.0,
+                                  ),
+                                  blurRadius: 5.0,
+                                  spreadRadius: 1.0,
+                                ), //BoxShadow
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: const Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ), //BoxShadow
+                              ]
+                          ),
+                          child: ListView(
+                            children: <Widget>[
+                              Row(children: <Widget>[
+                                Image.asset(
+                                  'assets/images/bhaisaab.jpg',
+                                  width: 34,
+                                  height: 44,
+                                  fit: BoxFit.cover,
+                                )
+                                ,
+                                Container(
+                                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                                    child: AnimSearchBar(
+                                      width: 320,
+                                      textController: textController,
+                                      onSuffixTap: () {
+                                        setState(() {
+                                          textController.clear();
+                                        });
+                                      },
+                                      color: Colors.white,
+                                      helpText: "Ask Bhaisaab...",
+                                      //autoFocus: false,
+                                      //closeSearchOnSuffixTap: true,
+                                      //animationDurationInMilli: 2000,
+                                      //rtl: true,
+                                    )
+                                )
+                              ],)
+                            ],
+                          )
+
+                        ),
+
+                      )
+
+                  )
+
+
+
+            ],
+          )
+      ),
+    );
+  }
+}
+
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
