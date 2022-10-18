@@ -1,6 +1,9 @@
-//import 'dart:developer';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:onlinefasal/home.dart';
+import 'package:onlinefasal/login.dart';
+import 'package:onlinefasal/weather_screen.dart';
 
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
@@ -41,8 +44,20 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                        Image.asset('assets/images/bell.png'),
-                        Image.asset('assets/images/user_logo.png'),
+                        InkWell(
+                            child: Image.asset('assets/images/bell.png'),
+                            onTap: () {
+                              log('bell icon pressed');
+                            }),
+                        InkWell(
+                            child: Image.asset('assets/images/user_logo.png'),
+                            onTap: () {
+                              log('user login button pressed');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
+                            }),
                       ])),
                 )
               ],
@@ -58,47 +73,80 @@ class _FarmingScreenState extends State<FarmingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/home.png',
-                          ),
-                          const Text('Home')
-                        ],
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/home.png',
+                            ),
+                            const Text('Home')
+                          ],
+                        ),
+                        onTap: () {
+                          log('Home button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
+                        },
                       ),
                     ),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/weather.png'),
                           const Text('Weather')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('weather button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WeatherScreen()));
+                      },
+                    )),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/Farming.png'),
                           const Text('Farming')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('farming button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FarmingScreen()));
+                      },
+                    )),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/govt_schemes.png'),
                           const Text('Govt. Schemes')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('Govt. schemes button pressed');
+                      },
+                    )),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/rupee-sign.png'),
                           const Text('Mandi Rates')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('mandi rates button pressed');
+                      },
+                    )),
                   ],
                 ))
           ]),
@@ -112,45 +160,69 @@ class _FarmingScreenState extends State<FarmingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/crop_logo.png',
-                          ),
-                          const Text('Crops')
-                        ],
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/crop_logo.png',
+                            ),
+                            const Text('Crops')
+                          ],
+                        ),
+                        onTap: () {
+                          log('crops button pressed');
+                        },
                       ),
                     ),
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/pesticide_logo.png'),
-                          const Text('Pesticides')
-                        ],
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/pesticide_logo.png'),
+                            const Text('Pesticides')
+                          ],
+                        ),
+                        onTap: () {
+                          log('pesticides button pressed');
+                        },
                       ),
                     ),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/disease_logo.png'),
                           const Text('Diseases')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('diseases button pressed');
+                      },
+                    )),
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/fertilizer_logo.png'),
-                          const Text('Fertilizer')
-                        ],
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/fertilizer_logo.png'),
+                            const Text('Fertilizer')
+                          ],
+                        ),
+                        onTap: () {
+                          log('Fertilizers button pressed');
+                        },
                       ),
                     ),
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/soil_logo.png'),
-                          const Text('Soil')
-                        ],
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/soil_logo.png'),
+                            const Text('Soil')
+                          ],
+                        ),
+                        onTap: () {
+                          log('Soil button pressed');
+                        },
                       ),
                     ),
                   ],

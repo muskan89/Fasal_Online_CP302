@@ -1,9 +1,12 @@
 //import 'dart:developer';
 import 'package:flutter/material.dart';
 
-import 'package:onlinefasal/Farming.dart';
-import 'package:onlinefasal/Home.dart';
-import 'package:onlinefasal/Login.dart';
+import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/home.dart';
+import 'package:onlinefasal/login.dart';
+import 'package:onlinefasal/sign_up.dart';
+import 'package:onlinefasal/splashscreen.dart';
+import 'package:onlinefasal/weather_screen.dart';
 
 void main() {
   runApp(const MyApp());

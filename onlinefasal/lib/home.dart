@@ -1,7 +1,10 @@
-//import 'dart:developer';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/login.dart';
+import 'package:onlinefasal/weather_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,8 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //body: const LoginScreen(),
-
       body: Container(
           child: ListView(
         children: <Widget>[
@@ -42,8 +43,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                        Image.asset('assets/images/bell.png'),
-                        Image.asset('assets/images/user_logo.png'),
+                        InkWell(
+                            child: Image.asset('assets/images/bell.png'),
+                            onTap: () {
+                              log('bell icon pressed');
+                            }),
+                        InkWell(
+                            child: Image.asset('assets/images/user_logo.png'),
+                            onTap: () {
+                              log('user login button pressed');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
+                            }),
                       ])),
                 )
               ],
@@ -59,47 +72,80 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/home.png',
-                          ),
-                          const Text('Home')
-                        ],
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/home.png',
+                            ),
+                            const Text('Home')
+                          ],
+                        ),
+                        onTap: () {
+                          log('Home button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
+                        },
                       ),
                     ),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/weather.png'),
                           const Text('Weather')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('weather button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WeatherScreen()));
+                      },
+                    )),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/Farming.png'),
                           const Text('Farming')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('farming button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FarmingScreen()));
+                      },
+                    )),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/govt_schemes.png'),
                           const Text('Govt. Schemes')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('Govt. schemes button pressed');
+                      },
+                    )),
                     Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/rupee-sign.png'),
                           const Text('Mandi Rates')
                         ],
                       ),
-                    ),
+                      onTap: () {
+                        log('mandi rates button pressed');
+                      },
+                    )),
                   ],
                 ))
           ]),
