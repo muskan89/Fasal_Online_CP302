@@ -5,6 +5,7 @@ import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/weather_screen.dart';
+import 'package:onlinefasal/speech_text.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -192,12 +193,34 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Image.asset(
-                              'assets/images/bhaisaab.jpg',
-                              width: 34,
-                              height: 44,
-                              fit: BoxFit.cover,
+                            Expanded(
+                                child: InkWell(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Image.asset(
+                                        'assets/images/bhaisaab.jpg',
+                                        width: 34,
+                                        height: 44,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      //const Text('Farming')
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    log('chat bot button pressed');
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const SpeechScreen()));
+                                  },
+                                )
                             ),
+                            // Image.asset(
+                            //   'assets/images/bhaisaab.jpg',
+                            //   width: 34,
+                            //   height: 44,
+                            //   fit: BoxFit.cover,
+                            // ),
                             Container(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: AnimSearchBar(

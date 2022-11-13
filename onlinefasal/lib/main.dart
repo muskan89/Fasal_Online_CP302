@@ -5,8 +5,10 @@ import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/sign_up.dart';
-import 'package:onlinefasal/splashscreen.dart';
 import 'package:onlinefasal/weather_screen.dart';
+import 'package:onlinefasal/speech_text.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -24,8 +26,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
       ),
       home: const Scaffold(
-        body: HomeScreen(),
-        //body: const HomeScreen(),
+        //body: SpeechScreen(),
+        body: const HomeScreen(),
       ),
     );
   }
