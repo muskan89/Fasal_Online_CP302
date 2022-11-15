@@ -8,6 +8,12 @@ import 'package:onlinefasal/sign_up.dart';
 import 'package:onlinefasal/weather_screen.dart';
 import 'package:onlinefasal/speech_text.dart';
 
+import 'package:flutter/material.dart';
+import 'package:onlinefasal/api/api.dart';
+import 'package:onlinefasal/splashscreen.dart';
+import 'package:provider/provider.dart';
+
+
 
 
 void main() {
@@ -20,6 +26,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => CropProvider())],
+      child: MaterialApp(
+        title: 'Fasal online',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+        ),
+        home: const Scaffold(
+          body: SplashScreen(),
+        ),
+      ),
+    );
     return MaterialApp(
       title: 'Fasal online',
       theme: ThemeData(
