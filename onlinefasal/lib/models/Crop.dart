@@ -21,8 +21,8 @@ class Crop {
 
   factory Crop.fromJson(Map<String, dynamic> json) {
     return Crop(
-        name: json['name'],
-        description: json['description'],
-        species: json['species']);
+        name: (json['name']!=null)?json['name']:"Not available",
+        description: (json['description']!=null)?json['description']:"Not available",
+        species: (json['species']!=null)?json['species']:"Not available");
   }
 }

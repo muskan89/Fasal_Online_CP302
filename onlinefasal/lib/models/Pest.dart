@@ -13,7 +13,7 @@ class Pest {
   // final String averageYield;
   // final Float32List yieldMin;
   // final Float32List yieldMax;
-  final String crop;
+  final int crop;
   final String state;
   final String name;
   final String symptoms;
@@ -24,12 +24,12 @@ class Pest {
 
   factory Pest.fromJson(Map<String, dynamic> json) {
     return Pest(
-        crop: json['crop'],
-        state: json['state'],
-        name: json['name'],
-        symptoms: json['symptoms'],
-        measures: json['measures'],
-        pest_image: json['pest_image'])
+        crop: (json['crop']!=null)?json['crop']:-1,
+        state: (json['state']!=null)?json['state']:"Not available",
+        name: (json['name']!=null)?json['name']:"Not available",
+        symptoms: (json['symptoms']!=null)?json['symptoms']:"Not available",
+        measures: (json['measures']!=null)?json['measures']:"Not available",
+        pest_image: (json['pest_image']!=null)?json['pest_image']:"Not available")
         ;
         }
 }

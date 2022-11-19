@@ -13,29 +13,29 @@ class Soil {
   // final String averageYield;
   // final Float32List yieldMin;
   // final Float32List yieldMax;
-  final String crop;
+  final int crop;
   final String state;
   final String type;
   final String water_content;
   final String ph;
-  final String water_content_min;
-  final String water_content_max;
-  final String ph_min;
-  final String ph_max;
+  final int water_content_min;
+  final int water_content_max;
+  final double ph_min;
+  final double ph_max;
 
   Soil({required this.crop, required this.state, required this.type,required this.water_content,required this.ph,required this.water_content_min, required this.water_content_max, required this.ph_min,required this.ph_max});
 
   factory Soil.fromJson(Map<String, dynamic> json) {
     return Soil(
-        crop: json['crop'],
-        state: json['state'],
-        type: json['type'],
-        water_content: json['water_content'],
-        ph: json['ph'],
-        water_content_min: json['water_content_min'],
-        water_content_max: json['water_content_max'],
-        ph_min: json['ph_min'],
-        ph_max: json['ph_max'])
+        crop: (json['crop']!=null)?json['crop']: -1,
+        state: (json['state']!=null)?json['state']:"Not available",
+        type: (json['type']!=null)?json['type']:"Not available",
+        water_content: (json['water_content']!=null)?json['water_content']:"Not available",
+        ph: (json['ph']!=null)?json['ph']:"Not available",
+        water_content_min: (json['water_content_min']!=null)?json['water_content_min']: -1,
+        water_content_max: (json['water_content_max']!=null)?json['water_content_max']:-1,
+        ph_min: (json['ph_min']!=null)?json['ph_min']:-1.0,
+        ph_max: (json['ph_max']!=null)?json['ph_max']:-1.0)
     ;
   }
 }

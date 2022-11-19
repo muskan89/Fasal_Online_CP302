@@ -9,7 +9,7 @@ import 'package:onlinefasal/weather_screen.dart';
 import 'package:onlinefasal/speech_text.dart';
 
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/api/api_crop.dart';
+import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/splashscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +27,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => CropProvider())],
+      providers: [ChangeNotifierProvider(create: (context) => CropProvider()),
+        ChangeNotifierProvider(create: (context) => DiseaseProvider()),
+        ChangeNotifierProvider(create: (context) => FertilizerProvider()),
+        ChangeNotifierProvider(create: (context) => PestProvider()),
+        ChangeNotifierProvider(create: (context) => SoilProvider())
+      ],
       child: MaterialApp(
         title: 'Fasal online',
         theme: ThemeData(

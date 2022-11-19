@@ -13,7 +13,7 @@ class Fertilizer {
   // final String averageYield;
   // final Float32List yieldMin;
   // final Float32List yieldMax;
-  final String crop_id;
+  final int crop_id;
   final String state;
   final String trade_name;
   final String cycle;
@@ -25,13 +25,13 @@ class Fertilizer {
 
   factory Fertilizer.fromJson(Map<String, dynamic> json) {
     return Fertilizer(
-        crop_id: json['crop_id'],
-        state: json['state'],
-        trade_name: json['trade_name'],
-        cycle: json['cycle'],
-        amount: json['amount'],
-        amount_min: json['amount_min'],
-        amount_max: json['amount_max'])
+        crop_id: (json['crop_id']!=null)?json['crop_id']:-1,
+        state: (json['state']!=null)?json['state']:"Not available",
+        trade_name: (json['trade_name']!=null)?json['trade_name']:"Not available",
+        cycle: (json['cycle']!=null)?json['cycle']:"Not available",
+        amount: (json['amount']!=null)?json['amount']:"Not available",
+        amount_min: (json['amount_min']!=null)?json['amount_min']:"Not available",
+        amount_max: (json['amount_max']!=null)?json['amount_max']:"Not available")
     ;
   }
 }

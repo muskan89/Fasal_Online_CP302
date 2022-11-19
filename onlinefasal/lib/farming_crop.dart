@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/api/api_crop.dart';
+import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/DioPackage.dart';
@@ -9,7 +9,9 @@ import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/farming_crop_data.dart';
 import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming_disease.dart';
-
+import 'package:onlinefasal/farming_pest.dart';
+import 'package:onlinefasal/farming_soil.dart';
+import 'package:onlinefasal/farming_fertilizer.dart';
 
 class FarmingCropScreen extends StatefulWidget {
   const FarmingCropScreen({Key? key}) : super(key: key);
@@ -194,6 +196,10 @@ class _FarmingCropScreenState extends State<FarmingCropScreen> {
                           ),
                           onTap: () {
                             log('pests button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingPestScreen()));
                           },
                         ),
                       ),
@@ -223,6 +229,10 @@ class _FarmingCropScreenState extends State<FarmingCropScreen> {
                           ),
                           onTap: () {
                             log('Fertilizers button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingFertilizerScreen()));
                           },
                         ),
                       ),
@@ -236,6 +246,10 @@ class _FarmingCropScreenState extends State<FarmingCropScreen> {
                           ),
                           onTap: () {
                             log('Soil button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingSoilScreen()));
                           },
                         ),
                       ),

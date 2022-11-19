@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/api/api_disease.dart';
+import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/DioPackage.dart';
@@ -9,6 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/farming_crop.dart';
 import 'package:onlinefasal/farming_disease.dart';
+import 'package:onlinefasal/farming_pest.dart';
+import 'package:onlinefasal/farming_soil.dart';
+import 'package:onlinefasal/farming_fertilizer.dart';
 
 
 class FarmingDiseaseScreendata extends StatelessWidget {
@@ -201,6 +204,10 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                           ),
                           onTap: () {
                             log('pests button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingPestScreen()));
                           },
                         ),
                       ),
@@ -230,6 +237,10 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                           ),
                           onTap: () {
                             log('Fertilizers button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingFertilizerScreen()));
                           },
                         ),
                       ),
@@ -243,6 +254,10 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                           ),
                           onTap: () {
                             log('Soil button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingSoilScreen()));
                           },
                         ),
                       ),
@@ -292,6 +307,14 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                     ),
                     Text(
                       diseaseP.diseases[data].measures,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      "common name",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    Text(
+                      diseaseP.diseases[data].common_name,
                       style: TextStyle(fontSize: 20),
                     ),
                   ],

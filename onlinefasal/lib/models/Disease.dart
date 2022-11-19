@@ -13,7 +13,7 @@ class Disease {
   // final String averageYield;
   // final Float32List yieldMin;
   // final Float32List yieldMax;
-  final String crop;
+  final int crop;
   final String state;
   final String name;
   final String type;
@@ -26,14 +26,14 @@ class Disease {
 
   factory Disease.fromJson(Map<String, dynamic> json) {
     return Disease(
-        crop: json['crop'],
-        state: json['state'],
-        name: json['name'],
-        type: json['type'],
-        symptoms: json['symptoms'],
-        measures: json['measures'],
-        common_name: json['common_name'],
-        disease_image: json['disease_image'])
+        crop: (json['crop']!=null)?json['crop']:-1,
+        state: (json['state']!=null)?json['state']:"Not available",
+        name: (json['name']!=null)?json['name']:"Not available",
+        type: (json['type']!=null)?json['type']:"Not available",
+        symptoms: (json['symptoms']!=null)?json['symptoms']:"Not available",
+        measures: (json['measures']!=null)?json['measures']:"Not available",
+        common_name: (json['common_name']!=null)?json['common_name']:"Not available",
+        disease_image: (json['disease_image']!=null)?json['disease_image']:"Not available")
     ;
   }
 }
