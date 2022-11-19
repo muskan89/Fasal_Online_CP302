@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/api/api.dart';
+import 'package:onlinefasal/api/api_crop.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/DioPackage.dart';
 import 'package:provider/provider.dart';
+import 'package:onlinefasal/farming_crop.dart';
+import 'package:onlinefasal/farming_disease.dart';
+
 
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
@@ -102,6 +105,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                     ),
                     onTap: () {
                       log('weather button pressed');
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -172,6 +176,10 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       ),
                       onTap: () {
                         log('crops button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FarmingCropScreen()));
                       },
                     ),
                   ),
@@ -180,11 +188,11 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/pesticide_logo.png'),
-                          const Text('Pesticides')
+                          const Text('Pests')
                         ],
                       ),
                       onTap: () {
-                        log('pesticides button pressed');
+                        log('pests button pressed');
                       },
                     ),
                   ),
@@ -198,6 +206,10 @@ class _FarmingScreenState extends State<FarmingScreen> {
                     ),
                     onTap: () {
                       log('diseases button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FarmingDiseaseScreen()));
                     },
                   )),
                   Expanded(
@@ -229,16 +241,6 @@ class _FarmingScreenState extends State<FarmingScreen> {
                 ],
               ))
         ]),
-        ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 500, minHeight: 50),
-            child: ListView.builder(
-                itemCount: cropP.crops.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(cropP.crops[index].name),
-                    subtitle: Text(cropP.crops[index].description),
-                  );
-                }))
       ])),
     );
   }

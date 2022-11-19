@@ -9,7 +9,7 @@ import 'package:onlinefasal/weather_screen.dart';
 import 'package:onlinefasal/speech_text.dart';
 
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/api/api.dart';
+import 'package:onlinefasal/api/api_crop.dart';
 import 'package:onlinefasal/splashscreen.dart';
 import 'package:provider/provider.dart';
 
