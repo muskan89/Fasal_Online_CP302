@@ -4,6 +4,7 @@ from fasals import models
 class CropSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            'id',
             'name',
             'description',
             'species',

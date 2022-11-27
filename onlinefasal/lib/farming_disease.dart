@@ -14,18 +14,27 @@ import 'package:onlinefasal/farming_soil.dart';
 import 'package:onlinefasal/farming_fertilizer.dart';
 
 
-class FarmingDiseaseScreen extends StatefulWidget {
-  const FarmingDiseaseScreen({Key? key}) : super(key: key);
+class FarmingDiseaseScreen extends StatelessWidget {
+//   const FarmingDiseaseScreen({Key? key}) : super(key: key);
+//
+//   @override
+//   State<FarmingDiseaseScreen> createState() => _FarmingDiseaseScreenState();
+// }
+//
+// class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
+  final int data;
 
-  @override
-  State<FarmingDiseaseScreen> createState() => _FarmingDiseaseScreenState();
-}
-
-class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
+  FarmingDiseaseScreen({
+    Key? key,
+    //required Key key,
+    required this.data,
+  }) : super(key: key);
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final diseaseP = Provider.of<DiseaseProvider>(context);
+    final cropP = Provider.of<CropProvider>(context);
+
     return Scaffold(
       //body: const LoginScreen(),
 
@@ -168,25 +177,25 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/crop_logo.png',
-                              ),
-                              const Text('Crops')
-                            ],
-                          ),
-                          onTap: () {
-                            log('crops button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingCropScreen()));
-                          },
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: InkWell(
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Image.asset(
+                      //           'assets/images/crop_logo.png',
+                      //         ),
+                      //         const Text('Crops')
+                      //       ],
+                      //     ),
+                      //     onTap: () {
+                      //       log('crops button pressed');
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => const FarmingCropScreen()));
+                      //     },
+                      //   ),
+                      // ),
                       Expanded(
                         child: InkWell(
                           child: Column(
@@ -200,7 +209,7 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingPestScreen()));
+                                    builder: (context) =>  FarmingPestScreen(data: data)));
                           },
                         ),
                       ),
@@ -217,7 +226,7 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const FarmingDiseaseScreen()));
+                                      builder: (context) => FarmingDiseaseScreen(data: data)));
                             },
                           )),
                       Expanded(
@@ -233,7 +242,7 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingFertilizerScreen()));
+                                    builder: (context) => FarmingFertilizerScreen(data: data)));
                           },
                         ),
                       ),
@@ -250,7 +259,7 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingSoilScreen()));
+                                    builder: (context) => FarmingSoilScreen(data: data)));
                           },
                         ),
                       ),
@@ -265,7 +274,7 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                       return
                         //ListTile(
                         Expanded(
-                            child: InkWell(
+                            child: (diseaseP.diseases[index].crop==data)? InkWell(
                               child: Container(
                                   height: 100,
                                   padding: EdgeInsets.fromLTRB(0, 0, 20, 30),
@@ -292,7 +301,7 @@ class _FarmingDiseaseScreenState extends State<FarmingDiseaseScreen> {
                                 //     MaterialPageRoute(
                                 //         builder: (context) => const FarmingScreendata()));
                               },
-                            )
+                            ):Container()
                         )
                       //title: Text(cropP.crops[index].name),
                       //subtitle: Text(cropP.crops[index].description),

@@ -15,18 +15,25 @@ import 'package:onlinefasal/farming_soil.dart';
 import 'package:onlinefasal/farming_fertilizer.dart';
 
 
-class FarmingFertilizerScreen extends StatefulWidget {
-  const FarmingFertilizerScreen({Key? key}) : super(key: key);
+class FarmingFertilizerScreen extends StatelessWidget {
+  //const FarmingFertilizerScreen({Key? key}) : super(key: key);
+  final int data;
 
-  @override
-  State<FarmingFertilizerScreen> createState() => _FarmingFertilizerScreenState();
-}
-
-class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
+  FarmingFertilizerScreen({
+    Key? key,
+    //required Key key,
+    required this.data,
+  }) : super(key: key);
+//   @override
+//   State<FarmingFertilizerScreen> createState() => _FarmingFertilizerScreenState();
+// }
+//
+// class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final fertilizerP = Provider.of<FertilizerProvider>(context);
+    final cropP = Provider.of<CropProvider>(context);
     return Scaffold(
       //body: const LoginScreen(),
 
@@ -169,25 +176,25 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/crop_logo.png',
-                              ),
-                              const Text('Crops')
-                            ],
-                          ),
-                          onTap: () {
-                            log('crops button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingCropScreen()));
-                          },
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: InkWell(
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Image.asset(
+                      //           'assets/images/crop_logo.png',
+                      //         ),
+                      //         const Text('Crops')
+                      //       ],
+                      //     ),
+                      //     onTap: () {
+                      //       log('crops button pressed');
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => const FarmingCropScreen()));
+                      //     },
+                      //   ),
+                      // ),
                       Expanded(
                         child: InkWell(
                           child: Column(
@@ -201,7 +208,7 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingPestScreen()));
+                                    builder: (context) => FarmingPestScreen(data: data)));
                           },
                         ),
                       ),
@@ -218,7 +225,7 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const FarmingDiseaseScreen()));
+                                      builder: (context) => FarmingDiseaseScreen(data: data)));
                             },
                           )),
                       Expanded(
@@ -234,7 +241,7 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingFertilizerScreen()));
+                                    builder: (context) => FarmingFertilizerScreen(data: data)));
                           },
                         ),
                       ),
@@ -251,7 +258,7 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingSoilScreen()));
+                                    builder: (context) => FarmingSoilScreen(data: data)));
                           },
                         ),
                       ),
@@ -266,7 +273,7 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                       return
                         //ListTile(
                         Expanded(
-                            child: InkWell(
+                            child:  (fertilizerP.fertilizers[index].crop_id==data)?InkWell(
                               child: Container(
                                   height: 100,
                                   padding: EdgeInsets.fromLTRB(0, 0, 20, 30),
@@ -293,7 +300,7 @@ class _FarmingFertilizerScreenState extends State<FarmingFertilizerScreen> {
                                 //     MaterialPageRoute(
                                 //         builder: (context) => const FarmingScreendata()));
                               },
-                            )
+                            ):Container()
                         )
                       //title: Text(cropP.crops[index].name),
                       //subtitle: Text(cropP.crops[index].description),

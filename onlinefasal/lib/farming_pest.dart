@@ -14,18 +14,25 @@ import 'package:onlinefasal/farming_soil.dart';
 import 'package:onlinefasal/farming_fertilizer.dart';
 
 
-class FarmingPestScreen extends StatefulWidget {
-  const FarmingPestScreen({Key? key}) : super(key: key);
+class FarmingPestScreen extends StatelessWidget {
+  //const FarmingPestScreen({Key? key}) : super(key: key);
+  final int data;
 
-  @override
-  State<FarmingPestScreen> createState() => _FarmingPestScreenState();
-}
-
-class _FarmingPestScreenState extends State<FarmingPestScreen> {
+  FarmingPestScreen({
+    Key? key,
+    //required Key key,
+    required this.data,
+  }) : super(key: key);
+//   @override
+//   State<FarmingPestScreen> createState() => _FarmingPestScreenState();
+// }
+//
+// class _FarmingPestScreenState extends State<FarmingPestScreen> {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final pestP = Provider.of<PestProvider>(context);
+    final cropP = Provider.of<CropProvider>(context);
     return Scaffold(
       //body: const LoginScreen(),
 
@@ -168,25 +175,25 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/crop_logo.png',
-                              ),
-                              const Text('Crops')
-                            ],
-                          ),
-                          onTap: () {
-                            log('crops button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingCropScreen()));
-                          },
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: InkWell(
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Image.asset(
+                      //           'assets/images/crop_logo.png',
+                      //         ),
+                      //         const Text('Crops')
+                      //       ],
+                      //     ),
+                      //     onTap: () {
+                      //       log('crops button pressed');
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => const FarmingCropScreen()));
+                      //     },
+                      //   ),
+                      // ),
                       Expanded(
                         child: InkWell(
                           child: Column(
@@ -200,7 +207,7 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingPestScreen()));
+                                    builder: (context) => FarmingPestScreen(data: data)));
                           },
                         ),
                       ),
@@ -217,7 +224,7 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const FarmingDiseaseScreen()));
+                                      builder: (context) => FarmingDiseaseScreen(data: data)));
                             },
                           )),
                       Expanded(
@@ -233,7 +240,7 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingFertilizerScreen()));
+                                    builder: (context) => FarmingFertilizerScreen(data: data)));
                           },
                         ),
                       ),
@@ -250,7 +257,7 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingSoilScreen()));
+                                    builder: (context) => FarmingSoilScreen(data: data)));
                           },
                         ),
                       ),
@@ -264,8 +271,14 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return
                         //ListTile(
+                        // Expanded(() {
+                        //   // your code here
+                        //   if(pestP.pests[index].id==data){
+                        //     return child:
+                        //   }
+                        // }())
                         Expanded(
-                            child: InkWell(
+                            child: (pestP.pests[index].crop==data)? InkWell(
                               child: Container(
                                   height: 100,
                                   padding: EdgeInsets.fromLTRB(0, 0, 20, 30),
@@ -292,7 +305,7 @@ class _FarmingPestScreenState extends State<FarmingPestScreen> {
                                 //     MaterialPageRoute(
                                 //         builder: (context) => const FarmingScreendata()));
                               },
-                            )
+                            ):Container()
                         )
                       //title: Text(cropP.crops[index].name),
                       //subtitle: Text(cropP.crops[index].description),

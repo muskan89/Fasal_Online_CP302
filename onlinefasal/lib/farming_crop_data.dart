@@ -175,25 +175,25 @@ class FarmingCropScreendata extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/crop_logo.png',
-                              ),
-                              const Text('Crops')
-                            ],
-                          ),
-                          onTap: () {
-                            log('crops button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingCropScreen()));
-                          },
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: InkWell(
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Image.asset(
+                      //           'assets/images/crop_logo.png',
+                      //         ),
+                      //         const Text('Crops')
+                      //       ],
+                      //     ),
+                      //     onTap: () {
+                      //       log('crops button pressed');
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => const FarmingCropScreen()));
+                      //     },
+                      //   ),
+                      // ),
                       Expanded(
                         child: InkWell(
                           child: Column(
@@ -207,7 +207,7 @@ class FarmingCropScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingPestScreen()));
+                                    builder: (context) => FarmingPestScreen(data: cropP.crops[data].id)));
                           },
                         ),
                       ),
@@ -224,7 +224,7 @@ class FarmingCropScreendata extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const FarmingDiseaseScreen()));
+                                      builder: (context) => FarmingDiseaseScreen(data: cropP.crops[data].id)));
                             },
                           )),
                       Expanded(
@@ -240,7 +240,7 @@ class FarmingCropScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingFertilizerScreen()));
+                                    builder: (context) => FarmingFertilizerScreen(data: cropP.crops[data].id)));
                           },
                         ),
                       ),
@@ -257,7 +257,7 @@ class FarmingCropScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingSoilScreen()));
+                                    builder: (context) => FarmingSoilScreen(data: cropP.crops[data].id)));
                           },
                         ),
                       ),
@@ -285,9 +285,9 @@ class FarmingCropScreendata extends StatelessWidget {
                 //       //)
                 //           ;
                 //     })
-                  child: Center(
+                  child: SingleChildScrollView(
                           child: Column(
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               Text(
                                 cropP.crops[data].name,
@@ -295,6 +295,102 @@ class FarmingCropScreendata extends StatelessWidget {
                               ),
                               Text(
                                 cropP.crops[data].description,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Species",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].species,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Category",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].category,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Season",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].season,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Botanical name",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].botanical_name,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Genus",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].genus,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Family",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].family,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Origin",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].origin,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Synonym",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].synonym,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Rotations",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].rotations,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Average yield",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].average_yield,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Minimum yield",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].yield_min.toString(),
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "Maximum yield",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                cropP.crops[data].yield_max.toString(),
                                 style: TextStyle(fontSize: 20),
                               ),
                             ],

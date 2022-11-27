@@ -126,6 +126,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     )),
                     Expanded(
                         child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                              //const Text('Farming')
+                            ],
+                          ),
+                          onTap: () {
+                            log('chat bot button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SpeechScreen()));
+                          },
+                        )
+                    ),
+                    Expanded(
+                        child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/govt_schemes.png'),
@@ -194,28 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Expanded(
-                                child: InkWell(
-                                  child: Column(
-                                    children: <Widget>[
-                                      Image.asset(
-                                        'assets/images/bhaisaab.jpg',
-                                        width: 34,
-                                        height: 44,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      //const Text('Farming')
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    log('chat bot button pressed');
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const SpeechScreen()));
-                                  },
-                                )
-                            ),
+
                             // Image.asset(
                             //   'assets/images/bhaisaab.jpg',
                             //   width: 34,

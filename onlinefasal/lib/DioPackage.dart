@@ -102,14 +102,15 @@ class _WeatherrState extends State<Weatherr> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xff0e1e29),
-            Color(0xff5292a4),
+            Color(0xffffff),
+            Color.fromRGBO(0, 194, 146, 1),
           ],
         ),
+
       ),
       child: loading
           ? Scaffold(
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
         appBar: buildAppBar(),
         body: SingleChildScrollView(
           child: Column(
@@ -127,7 +128,7 @@ class _WeatherrState extends State<Weatherr> {
                       icon: Icon(
                         Icons.search,
                         size: 20,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         setState(() {
@@ -212,14 +213,14 @@ class _WeatherrState extends State<Weatherr> {
         children: [
           Text(
             temp.toString(),
-            style: TextStyle(fontSize: height / 8, color: Colors.white),
+            style: TextStyle(fontSize: height / 8, color: Colors.teal),
           ),
           SizedBox(width: 5),
           Text(
             '°C',
             style: TextStyle(
               fontSize: height / 8.5,
-              color: Colors.white,
+              color: Colors.teal,
             ),
           ),
         ],
@@ -234,11 +235,11 @@ class _WeatherrState extends State<Weatherr> {
       decoration: InputDecoration(
         hintText: 'Search City',
         hintStyle: TextStyle(
-          color: Colors.grey,
+          color: Colors.black,
         ),
       ),
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black,
       ),
     );
   }
@@ -246,13 +247,13 @@ class _WeatherrState extends State<Weatherr> {
 // App Bar
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      //backgroundColor: Colors.transparent,
       elevation: 0,
       actions: [
         IconButton(
           icon: Icon(
             Icons.refresh,
-            color: Colors.grey,
+            color: Colors.black,
           ),
           onPressed: () {
             setState(() {
@@ -292,7 +293,7 @@ class _WeatherrState extends State<Weatherr> {
               Text(
                 location.toString() + " ," + country.toString().toUpperCase(),
                 style: smallText.copyWith(
-                  color: Colors.white54,
+                  color: Colors.black,
                 ),
               ),
             ],

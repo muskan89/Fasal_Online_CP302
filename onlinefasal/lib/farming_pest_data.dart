@@ -166,104 +166,104 @@ class FarmingPestScreendata extends StatelessWidget {
                     ],
                   ))
             ]),
-            Column(children: <Widget>[
-              Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Color.fromRGBO(238, 255, 234, 1),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/crop_logo.png',
-                              ),
-                              const Text('Crops')
-                            ],
-                          ),
-                          onTap: () {
-                            log('crops button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingCropScreen()));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/pesticide_logo.png'),
-                              const Text('Pests')
-                            ],
-                          ),
-                          onTap: () {
-                            log('pests button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingPestScreen()));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                          child: InkWell(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/images/disease_logo.png'),
-                                const Text('Diseases')
-                              ],
-                            ),
-                            onTap: () {
-                              log('diseases button pressed');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const FarmingDiseaseScreen()));
-                            },
-                          )),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/fertilizer_logo.png'),
-                              const Text('Fertilizer')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Fertilizers button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingFertilizerScreen()));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/soil_logo.png'),
-                              const Text('Soil')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Soil button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingSoilScreen()));
-                          },
-                        ),
-                      ),
-                    ],
-                  ))
-            ]),
+            // Column(children: <Widget>[
+            //   Container(
+            //       decoration: const BoxDecoration(
+            //         borderRadius: BorderRadius.all(Radius.circular(15)),
+            //         color: Color.fromRGBO(238, 255, 234, 1),
+            //       ),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Expanded(
+            //             child: InkWell(
+            //               child: Column(
+            //                 children: <Widget>[
+            //                   Image.asset(
+            //                     'assets/images/crop_logo.png',
+            //                   ),
+            //                   const Text('Crops')
+            //                 ],
+            //               ),
+            //               onTap: () {
+            //                 log('crops button pressed');
+            //                 Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                         builder: (context) => const FarmingCropScreen()));
+            //               },
+            //             ),
+            //           ),
+            //           Expanded(
+            //             child: InkWell(
+            //               child: Column(
+            //                 children: <Widget>[
+            //                   Image.asset('assets/images/pesticide_logo.png'),
+            //                   const Text('Pests')
+            //                 ],
+            //               ),
+            //               onTap: () {
+            //                 log('pests button pressed');
+            //                 Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                         builder: (context) => const FarmingPestScreen()));
+            //               },
+            //             ),
+            //           ),
+            //           Expanded(
+            //               child: InkWell(
+            //                 child: Column(
+            //                   children: <Widget>[
+            //                     Image.asset('assets/images/disease_logo.png'),
+            //                     const Text('Diseases')
+            //                   ],
+            //                 ),
+            //                 onTap: () {
+            //                   log('diseases button pressed');
+            //                   Navigator.push(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                           builder: (context) => const FarmingDiseaseScreen()));
+            //                 },
+            //               )),
+            //           Expanded(
+            //             child: InkWell(
+            //               child: Column(
+            //                 children: <Widget>[
+            //                   Image.asset('assets/images/fertilizer_logo.png'),
+            //                   const Text('Fertilizer')
+            //                 ],
+            //               ),
+            //               onTap: () {
+            //                 log('Fertilizers button pressed');
+            //                 Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                         builder: (context) => const FarmingFertilizerScreen()));
+            //               },
+            //             ),
+            //           ),
+            //           Expanded(
+            //             child: InkWell(
+            //               child: Column(
+            //                 children: <Widget>[
+            //                   Image.asset('assets/images/soil_logo.png'),
+            //                   const Text('Soil')
+            //                 ],
+            //               ),
+            //               onTap: () {
+            //                 log('Soil button pressed');
+            //                 Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                         builder: (context) => const FarmingSoilScreen()));
+            //               },
+            //             ),
+            //           ),
+            //         ],
+            //       ))
+            // ]),
             ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 500, minHeight: 50),
               // child: ListView.builder(
@@ -285,7 +285,7 @@ class FarmingPestScreendata extends StatelessWidget {
               //       //)
               //           ;
               //     })
-              child: Center(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -310,6 +310,15 @@ class FarmingPestScreendata extends StatelessWidget {
                         pestP.pests[data].measures,
                         style: TextStyle(fontSize: 20),
                       ),
+                    Text(
+                      "State",
+                      style: TextStyle(fontSize: 30),
+                    ),
+
+                    Text(
+                      pestP.pests[data].state,
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
               ),

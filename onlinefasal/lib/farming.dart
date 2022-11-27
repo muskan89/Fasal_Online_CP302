@@ -187,73 +187,73 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       },
                     ),
                   ),
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/pesticide_logo.png'),
-                          const Text('Pests')
-                        ],
-                      ),
-                      onTap: () {
-                        log('pests button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingPestScreen()));
-                      },
-                    ),
-                  ),
-                  Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/disease_logo.png'),
-                        const Text('Diseases')
-                      ],
-                    ),
-                    onTap: () {
-                      log('diseases button pressed');
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FarmingDiseaseScreen()));
-                    },
-                  )),
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/fertilizer_logo.png'),
-                          const Text('Fertilizer')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Fertilizers button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingFertilizerScreen()));
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/soil_logo.png'),
-                          const Text('Soil')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Soil button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingSoilScreen()));
-                      },
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: InkWell(
+                  //     child: Column(
+                  //       children: <Widget>[
+                  //         Image.asset('assets/images/pesticide_logo.png'),
+                  //         const Text('Pests')
+                  //       ],
+                  //     ),
+                  //     onTap: () {
+                  //       log('pests button pressed');
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => const FarmingPestScreen()));
+                  //     },
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //     child: InkWell(
+                  //   child: Column(
+                  //     children: <Widget>[
+                  //       Image.asset('assets/images/disease_logo.png'),
+                  //       const Text('Diseases')
+                  //     ],
+                  //   ),
+                  //   onTap: () {
+                  //     log('diseases button pressed');
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const FarmingDiseaseScreen()));
+                  //   },
+                  // )),
+                  // Expanded(
+                  //   child: InkWell(
+                  //     child: Column(
+                  //       children: <Widget>[
+                  //         Image.asset('assets/images/fertilizer_logo.png'),
+                  //         const Text('Fertilizer')
+                  //       ],
+                  //     ),
+                  //     onTap: () {
+                  //       log('Fertilizers button pressed');
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => const FarmingFertilizerScreen()));
+                  //     },
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //   child: InkWell(
+                  //     child: Column(
+                  //       children: <Widget>[
+                  //         Image.asset('assets/images/soil_logo.png'),
+                  //         const Text('Soil')
+                  //       ],
+                  //     ),
+                  //     onTap: () {
+                  //       log('Soil button pressed');
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => const FarmingSoilScreen()));
+                  //     },
+                  //   ),
+                  // ),
                 ],
               ))
         ]),
