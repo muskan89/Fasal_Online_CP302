@@ -7,6 +7,8 @@ import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/weather_screen.dart';
 import 'package:onlinefasal/speech_text.dart';
 import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/askbhaisaab/chathome.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -143,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const SpeechScreen()));
+                                    builder: (context) => const ChatHomeScreen()));
                           },
                         )
                     ),
