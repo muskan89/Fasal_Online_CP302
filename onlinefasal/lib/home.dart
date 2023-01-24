@@ -9,7 +9,6 @@ import 'package:onlinefasal/speech_text.dart';
 import 'package:onlinefasal/DioPackage.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -69,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(children: <Widget>[
             Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Color.fromRGBO(0, 194, 146, 0.28),
                 ),
                 child: Row(
@@ -79,9 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: InkWell(
                         child: Column(
                           children: <Widget>[
-                            Image.asset(
-                              'assets/images/home.png',
-                            ),
+                            Image.asset('assets/images/home.png',
+                                height: 20, width: 20),
                             const Text('Home')
                           ],
                         ),
@@ -98,7 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: InkWell(
                       child: Column(
                         children: <Widget>[
-                          Image.asset('assets/images/weather.png'),
+                          Image.asset('assets/images/weather.png',
+                              height: 20, width: 20),
                           const Text('Weather')
                         ],
                       ),
@@ -114,7 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: InkWell(
                       child: Column(
                         children: <Widget>[
-                          Image.asset('assets/images/Farming.png'),
+                          Image.asset('assets/images/Farming.png',
+                              height: 20, width: 20),
                           const Text('Farming')
                         ],
                       ),
@@ -128,33 +128,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/bhaisaab.jpg',
-                                width: 34,
-                                height: 44,
-                                fit: BoxFit.cover,
-                              ),
-                              const Text('Ask Bhaisaab')
-                              //const Text('Farming')
-                            ],
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/bhaisaab.jpg',
+                            width: 20,
+                            height: 20,
+                            //fit: BoxFit.cover,
                           ),
-                          onTap: () {
-                            log('chat bot button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ChatHomeScreen()));
-                          },
-                        )
-                    ),
+                          const Text('AskBhaisaab')
+                          //const Text('Farming')
+                        ],
+                      ),
+                      onTap: () {
+                        log('chat bot button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatHomeScreen()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
                       child: Column(
                         children: <Widget>[
-                          Image.asset('assets/images/govt_schemes.png'),
-                          const Text('Govt. Schemes')
+                          Image.asset('assets/images/govt_schemes.png',
+                              height: 20, width: 20),
+                          const Text('Govt.Scheme')
                         ],
                       ),
                       onTap: () {
@@ -165,7 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: InkWell(
                       child: Column(
                         children: <Widget>[
-                          Image.asset('assets/images/rupee-sign.png'),
+                          Image.asset('assets/images/rupee-sign.png',
+                              height: 22, width: 22),
                           const Text('Mandi Rates')
                         ],
                       ),
@@ -219,7 +220,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-
                             // Image.asset(
                             //   'assets/images/bhaisaab.jpg',
                             //   width: 34,
@@ -238,6 +238,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   color: Colors.white,
                                   helpText: "Ask Bhaisaab...",
+                                  onSubmitted: (text) => {
+                                    log("search text submiited"),
+                                    // todo: searchbar functionality
+                                  },
                                   //autoFocus: false,
                                   //closeSearchOnSuffixTap: true,
                                   //animationDurationInMilli: 2000,

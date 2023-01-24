@@ -32,7 +32,6 @@ class CropProvider with ChangeNotifier {
   }
 }
 
-
 class DiseaseProvider with ChangeNotifier {
   DiseaseProvider() {
     this.fetchTasks();
@@ -76,7 +75,8 @@ class FertilizerProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       var data = json.decode(response.body) as List;
       log(response.body);
-      _fertilizers = data.map<Fertilizer>((json) => Fertilizer.fromJson(json)).toList();
+      _fertilizers =
+          data.map<Fertilizer>((json) => Fertilizer.fromJson(json)).toList();
     }
   }
 }

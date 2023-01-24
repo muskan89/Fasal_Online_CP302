@@ -10,14 +10,12 @@ import 'package:onlinefasal/DioPackage.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 
-
-
-
 class ChatCommunicationScreen extends StatefulWidget {
   const ChatCommunicationScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChatCommunicationScreen> createState() => _ChatCommunicationScreenState();
+  State<ChatCommunicationScreen> createState() =>
+      _ChatCommunicationScreenState();
 }
 
 class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
@@ -26,10 +24,11 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child:
-      // Container(
-      //     child:
-      ListView(
+      body: Center(
+          child:
+              // Container(
+              //     child:
+              ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -53,21 +52,21 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            InkWell(
-                                child: Image.asset('assets/images/bell.png'),
-                                onTap: () {
-                                  log('bell icon pressed');
-                                }),
-                            InkWell(
-                                child: Image.asset('assets/images/user_logo.png'),
-                                onTap: () {
-                                  log('user login button pressed');
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
-                                }),
-                          ])),
+                        InkWell(
+                            child: Image.asset('assets/images/bell.png'),
+                            onTap: () {
+                              log('bell icon pressed');
+                            }),
+                        InkWell(
+                            child: Image.asset('assets/images/user_logo.png'),
+                            onTap: () {
+                              log('user login button pressed');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
+                            }),
+                      ])),
                 )
               ],
             )
@@ -102,83 +101,82 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                     ),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/weather.png'),
-                              const Text('Weather')
-                            ],
-                          ),
-                          onTap: () {
-                            log('weather button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Weatherr()));
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/weather.png'),
+                          const Text('Weather')
+                        ],
+                      ),
+                      onTap: () {
+                        log('weather button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Weatherr()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/Farming.png'),
-                              const Text('Farming')
-                            ],
-                          ),
-                          onTap: () {
-                            log('farming button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingScreen()));
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/Farming.png'),
+                          const Text('Farming')
+                        ],
+                      ),
+                      onTap: () {
+                        log('farming button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FarmingScreen()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/bhaisaab.jpg',
-                                width: 34,
-                                height: 44,
-                                fit: BoxFit.cover,
-                              ),
-                              const Text('Ask Bhaisaab')
-                              //const Text('Farming')
-                            ],
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/bhaisaab.jpg',
+                            width: 34,
+                            height: 44,
+                            fit: BoxFit.cover,
                           ),
-                          onTap: () {
-                            log('chat bot button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ChatHomeScreen()));
-                          },
-                        )
-                    ),
+                          const Text('Ask Bhaisaab')
+                          //const Text('Farming')
+                        ],
+                      ),
+                      onTap: () {
+                        log('chat bot button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatHomeScreen()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/govt_schemes.png'),
-                              const Text('Govt. Schemes')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Govt. schemes button pressed');
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/govt_schemes.png'),
+                          const Text('Govt. Schemes')
+                        ],
+                      ),
+                      onTap: () {
+                        log('Govt. schemes button pressed');
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/rupee-sign.png'),
-                              const Text('Mandi Rates')
-                            ],
-                          ),
-                          onTap: () {
-                            log('mandi rates button pressed');
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/rupee-sign.png'),
+                          const Text('Mandi Rates')
+                        ],
+                      ),
+                      onTap: () {
+                        log('mandi rates button pressed');
+                      },
+                    )),
                   ],
                 ))
           ]),
@@ -187,7 +185,8 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text("Query Types",
+                  child: Text(
+                    "Query Types",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 128, 128, 1.0),
                         fontSize: 20.0,
@@ -202,8 +201,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("Enter 8 for Contact Number",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -213,8 +211,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("Enter 9 for Address",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -224,8 +221,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -271,8 +267,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("Enter 71 for Institution",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -282,8 +277,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("Enter 72 for Krishi Vigyan Kendras",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -293,8 +287,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("Enter 73 for Nodal Officer Details (Statewise)",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -304,8 +297,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 Expanded(
                   child: Text("",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -363,20 +355,19 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                           ),
                         ),
                         new Container(
-                            padding: const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new RaisedButton(
+                            padding:
+                                const EdgeInsets.only(left: 150.0, top: 40.0),
+                            child: new ElevatedButton(
                               child: const Text('Get Answer'),
-                              color: Color.fromRGBO(0, 128, 128, 1.0),
+                              //color: Color.fromRGBO(0, 128, 128, 1.0),
                               onPressed: null,
                             )),
-
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-
           ]),
         ],
       )),

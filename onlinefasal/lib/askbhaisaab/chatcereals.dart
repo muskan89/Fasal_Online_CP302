@@ -10,9 +10,6 @@ import 'package:onlinefasal/DioPackage.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 
-
-
-
 class ChatCerealsScreen extends StatefulWidget {
   const ChatCerealsScreen({Key? key}) : super(key: key);
 
@@ -26,10 +23,11 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child:
-      // Container(
-      //     child:
-      ListView(
+      body: Center(
+          child:
+              // Container(
+              //     child:
+              ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -53,21 +51,22 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            InkWell(
-                                child: Image.asset('assets/images/bell.png'),
-                                onTap: () {
-                                  log('bell icon pressed');
-                                }),
-                            InkWell(
-                                child: Image.asset('assets/images/user_logo.png'),
-                                onTap: () {
-                                  log('user login button pressed');
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
-                                }),
-                          ])),
+                        InkWell(
+                            child: Image.asset('assets/images/bell.png'),
+                            onTap: () {
+                              log('bell icon pressed');
+                            }),
+                        InkWell(
+                            child: Image.asset('assets/images/user_logo.png'),
+                            onTap: () {
+                              log('user login button pressed');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()));
+                            }),
+                      ])),
                 )
               ],
             )
@@ -96,89 +95,88 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                       ),
                     ),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/weather.png'),
-                              const Text('Weather')
-                            ],
-                          ),
-                          onTap: () {
-                            log('weather button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Weatherr()));
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/weather.png'),
+                          const Text('Weather')
+                        ],
+                      ),
+                      onTap: () {
+                        log('weather button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Weatherr()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/Farming.png'),
-                              const Text('Farming')
-                            ],
-                          ),
-                          onTap: () {
-                            log('farming button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FarmingScreen()));
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/Farming.png'),
+                          const Text('Farming')
+                        ],
+                      ),
+                      onTap: () {
+                        log('farming button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FarmingScreen()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/bhaisaab.jpg',
-                                width: 34,
-                                height: 44,
-                                fit: BoxFit.cover,
-                              ),
-                              const Text('Ask Bhaisaab')
-                              //const Text('Farming')
-                            ],
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/bhaisaab.jpg',
+                            width: 34,
+                            height: 44,
+                            fit: BoxFit.cover,
                           ),
-                          onTap: () {
-                            log('chat bot button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ChatHomeScreen()));
-                          },
-                        )
-                    ),
+                          const Text('Ask Bhaisaab')
+                          //const Text('Farming')
+                        ],
+                      ),
+                      onTap: () {
+                        log('chat bot button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatHomeScreen()));
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/govt_schemes.png'),
-                              const Text('Govt. Schemes')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Govt. schemes button pressed');
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/govt_schemes.png'),
+                          const Text('Govt. Schemes')
+                        ],
+                      ),
+                      onTap: () {
+                        log('Govt. schemes button pressed');
+                      },
+                    )),
                     Expanded(
                         child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/rupee-sign.png'),
-                              const Text('Mandi Rates')
-                            ],
-                          ),
-                          onTap: () {
-                            log('mandi rates button pressed');
-                          },
-                        )),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/rupee-sign.png'),
+                          const Text('Mandi Rates')
+                        ],
+                      ),
+                      onTap: () {
+                        log('mandi rates button pressed');
+                      },
+                    )),
                   ],
                 ))
           ]),
@@ -186,8 +184,9 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Text("Crop Names",
+                const Expanded(
+                  child: Text(
+                    "Crop Names",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 128, 128, 1.0),
                         fontSize: 20.0,
@@ -199,77 +198,70 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 54 for Barley(Jow)",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 55 for Maize(Kharif)",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 56 for Oats",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 57 for Wheat",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 58 for Rice",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 59 for Sugarcane",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -300,7 +292,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Query Types",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -312,99 +304,90 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 1 for Cultural Practices",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 3 for Nutrient Management",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 4 for Fertilizer Uses",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 5 for Varieties",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 6 for Weed Management",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 7 for Seeds",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 10 for Water Management",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("Enter 11 for Plant Protection",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: Text("",
                       style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0),
-                          fontSize: 15.0)),
+                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
@@ -454,7 +437,6 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                             labelText: 'Query Type',
                           ),
                         ),
-
                         TextFormField(
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
@@ -463,20 +445,19 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                           ),
                         ),
                         new Container(
-                            padding: const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new RaisedButton(
+                            padding:
+                                const EdgeInsets.only(left: 150.0, top: 40.0),
+                            child: new ElevatedButton(
                               child: const Text('Get Answer'),
-                              color: Color.fromRGBO(0, 128, 128, 1.0),
+                              //color: const Color.fromRGBO(0, 128, 128, 1.0),
                               onPressed: null,
                             )),
-
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-
           ]),
         ],
       )),

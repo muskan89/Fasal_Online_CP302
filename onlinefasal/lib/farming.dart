@@ -12,8 +12,6 @@ import 'package:onlinefasal/farming_pest.dart';
 import 'package:onlinefasal/farming_soil.dart';
 import 'package:onlinefasal/farming_fertilizer.dart';
 
-
-
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
 
@@ -86,6 +84,8 @@ class _FarmingScreenState extends State<FarmingScreen> {
                         children: <Widget>[
                           Image.asset(
                             'assets/images/home.png',
+                            height: 20,
+                            width: 20,
                           ),
                           const Text('Home')
                         ],
@@ -103,24 +103,30 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       child: InkWell(
                     child: Column(
                       children: <Widget>[
-                        Image.asset('assets/images/weather.png'),
+                        Image.asset(
+                          'assets/images/weather.png',
+                          height: 20,
+                          width: 20,
+                        ),
                         const Text('Weather')
                       ],
                     ),
                     onTap: () {
                       log('weather button pressed');
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Weatherr()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Weatherr()));
                     },
                   )),
                   Expanded(
                       child: InkWell(
                     child: Column(
                       children: <Widget>[
-                        Image.asset('assets/images/Farming.png'),
+                        Image.asset(
+                          'assets/images/Farming.png',
+                          height: 20,
+                          width: 20,
+                        ),
                         const Text('Farming')
                       ],
                     ),
@@ -136,7 +142,11 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       child: InkWell(
                     child: Column(
                       children: <Widget>[
-                        Image.asset('assets/images/govt_schemes.png'),
+                        Image.asset(
+                          'assets/images/govt_schemes.png',
+                          height: 20,
+                          width: 20,
+                        ),
                         const Text('Govt. Schemes')
                       ],
                     ),
@@ -148,7 +158,11 @@ class _FarmingScreenState extends State<FarmingScreen> {
                       child: InkWell(
                     child: Column(
                       children: <Widget>[
-                        Image.asset('assets/images/rupee-sign.png'),
+                        Image.asset(
+                          'assets/images/rupee-sign.png',
+                          height: 20,
+                          width: 20,
+                        ),
                         const Text('Mandi Rates')
                       ],
                     ),
@@ -168,25 +182,25 @@ class _FarmingScreenState extends State<FarmingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/crop_logo.png',
-                          ),
-                          const Text('Crops')
-                        ],
-                      ),
-                      onTap: () {
-                        log('crops button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingCropScreen()));
-                      },
+                  // Expanded(
+                  InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/crop_logo.png',
+                        ),
+                        const Text('Crops')
+                      ],
                     ),
+                    onTap: () {
+                      log('crops button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FarmingCropScreen()));
+                    },
                   ),
+                  // ),
                   // Expanded(
                   //   child: InkWell(
                   //     child: Column(

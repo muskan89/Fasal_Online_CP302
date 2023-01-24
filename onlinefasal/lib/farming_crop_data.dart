@@ -13,7 +13,6 @@ import 'package:onlinefasal/farming_pest.dart';
 import 'package:onlinefasal/farming_soil.dart';
 import 'package:onlinefasal/farming_fertilizer.dart';
 
-
 class FarmingCropScreendata extends StatelessWidget {
   //const FarmingScreendata({Key? key}) : super(key: key);
   final int data;
@@ -31,373 +30,376 @@ class FarmingCropScreendata extends StatelessWidget {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
     final cropP = Provider.of<CropProvider>(context);
     return Scaffold(
       //body: const LoginScreen(),
 
       body: Container(
           child: ListView(children: <Widget>[
-            Column(children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Column(children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset('assets/images/logo.png'),
+                  ],
+                ),
+              ),
+              const Expanded(
+                child: Text("Fasal Online",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+              ),
+              Expanded(
+                child: Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                      InkWell(
+                          child: Image.asset('assets/images/bell.png'),
+                          onTap: () {
+                            log('bell icon pressed');
+                          }),
+                      InkWell(
+                          child: Image.asset('assets/images/user_logo.png'),
+                          onTap: () {
+                            log('user login button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
+                          }),
+                    ])),
+              )
+            ],
+          )
+        ]),
+        Column(children: <Widget>[
+          Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                color: Color.fromRGBO(0, 194, 146, 0.28),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/logo.png'),
-                      ],
+                    child: InkWell(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/home.png',
+                          ),
+                          const Text('Home')
+                        ],
+                      ),
+                      onTap: () {
+                        log('Home button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
+                      },
                     ),
                   ),
-                  const Expanded(
-                    child: Text("Fasal Online",
-                        style: TextStyle(
-                            color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+                  Expanded(
+                      child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/weather.png'),
+                        const Text('Weather')
+                      ],
+                    ),
+                    onTap: () {
+                      log('weather button pressed');
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Weatherr()));
+                    },
+                  )),
+                  Expanded(
+                      child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/Farming.png'),
+                        const Text('Farming')
+                      ],
+                    ),
+                    onTap: () {
+                      log('farming button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FarmingScreen()));
+                    },
+                  )),
+                  Expanded(
+                      child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/govt_schemes.png'),
+                        const Text('Govt. Schemes')
+                      ],
+                    ),
+                    onTap: () {
+                      log('Govt. schemes button pressed');
+                    },
+                  )),
+                  Expanded(
+                      child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/rupee-sign.png'),
+                        const Text('Mandi Rates')
+                      ],
+                    ),
+                    onTap: () {
+                      log('mandi rates button pressed');
+                    },
+                  )),
+                ],
+              ))
+        ]),
+        Column(children: <Widget>[
+          Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                color: Color.fromRGBO(238, 255, 234, 1),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Expanded(
+                  //   child: InkWell(
+                  //     child: Column(
+                  //       children: <Widget>[
+                  //         Image.asset(
+                  //           'assets/images/crop_logo.png',
+                  //         ),
+                  //         const Text('Crops')
+                  //       ],
+                  //     ),
+                  //     onTap: () {
+                  //       log('crops button pressed');
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => const FarmingCropScreen()));
+                  //     },
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: InkWell(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/pesticide_logo.png'),
+                          const Text('Pests')
+                        ],
+                      ),
+                      onTap: () {
+                        log('pests button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FarmingPestScreen(
+                                    data: cropP.crops[data].id)));
+                      },
+                    ),
                   ),
                   Expanded(
-                    child: Container(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              InkWell(
-                                  child: Image.asset('assets/images/bell.png'),
-                                  onTap: () {
-                                    log('bell icon pressed');
-                                  }),
-                              InkWell(
-                                  child: Image.asset('assets/images/user_logo.png'),
-                                  onTap: () {
-                                    log('user login button pressed');
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginScreen()));
-                                  }),
-                            ])),
-                  )
+                      child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/disease_logo.png'),
+                        const Text('Diseases')
+                      ],
+                    ),
+                    onTap: () {
+                      log('diseases button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FarmingDiseaseScreen(
+                                  data: cropP.crops[data].id)));
+                    },
+                  )),
+                  Expanded(
+                    child: InkWell(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/fertilizer_logo.png'),
+                          const Text('Fertilizer')
+                        ],
+                      ),
+                      onTap: () {
+                        log('Fertilizers button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FarmingFertilizerScreen(
+                                    data: cropP.crops[data].id)));
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/soil_logo.png'),
+                          const Text('Soil')
+                        ],
+                      ),
+                      onTap: () {
+                        log('Soil button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FarmingSoilScreen(
+                                    data: cropP.crops[data].id)));
+                      },
+                    ),
+                  ),
                 ],
-              )
-            ]),
-            Column(children: <Widget>[
-              Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Color.fromRGBO(0, 194, 146, 0.28),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/home.png',
-                              ),
-                              const Text('Home')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Home button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                          child: InkWell(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/images/weather.png'),
-                                const Text('Weather')
-                              ],
-                            ),
-                            onTap: () {
-                              log('weather button pressed');
-
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Weatherr()));
-                            },
-                          )),
-                      Expanded(
-                          child: InkWell(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/images/Farming.png'),
-                                const Text('Farming')
-                              ],
-                            ),
-                            onTap: () {
-                              log('farming button pressed');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const FarmingScreen()));
-                            },
-                          )),
-                      Expanded(
-                          child: InkWell(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/images/govt_schemes.png'),
-                                const Text('Govt. Schemes')
-                              ],
-                            ),
-                            onTap: () {
-                              log('Govt. schemes button pressed');
-                            },
-                          )),
-                      Expanded(
-                          child: InkWell(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/images/rupee-sign.png'),
-                                const Text('Mandi Rates')
-                              ],
-                            ),
-                            onTap: () {
-                              log('mandi rates button pressed');
-                            },
-                          )),
-                    ],
-                  ))
-            ]),
-            Column(children: <Widget>[
-              Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Color.fromRGBO(238, 255, 234, 1),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // Expanded(
-                      //   child: InkWell(
-                      //     child: Column(
-                      //       children: <Widget>[
-                      //         Image.asset(
-                      //           'assets/images/crop_logo.png',
-                      //         ),
-                      //         const Text('Crops')
-                      //       ],
-                      //     ),
-                      //     onTap: () {
-                      //       log('crops button pressed');
-                      //       Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //               builder: (context) => const FarmingCropScreen()));
-                      //     },
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/pesticide_logo.png'),
-                              const Text('Pests')
-                            ],
-                          ),
-                          onTap: () {
-                            log('pests button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => FarmingPestScreen(data: cropP.crops[data].id)));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                          child: InkWell(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset('assets/images/disease_logo.png'),
-                                const Text('Diseases')
-                              ],
-                            ),
-                            onTap: () {
-                              log('diseases button pressed');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FarmingDiseaseScreen(data: cropP.crops[data].id)));
-                            },
-                          )),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/fertilizer_logo.png'),
-                              const Text('Fertilizer')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Fertilizers button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => FarmingFertilizerScreen(data: cropP.crops[data].id)));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/soil_logo.png'),
-                              const Text('Soil')
-                            ],
-                          ),
-                          onTap: () {
-                            log('Soil button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => FarmingSoilScreen(data: cropP.crops[data].id)));
-                          },
-                        ),
-                      ),
-                    ],
-                  ))
-            ]),
-            ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 500, minHeight: 50),
-                // child: ListView.builder(
-                //     itemCount: cropP.crops.length,
-                //     itemBuilder: (BuildContext context, int index) {
-                //       return
-                //         //ListTile(
-                //         Expanded(
-                //           child: Container(
-                //               decoration: BoxDecoration(
-                //                   color: Colors.blueAccent,//remove color to make it transpatent
-                //                   border: Border.all(
-                //                       style: BorderStyle.solid,
-                //                       color: Colors.white)),
-                //               child: Center(child: Text(cropP.crops[index].name))),
-                //         )
-                //       //title: Text(cropP.crops[index].name),
-                //       //subtitle: Text(cropP.crops[index].description),
-                //       //)
-                //           ;
-                //     })
-                  child: SingleChildScrollView(
-                          child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Text(
-                                cropP.crops[data].name,
-                                style: TextStyle(fontSize: 50),
-                              ),
-                              Text(
-                                cropP.crops[data].description,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Species",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].species,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Category",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].category,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Season",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].season,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Botanical name",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].botanical_name,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Genus",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].genus,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Family",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].family,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Origin",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].origin,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Synonym",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].synonym,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Rotations",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].rotations,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Average yield",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].average_yield,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Minimum yield",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].yield_min.toString(),
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                "Maximum yield",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                cropP.crops[data].yield_max.toString(),
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                  ),
-            )
-          ])),
+              ))
+        ]),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 500, minHeight: 50),
+          // child: ListView.builder(
+          //     itemCount: cropP.crops.length,
+          //     itemBuilder: (BuildContext context, int index) {
+          //       return
+          //         //ListTile(
+          //         Expanded(
+          //           child: Container(
+          //               decoration: BoxDecoration(
+          //                   color: Colors.blueAccent,//remove color to make it transpatent
+          //                   border: Border.all(
+          //                       style: BorderStyle.solid,
+          //                       color: Colors.white)),
+          //               child: Center(child: Text(cropP.crops[index].name))),
+          //         )
+          //       //title: Text(cropP.crops[index].name),
+          //       //subtitle: Text(cropP.crops[index].description),
+          //       //)
+          //           ;
+          //     })
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Text(
+                  cropP.crops[data].name,
+                  style: TextStyle(fontSize: 50),
+                ),
+                Image.asset('assets/uploads/${cropP.crops[data].cropimage}',
+                    height: 100, width: 100),
+                Text(
+                  cropP.crops[data].description,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Species",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].species,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Category",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].category,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Season",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].season,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Botanical name",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].botanical_name,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Genus",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].genus,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Family",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].family,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Origin",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].origin,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Synonym",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].synonym,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Rotations",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].rotations,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Average yield",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].average_yield,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Minimum yield",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].yield_min.toString(),
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(
+                  "Maximum yield",
+                  style: TextStyle(fontSize: 30),
+                ),
+                Text(
+                  cropP.crops[data].yield_max.toString(),
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+        )
+      ])),
     );
   }
 }
