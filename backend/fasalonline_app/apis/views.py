@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny, IsAuthenticated
 # Create your views here.
 
 from fasals import models
@@ -53,6 +56,10 @@ class DetailChemicalFertilizer(generics.RetrieveAPIView):
     queryset = models.ChemicalFertilizer.objects.all()
     serializer_class = ChemicalFertilizerSerializer
 
-
-
+@api_view()
+@permission_classes([AllowAny])
+def add_numbers(request,a,b):
+    # print(request.query_params)
+    res = a + b
+    return Response({'result': res, 'message': 'api sucessful'})
 

@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('crop/',ListCrop.as_view()),
@@ -14,4 +16,5 @@ urlpatterns = [
     path('weed/<int:pk>/',DetailWeed.as_view()),
     path('fertilizer/',ListChemicalFertilizer.as_view()),
     path('fertilizer/<int:pk>/',DetailChemicalFertilizer.as_view()),
-]
+    path('function/<int:a>/<int:b>/',add_numbers),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
