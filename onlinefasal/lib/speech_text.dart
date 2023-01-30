@@ -21,7 +21,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
   String _text = 'Press the button and start speaking';
   double _confidence = 1.0;
 
-
   @override
   void initState() {
     super.initState();
@@ -33,7 +32,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
     return Scaffold(
       appBar: AppBar(
         //title: Text('Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
-        title: Text('Ask Bhaisaab'),
+        title: const Text('Ask Bhaisaab'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
@@ -53,12 +52,9 @@ class _SpeechScreenState extends State<SpeechScreen> {
         reverse: true,
         child: Container(
           padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
-          child: Text(
-             _text,
-            style: TextStyle(
-                color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0
-            )
-          ),
+          child: Text(_text,
+              style: const TextStyle(
+                  color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
         ),
       ),
     );
@@ -172,4 +168,3 @@ class _SpeechScreenState extends State<SpeechScreen> {
   //   );
   // }
 }
-

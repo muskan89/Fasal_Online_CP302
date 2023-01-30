@@ -70,7 +70,7 @@ class FarmingPestScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
                     ])),
               )
@@ -101,7 +101,7 @@ class FarmingPestScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),
@@ -283,7 +283,7 @@ class FarmingPestScreen extends StatelessWidget {
                           ? InkWell(
                               child: Container(
                                 height: 80,
-                                padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                 decoration: BoxDecoration(
                                     color: Colors
                                         .teal, //remove color to make it transpatent
@@ -303,9 +303,7 @@ class FarmingPestScreen extends StatelessWidget {
                                             padding:
                                                 EdgeInsets.fromLTRB(0, 0, 0, 0))
                                         //Text(pestP.pests[index].pest_image)
-                                        :
-                                        // TODO: we have to add a check for checking null values in data
-                                        Image.asset(
+                                        : Image.asset(
                                             'assets/uploads/${pestP.pests[index].pest_image.substring(0, pestP.pests[index].pest_image.length - 1)}',
                                             height: 80,
                                             width: 80),

@@ -18,7 +18,9 @@ class ChatSchemeScreen extends StatefulWidget {
 }
 
 class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController schemename = TextEditingController();
+  TextEditingController querytype = TextEditingController();
+  TextEditingController query = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -182,7 +184,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                     "Query Types",
@@ -196,7 +198,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                       "Enter 2 for having info about Government Schemes",
@@ -207,7 +209,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -241,7 +243,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Scheme Names",
                       style: TextStyle(
@@ -253,7 +255,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                       "Enter 31 for Pradhan Mantri KISAN Samman Nidhi Yojana",
@@ -264,7 +266,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                       "Enter 32 for Pradhan Mantri Krishi Sinchai Yojana (PMKSY)",
@@ -275,7 +277,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 33 for Saur Sinchai Yojana",
                       style: TextStyle(
@@ -285,7 +287,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 34 for Rashtriya Krishi Vikas Yojana",
                       style: TextStyle(
@@ -295,7 +297,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                       "Enter 35 for Pradhan Mantri Fasal Bima Yojana (PMFBY)",
@@ -306,7 +308,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                       "Enter 36 for Pradhan Mantri Kisan Maan-Dhan Yojana",
@@ -317,7 +319,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 37 for Soil Health Card Scheme",
                       style: TextStyle(
@@ -327,7 +329,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 38 for PM Kusum Yojana",
                       style: TextStyle(
@@ -337,7 +339,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                       "Enter 39 for Pardhan Mantri Kisan SAMPADA Yojana",
@@ -348,7 +350,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 40 for Machinery/Equipment Subsidy",
                       style: TextStyle(
@@ -358,7 +360,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -399,6 +401,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: querytype,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter query type:',
@@ -406,6 +409,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: schemename,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter Scheme Name:',
@@ -413,18 +417,23 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: query,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter your query:',
                             labelText: 'Query',
                           ),
                         ),
-                        new Container(
+                        Container(
                             padding:
                                 const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
+                            child: ElevatedButton(
                               child: const Text('Get Answer'),
-                              onPressed: null,
+                              onPressed: () {
+                                log(querytype.text);
+                                log(schemename.text);
+                                log(query.text);
+                              },
                             )),
                       ],
                     ),

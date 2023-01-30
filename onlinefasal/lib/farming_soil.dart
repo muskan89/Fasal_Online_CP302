@@ -71,7 +71,7 @@ class FarmingSoilScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
                     ])),
               )
@@ -102,7 +102,7 @@ class FarmingSoilScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),
@@ -278,7 +278,8 @@ class FarmingSoilScreen extends StatelessWidget {
                           ? InkWell(
                               child: Container(
                                   height: 80,
-                                  padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                   decoration: BoxDecoration(
                                       color: Colors
                                           .teal, //remove color to make it transpatent

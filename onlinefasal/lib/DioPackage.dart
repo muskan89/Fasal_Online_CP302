@@ -60,7 +60,7 @@ class _WeatherrState extends State<Weatherr> {
         'http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=0fe03700518423ac4a10d937dd52aba5&units=metric';
     var response = await Dio().get(url);
     var convert =
-    jsonDecode(response.toString()); // using dio you need only response
+        jsonDecode(response.toString()); // using dio you need only response
     setState(() {
       loading = true;
       location = convert['name'];
@@ -96,7 +96,7 @@ class _WeatherrState extends State<Weatherr> {
     Size size = MediaQuery.of(context).size;
     double height = size.height.toDouble();
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         // background color
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -106,71 +106,69 @@ class _WeatherrState extends State<Weatherr> {
             Color.fromRGBO(0, 194, 146, 1),
           ],
         ),
-
       ),
       child: loading
           ? Scaffold(
-        //backgroundColor: Colors.transparent,
-        appBar: buildAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //backgroundColor: Colors.transparent,
+              appBar: buildAppBar(),
+              body: SingleChildScrollView(
+                child: Column(
                   children: [
                     Container(
-                      child: buildTextField(),
-                      width: size.width / 1.6,
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        size: 20,
-                        color: Colors.black,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            child: buildTextField(),
+                            width: size.width / 1.6,
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.search,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                location = controller.text;
+                                loading = false;
+                              });
+                              getWeather();
+                            },
+                          )
+                        ],
                       ),
-                      onPressed: () {
-                        setState(() {
-                          location = controller.text;
-                          loading = false;
-                        });
-                        getWeather();
-                      },
-                    )
+                    ),
+                    // buildWeatherIcon(),
+                    buildTempField(height),
+                    // buildRowData(
+                    //   data: tempf.toString() + ' f',
+                    //   text: 'Temp in F',
+                    // ),
+                    const SizedBox(height: 10),
+                    buildRowData(
+                      data: humidity.toString() + ' %',
+                      text: 'Humidity',
+                    ),
+                    const SizedBox(height: 10),
+                    // buildRowData(
+                    //   data: wind.toString() + ' Kph',
+                    //   text: 'Wind',
+                    // ),
+                    const SizedBox(height: 10),
+                    const Divider(thickness: 2),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),
-              // buildWeatherIcon(),
-              buildTempField(height),
-              // buildRowData(
-              //   data: tempf.toString() + ' f',
-              //   text: 'Temp in F',
-              // ),
-              SizedBox(height: 10),
-              buildRowData(
-                data: humidity.toString() + ' %',
-                text: 'Humidity',
-              ),
-              SizedBox(height: 10),
-              // buildRowData(
-              //   data: wind.toString() + ' Kph',
-              //   text: 'Wind',
-              // ),
-              SizedBox(height: 10),
-              Divider(thickness: 2),
-              SizedBox(height: 10),
-
-            ],
-          ),
-        ),
-      )
+            )
           : Scaffold(
-        body: Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            )),
-      ),
+              body: Container(
+                  child: const Center(
+                child: CircularProgressIndicator(),
+              )),
+            ),
     );
   }
 
@@ -215,7 +213,7 @@ class _WeatherrState extends State<Weatherr> {
             temp.toString(),
             style: TextStyle(fontSize: height / 8, color: Colors.teal),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Text(
             '°C',
             style: TextStyle(
@@ -232,13 +230,13 @@ class _WeatherrState extends State<Weatherr> {
   TextField buildTextField() {
     return TextField(
       controller: controller,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Search City',
         hintStyle: TextStyle(
           color: Colors.black,
         ),
       ),
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.black,
       ),
     );
@@ -251,7 +249,7 @@ class _WeatherrState extends State<Weatherr> {
       elevation: 0,
       actions: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.refresh,
             color: Colors.black,
           ),
@@ -278,17 +276,17 @@ class _WeatherrState extends State<Weatherr> {
           // time
           style: smallText,
         ),
-        SizedBox(height: 7),
+        const SizedBox(height: 7),
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.room,
                 color: Colors.red,
                 size: 20,
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               // location
               Text(
                 location.toString() + " ," + country.toString().toUpperCase(),

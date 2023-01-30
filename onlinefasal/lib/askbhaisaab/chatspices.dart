@@ -18,7 +18,9 @@ class ChatSpicesScreen extends StatefulWidget {
 }
 
 class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController spicename = TextEditingController();
+  TextEditingController querytype = TextEditingController();
+  TextEditingController query = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,8 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) =>
+                                          const LoginScreen()));
                             }),
                       ])),
                 )
@@ -94,7 +97,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                       ),
                     ),
@@ -182,7 +185,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                     "Spice Names",
@@ -196,7 +199,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 28 for Coriander",
                       style: TextStyle(
@@ -206,7 +209,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 29 for Ginger",
                       style: TextStyle(
@@ -216,7 +219,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 30 for Turmeric",
                       style: TextStyle(
@@ -227,7 +230,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -261,7 +264,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Query Types",
                       style: TextStyle(
@@ -273,7 +276,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 1 for Cultural Practices",
                       style: TextStyle(
@@ -283,7 +286,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 3 for Nutrient Management",
                       style: TextStyle(
@@ -293,7 +296,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 4 for Fertilizer Uses",
                       style: TextStyle(
@@ -303,7 +306,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 5 for Varieties",
                       style: TextStyle(
@@ -313,7 +316,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 6 for Weed Management",
                       style: TextStyle(
@@ -323,7 +326,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 7 for Seeds",
                       style: TextStyle(
@@ -333,7 +336,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 10 for Water Management",
                       style: TextStyle(
@@ -343,7 +346,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 11 for Plant Protection",
                       style: TextStyle(
@@ -353,7 +356,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -394,6 +397,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: spicename,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter Spice Name:',
@@ -401,6 +405,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: querytype,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter query type:',
@@ -408,19 +413,24 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: query,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter your query:',
                             labelText: 'Query',
                           ),
                         ),
-                        new Container(
+                        Container(
                             padding:
                                 const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
-                              child: const Text('Get Answer'),
+                            child: ElevatedButton(
+                              child: Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: null,
+                              onPressed: () {
+                                log(spicename.text);
+                                log(querytype.text);
+                                log(query.text);
+                              },
                             )),
                       ],
                     ),

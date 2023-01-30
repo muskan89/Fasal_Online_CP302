@@ -18,7 +18,9 @@ class ChatOilseedScreen extends StatefulWidget {
 }
 
 class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController cropname = TextEditingController();
+  TextEditingController querytype = TextEditingController();
+  TextEditingController query = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -182,7 +184,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                     "Crop Names",
@@ -196,7 +198,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 60 for Groundnut",
                       style: TextStyle(
@@ -206,7 +208,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 61 for Mustard",
                       style: TextStyle(
@@ -216,7 +218,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 62 for Soybean",
                       style: TextStyle(
@@ -226,7 +228,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 63 for Sunflower",
                       style: TextStyle(
@@ -237,7 +239,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -271,7 +273,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Query Types",
                       style: TextStyle(
@@ -283,7 +285,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 1 for Cultural Practices",
                       style: TextStyle(
@@ -293,7 +295,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 3 for Nutrient Management",
                       style: TextStyle(
@@ -303,7 +305,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 4 for Fertilizer Uses",
                       style: TextStyle(
@@ -313,7 +315,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 5 for Varieties",
                       style: TextStyle(
@@ -323,7 +325,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 6 for Weed Management",
                       style: TextStyle(
@@ -333,7 +335,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 7 for Seeds",
                       style: TextStyle(
@@ -343,7 +345,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 10 for Water Management",
                       style: TextStyle(
@@ -353,7 +355,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 11 for Plant Protection",
                       style: TextStyle(
@@ -363,7 +365,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -404,6 +406,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: cropname,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter Crop Name:',
@@ -411,6 +414,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: querytype,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter query type:',
@@ -418,19 +422,24 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: query,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter your query:',
                             labelText: 'Query',
                           ),
                         ),
-                        new Container(
+                        Container(
                             padding:
                                 const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
+                            child: ElevatedButton(
                               child: const Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: null,
+                              onPressed: () {
+                                log(cropname.text);
+                                log(querytype.text);
+                                log(query.text);
+                              },
                             )),
                       ],
                     ),

@@ -18,7 +18,7 @@ class ChatMandiScreen extends StatefulWidget {
 }
 
 class _ChatMandiScreenState extends State<ChatMandiScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController cropname = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -190,19 +190,22 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: cropname,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter the crop name:',
                             labelText: 'Crop Name',
                           ),
                         ),
-                        new Container(
+                        Container(
                             padding:
                                 const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
+                            child: ElevatedButton(
                               child: const Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: null,
+                              onPressed: () {
+                                log(cropname.text);
+                              },
                             )),
                       ],
                     ),

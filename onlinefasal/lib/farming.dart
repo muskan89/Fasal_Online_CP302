@@ -62,7 +62,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
                     ])),
               )
@@ -95,7 +95,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),

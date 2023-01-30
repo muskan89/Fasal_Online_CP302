@@ -19,7 +19,9 @@ class ChatCommunicationScreen extends StatefulWidget {
 }
 
 class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController placename = TextEditingController();
+  TextEditingController querytype = TextEditingController();
+  TextEditingController query = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -183,7 +185,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                     "Query Types",
@@ -197,7 +199,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 8 for Contact Number",
                       style: TextStyle(
@@ -207,7 +209,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 9 for Address",
                       style: TextStyle(
@@ -217,7 +219,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -251,7 +253,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Place Names",
                       style: TextStyle(
@@ -263,7 +265,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 71 for Institution",
                       style: TextStyle(
@@ -273,7 +275,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 72 for Krishi Vigyan Kendras",
                       style: TextStyle(
@@ -283,7 +285,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 73 for Nodal Officer Details (Statewise)",
                       style: TextStyle(
@@ -293,7 +295,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -334,6 +336,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: querytype,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter query type:',
@@ -341,6 +344,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: placename,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter Place Name:',
@@ -348,19 +352,24 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: query,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter your query:',
                             labelText: 'Query',
                           ),
                         ),
-                        new Container(
+                        Container(
                             padding:
                                 const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
+                            child: ElevatedButton(
                               child: const Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: null,
+                              onPressed: () {
+                                log(querytype.text);
+                                log(placename.text);
+                                log(query.text);
+                              },
                             )),
                       ],
                     ),

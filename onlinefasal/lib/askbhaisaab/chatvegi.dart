@@ -18,7 +18,9 @@ class ChatVegiScreen extends StatefulWidget {
 }
 
 class _ChatVegiScreenState extends State<ChatVegiScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController veginame = TextEditingController();
+  TextEditingController querytype = TextEditingController();
+  TextEditingController query = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -182,7 +184,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                     "Vegetable Names",
@@ -196,7 +198,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 1 for Ash Gourd",
                       style: TextStyle(
@@ -206,7 +208,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 2 for Turnip",
                       style: TextStyle(
@@ -216,7 +218,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 3 for Tomato",
                       style: TextStyle(
@@ -226,7 +228,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 4 for Sweet Potato",
                       style: TextStyle(
@@ -236,7 +238,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 5 for Squash Melon",
                       style: TextStyle(
@@ -246,7 +248,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 6 for Sponge Gourd",
                       style: TextStyle(
@@ -256,7 +258,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 7 for Spinach (Palak)",
                       style: TextStyle(
@@ -266,7 +268,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 8 for Radish",
                       style: TextStyle(
@@ -276,7 +278,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 9 for Rabi Onion(Pyaz)",
                       style: TextStyle(
@@ -286,7 +288,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 10 for Pumpkin",
                       style: TextStyle(
@@ -296,7 +298,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 11 for Potato",
                       style: TextStyle(
@@ -306,7 +308,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 12 for Peas",
                       style: TextStyle(
@@ -316,7 +318,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 13 for Okra",
                       style: TextStyle(
@@ -326,7 +328,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 14 for Long Melon",
                       style: TextStyle(
@@ -336,7 +338,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 15 for Lettuce",
                       style: TextStyle(
@@ -346,7 +348,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 16 for Kharif Onion(Pyaz)",
                       style: TextStyle(
@@ -356,7 +358,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 17 for Garlic",
                       style: TextStyle(
@@ -366,7 +368,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 18 for Cucumber",
                       style: TextStyle(
@@ -376,7 +378,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 19 for Chilli",
                       style: TextStyle(
@@ -386,7 +388,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 20 for Cauliflower",
                       style: TextStyle(
@@ -396,7 +398,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 21 for Carrot",
                       style: TextStyle(
@@ -406,7 +408,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 22 for Beetroot",
                       style: TextStyle(
@@ -416,7 +418,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 23 for Bitter Gourd",
                       style: TextStyle(
@@ -426,7 +428,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 24 for Capsicum",
                       style: TextStyle(
@@ -436,7 +438,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 25 for Cabbage",
                       style: TextStyle(
@@ -446,7 +448,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 26 for Broccoli",
                       style: TextStyle(
@@ -456,7 +458,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 27 for Brinjal",
                       style: TextStyle(
@@ -466,7 +468,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -500,7 +502,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Query Types",
                       style: TextStyle(
@@ -512,7 +514,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 1 for Cultural Practices",
                       style: TextStyle(
@@ -522,7 +524,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 3 for Nutrient Management",
                       style: TextStyle(
@@ -532,7 +534,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 4 for Fertilizer Uses",
                       style: TextStyle(
@@ -542,7 +544,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 5 for Varieties",
                       style: TextStyle(
@@ -552,7 +554,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 6 for Weed Management",
                       style: TextStyle(
@@ -562,7 +564,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 7 for Seeds",
                       style: TextStyle(
@@ -572,7 +574,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 10 for Water Management",
                       style: TextStyle(
@@ -582,7 +584,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("Enter 11 for Plant Protection",
                       style: TextStyle(
@@ -592,7 +594,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Expanded(
                   child: Text("",
                       style: TextStyle(
@@ -633,6 +635,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: veginame,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter Vegetable Name:',
@@ -640,6 +643,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: querytype,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter query type:',
@@ -647,19 +651,24 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: query,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter your query:',
                             labelText: 'Query',
                           ),
                         ),
-                        new Container(
-                            padding:
-                                const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
+                        Container(
+                            padding: const EdgeInsets.only(
+                                left: 150.0, top: 40.0, bottom: 20.0),
+                            child: ElevatedButton(
                               child: const Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: null,
+                              onPressed: () {
+                                log(veginame.text);
+                                log(querytype.text);
+                                log(query.text);
+                              },
                             )),
                       ],
                     ),

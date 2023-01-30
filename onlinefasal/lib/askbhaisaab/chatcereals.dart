@@ -18,7 +18,9 @@ class ChatCerealsScreen extends StatefulWidget {
 }
 
 class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
-  TextEditingController textController = TextEditingController();
+  TextEditingController cropname = TextEditingController();
+  TextEditingController querytype = TextEditingController();
+  TextEditingController query = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -183,8 +185,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text(
                     "Crop Names",
                     style: TextStyle(
@@ -197,8 +199,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 54 for Barley(Jow)",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -207,8 +209,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 55 for Maize(Kharif)",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -217,8 +219,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 56 for Oats",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -227,8 +229,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 57 for Wheat",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -237,8 +239,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 58 for Rice",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -247,8 +249,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 59 for Sugarcane",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -257,8 +259,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -291,8 +293,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Query Types",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -303,8 +305,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 1 for Cultural Practices",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -313,8 +315,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 3 for Nutrient Management",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -323,8 +325,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 4 for Fertilizer Uses",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -333,8 +335,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 5 for Varieties",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -343,8 +345,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 6 for Weed Management",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -353,8 +355,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 7 for Seeds",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -363,8 +365,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 10 for Water Management",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -373,8 +375,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Enter 11 for Plant Protection",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -383,8 +385,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -424,6 +426,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
+                          controller: cropname,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter Crop Name:',
@@ -431,6 +434,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: querytype,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter query type:',
@@ -438,19 +442,24 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: query,
                           decoration: const InputDecoration(
                             //icon: const Icon(Icons.person),
                             hintText: 'Enter your query:',
                             labelText: 'Query',
                           ),
                         ),
-                        new Container(
+                        Container(
                             padding:
                                 const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: new ElevatedButton(
+                            child: ElevatedButton(
                               child: const Text('Get Answer'),
                               //color: const Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: null,
+                              onPressed: () {
+                                log(cropname.text);
+                                log(querytype.text);
+                                log(query.text);
+                              },
                             )),
                       ],
                     ),

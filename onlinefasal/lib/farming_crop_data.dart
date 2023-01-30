@@ -69,7 +69,7 @@ class FarmingCropScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
                     ])),
               )
@@ -100,7 +100,7 @@ class FarmingCropScreendata extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),
@@ -291,109 +291,109 @@ class FarmingCropScreendata extends StatelessWidget {
               children: <Widget>[
                 Text(
                   cropP.crops[data].name,
-                  style: TextStyle(fontSize: 50),
+                  style: const TextStyle(fontSize: 50),
                 ),
                 Image.asset('assets/uploads/${cropP.crops[data].cropimage}',
                     height: 100, width: 100),
                 Text(
                   cropP.crops[data].description,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Species",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].species,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Category",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].category,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Season",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].season,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Botanical name",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].botanical_name,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Genus",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].genus,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Family",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].family,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Origin",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].origin,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Synonym",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].synonym,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Rotations",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].rotations,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Average yield",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].average_yield,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Minimum yield",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].yield_min.toString(),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Maximum yield",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   cropP.crops[data].yield_max.toString(),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),

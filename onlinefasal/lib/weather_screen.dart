@@ -51,7 +51,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                                  builder: (context) => const LoginScreen()));
                         }),
                   ])),
             )
@@ -82,7 +82,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                              builder: (context) => const HomeScreen()));
                     },
                   ),
                 ),
@@ -99,7 +99,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => WeatherScreen()));
+                            builder: (context) => const WeatherScreen()));
                   },
                 )),
                 Expanded(
@@ -115,7 +115,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FarmingScreen()));
+                            builder: (context) => const FarmingScreen()));
                   },
                 )),
                 Expanded(

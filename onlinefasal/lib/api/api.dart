@@ -128,3 +128,14 @@ class SoilProvider with ChangeNotifier {
     }
   }
 }
+
+// Future<Map<String, dynamic>> fetchAddresult(int a, int b) async {
+//   const url = 'http://127.0.0.1:8000/apis/v1/function/a/b/?format=api';
+//   final response = await http.get(Uri.parse(url));
+
+//   if (response.statusCode == 200) {
+//     return json.decode(response.body);
+//   } else {
+//     throw Exception('Failed to add numbers');
+//   }
+// }

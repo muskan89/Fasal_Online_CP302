@@ -69,7 +69,7 @@ class FarmingPestScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
                     ])),
               )
@@ -100,7 +100,7 @@ class FarmingPestScreendata extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),
@@ -287,7 +287,7 @@ class FarmingPestScreendata extends StatelessWidget {
               children: <Widget>[
                 Text(
                   pestP.pests[data].name,
-                  style: TextStyle(fontSize: 50),
+                  style: const TextStyle(fontSize: 50),
                 ),
                 pestP.pests[data].pest_image.toString() == "Not available"
                     ? const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 0))
@@ -298,29 +298,29 @@ class FarmingPestScreendata extends StatelessWidget {
                         'assets/uploads/${pestP.pests[data].pest_image.substring(0, pestP.pests[data].pest_image.length - 1)}',
                         height: 100,
                         width: 100),
-                Text(
+                const Text(
                   "symptoms",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   pestP.pests[data].symptoms,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "measures",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   pestP.pests[data].measures,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "State",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   pestP.pests[data].state,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),

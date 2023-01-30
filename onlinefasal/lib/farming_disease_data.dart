@@ -69,7 +69,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
                     ])),
               )
@@ -100,7 +100,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),
@@ -287,7 +287,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
               children: <Widget>[
                 Text(
                   diseaseP.diseases[data].common_name,
-                  style: TextStyle(fontSize: 50),
+                  style: const TextStyle(fontSize: 50),
                 ),
                 (diseaseP.diseases[data].disease_image.toString().isEmpty ||
                         diseaseP.diseases[data].disease_image.toString() == ",")
@@ -296,45 +296,45 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                         'assets/uploads/${diseaseP.diseases[data].disease_image.substring(0, diseaseP.diseases[data].disease_image.length - 1)}',
                         height: 100,
                         width: 100)),
-                Text(
+                const Text(
                   "Symptoms: ",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   diseaseP.diseases[data].symptoms,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Type: ",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   diseaseP.diseases[data].type,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Measures: ",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   diseaseP.diseases[data].measures,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "Scientific Name: ",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   diseaseP.diseases[data].name,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                Text(
+                const Text(
                   "State: ",
                   style: TextStyle(fontSize: 30),
                 ),
                 Text(
                   diseaseP.diseases[data].state,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),
