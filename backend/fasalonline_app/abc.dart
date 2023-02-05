@@ -1,6 +1,5 @@
-import 'dart:developer';
 import 'dart:convert';
-import 'dart:js_util';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
@@ -20,25 +19,21 @@ class ChatWeatherScreen extends StatefulWidget {
 }
 
 class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
-  Future<Map<String, dynamic>>? mp = null;
-  Future<Map<String, dynamic>>fetchAddresult(String CITY) async {
-    const url = 'http://127.0.0.1:8000/apis/v1/get_weather/CITY/';
+  var mp = null;
+  void fetchAddresult(String CITY) async {
+    const url = 'http://127.0.0.1:8000/apis/v1/get_weather/CITY/?format=api';
     final response = await http.get(Uri.parse(url));
-
+  
     if (response.statusCode == 200) {
-      // setState(() {
-      //   mp = json.decode(response.body);
-      // });
-      //mp = json.decode(response.body);
-      log("function");
-      log(response.body);
-      return json.decode(response.body);
+      setState(() {
+        mp = json.decode(response.body);
+      });
     }else{
-      //log("Failed to get weather");
-      throw Exception("Failed to get weather");
+      log("Failed to get weather");
     }
   }
   TextEditingController cityname = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -224,9 +219,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                               child: const Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
                               onPressed: () {
+                                fetchAddresult(cityname.text);
                                 log(cityname.text);
-                                mp=fetchAddresult(cityname.text);
-
+                                log(mp!=null ? mp:"null");
                               },
                             )),
                       ],
