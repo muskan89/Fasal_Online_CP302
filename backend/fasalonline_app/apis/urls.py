@@ -17,4 +17,7 @@ urlpatterns = [
     path('fertilizer/',ListChemicalFertilizer.as_view()),
     path('fertilizer/<int:pk>/',DetailChemicalFertilizer.as_view()),
     path('function/<int:a>/<int:b>/',add_numbers),
+    path('get_answer/<str:query_type>/<str:query>/<str:crop>/<str:category>/',get_answer_database),
+    path('get_weather/<str:CITY>/',get_weather_info),
+    path('get_mandi/<str:crop>/',get_mandi_rate),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
