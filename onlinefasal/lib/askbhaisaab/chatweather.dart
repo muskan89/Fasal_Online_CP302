@@ -11,6 +11,7 @@ import 'package:onlinefasal/speech_text.dart';
 import 'package:onlinefasal/DioPackage.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:onlinefasal/Content/Cons.dart';
 
 class ChatWeatherScreen extends StatefulWidget {
   const ChatWeatherScreen({Key? key}) : super(key: key);
@@ -20,26 +21,60 @@ class ChatWeatherScreen extends StatefulWidget {
 }
 
 class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
-  Future<Map<String, dynamic>>? mp = null;
-  Future<Map<String, dynamic>>fetchAddresult(String CITY) async {
-    const url = 'http://127.0.0.1:8000/apis/v1/get_weather/CITY/';
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      // setState(() {
-      //   mp = json.decode(response.body);
-      // });
-      //mp = json.decode(response.body);
-      log("function");
+  // Future<Map<String, dynamic>>? mp = null;
+  //var error, City_id, Temperature, feel_like, Humidity, atm_pressure, weth_Report, Wind_Speed;
+  Future fetchAddresult() async {
+    try{
+      String url = 'http://127.0.0.1:8000/apis/v1/get_weather/$CITY/';
+      final response = await http.get(Uri.parse(url));
       log(response.body);
-      return json.decode(response.body);
-    }else{
-      //log("Failed to get weather");
-      throw Exception("Failed to get weather");
+      Map<String, dynamic> data = json.decode(response.body);
+      setState(() {
+        // country and city  name that print in App Bar
+        error = data['error'].toString();
+        City_id = data['City_id'].toString();
+        // to be so sure it should be as string type
+
+        Temperature = data['Temperature'].toString();
+        // round method convert double value into integer
+
+// local time according to location that searched
+        feel_like = data['feel_like'].toString();
+        // temperature in far
+        Humidity = data['Humidity'].toString();
+        atm_pressure = data['atm_pressure'].toString();
+        weth_Report = data['weth_Report'].toString();
+        // we are using two property to get icon according to weather codition
+        // API return unfinished link of icon that why we are using
+        Wind_Speed = data['Wind_Speed'].toString();
+        // print data into consol
+      });
+    }on Exception catch (e) {
+      print(e.toString().toUpperCase());
     }
+
+    // if (response.statusCode == 200) {
+    //   // setState(() {
+    //   //   mp = json.decode(response.body);
+    //   // });
+    //   //mp = json.decode(response.body);
+    //   log("function");
+    //   //log(response.body);
+    //   return json.decode(response.body);
+    // }else{
+    //   //log("Failed to get weather");
+    //   throw Exception("Failed to get weather");
+    // }
   }
+
   TextEditingController cityname = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    this.fetchAddresult();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -224,18 +259,45 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                               child: const Text('Get Answer'),
                               //color: Color.fromRGBO(0, 128, 128, 1.0),
                               onPressed: () {
+                                CITY = cityname.text;
                                 log(cityname.text);
-                                mp=fetchAddresult(cityname.text);
-
+                                fetchAddresult();
                               },
                             )),
+
                       ],
                     ),
                   ),
                 ),
+                Expanded(
+                  child: Text(
+                    City_id,
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 128, 128, 1.0),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+
               ],
             ),
           ]),
+        Column(children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Expanded(
+                child: Text(
+                  "Temperature: ",
+                  style: TextStyle(
+                      color: Color.fromRGBO(0, 128, 128, 1.0),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+
+            ],
+          )]),
         ],
       )),
     );

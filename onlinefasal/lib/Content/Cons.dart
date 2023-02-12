@@ -1,0 +1,1 @@
+var error, City_id, Temperature, feel_like, Humidity, atm_pressure, weth_Report, Wind_Speed, CITY;
