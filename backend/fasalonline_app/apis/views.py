@@ -14,21 +14,21 @@ import re
 from spellchecker import SpellChecker
 
 spell = SpellChecker()
-dataset = pd.read_csv('D:\_7th sem\CP302\code_fasal\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\imp_final_data.csv',encoding = 'unicode_escape')
+dataset = pd.read_csv('D:\\flutter projects\\Fasal_Online_CP302-main\\backend\\fasalonline_app\\apis\\imp_final_data.csv',encoding = 'unicode_escape')
 
-dataset['QueryType'] = dataset['QueryType'].str.replace(r'\t', '')
+dataset['QueryType'] = dataset['QueryType'].str.replace(r'\t', '',regex='True')
 from sentence_transformers import SentenceTransformer, util
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 import requests, json
 # API base URL
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
-import requests
+
 res = requests.get("https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd0000014300ea7a708648397e8195bb436adc38&format=json&limit=1000")
 all_data=res.json()
-for y in all_data["records"][:2]:
-  for k in y:
-    print(k,y[k])
+# for y in all_data["records"][:2]:
+#   for k in y:
+#     print(k,y[k])
 
 category_dict = {"1": "Todays Weather","2": "Mandi Rate","3": "Vegetables","4":"Spices","5": "Schemes","6": "Communication","7": "Fruits","8": "Cereals",
                    "9": "Oilseeds","10": "Pulses"}
@@ -49,6 +49,8 @@ crop_dict = {"1": "Ash Gourd","2": "Turnip","3": "Tomato","4": "Sweet Potato","5
 "62": "Soybean","63": "Sunflower","64": "Lentil","65": "Bengal Gram","66": "Green Gram","67": "Kidney Bean","68": "Mash",
 "69": "Pigeon Pea","70": "RiceBean","71": "Institution","72": "Krishi Vigyan Kendras","73": "Nodal Officer Details (Statewise)"
              }
+
+
 def spell_check(sentence):
     corrected_sentence = ""
     words = sentence.split(" ")
@@ -109,12 +111,8 @@ class DetailChemicalFertilizer(generics.RetrieveAPIView):
     queryset = models.ChemicalFertilizer.objects.all()
     serializer_class = ChemicalFertilizerSerializer
 
-@api_view()
-@permission_classes([AllowAny])
-def add_numbers(request,a,b):
-    # print(request.query_params)
-    res = a + b
-    return Response({'result': res, 'message': 'api sucessful'})
+
+
 
 @api_view()
 @permission_classes([AllowAny])
