@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/farming.dart';
-import 'package:onlinefasal/farming_crop.dart';
 import 'package:onlinefasal/farming_disease_data.dart';
 import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming_pest.dart';
@@ -32,13 +31,11 @@ class FarmingDiseaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final diseaseP = Provider.of<DiseaseProvider>(context);
-    final cropP = Provider.of<CropProvider>(context);
 
     return Scaffold(
       //body: const LoginScreen(),
 
-      body: Container(
-          child: ListView(children: <Widget>[
+      body: ListView(children: <Widget>[
         Column(children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,10 +53,9 @@ class FarmingDiseaseScreen extends StatelessWidget {
                         color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
               ),
               Expanded(
-                child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
                       InkWell(
                           child: Image.asset('assets/images/bell.png'),
                           onTap: () {
@@ -72,9 +68,9 @@ class FarmingDiseaseScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           }),
-                    ])),
+                    ]),
               )
             ],
           )
@@ -103,7 +99,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => const HomeScreen()));
                       },
                     ),
                   ),
@@ -278,7 +274,8 @@ class FarmingDiseaseScreen extends StatelessWidget {
                           ? InkWell(
                               child: Container(
                                   height: 80,
-                                  padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                   decoration: BoxDecoration(
                                       color: Colors
                                           .teal, //remove color to make it transpatent
@@ -340,7 +337,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                       //)
                       ;
                 }))
-      ])),
+      ]),
     );
   }
 }

@@ -1,16 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/DioPackage.dart';
-import 'package:provider/provider.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/farming_crop.dart';
-import 'package:onlinefasal/farming_disease.dart';
-import 'package:onlinefasal/farming_pest.dart';
-import 'package:onlinefasal/farming_soil.dart';
-import 'package:onlinefasal/farming_fertilizer.dart';
 
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
@@ -23,12 +17,10 @@ class _FarmingScreenState extends State<FarmingScreen> {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final cropP = Provider.of<CropProvider>(context);
     return Scaffold(
       //body: const LoginScreen(),
 
-      body: Container(
-          child: ListView(children: <Widget>[
+      body: ListView(children: <Widget>[
         Column(children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,10 +38,9 @@ class _FarmingScreenState extends State<FarmingScreen> {
                         color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
               ),
               Expanded(
-                child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
                       InkWell(
                           child: Image.asset('assets/images/bell.png'),
                           onTap: () {
@@ -64,7 +55,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => const LoginScreen()));
                           }),
-                    ])),
+                    ]),
               )
             ],
           )
@@ -271,7 +262,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                 ],
               ))
         ]),
-      ])),
+      ]),
     );
   }
 }

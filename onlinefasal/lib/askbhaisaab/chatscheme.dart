@@ -1,14 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/weather_screen.dart';
-import 'package:onlinefasal/speech_text.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:onlinefasal/models/dbresponse.dart';
 
 class ChatSchemeScreen extends StatefulWidget {
   const ChatSchemeScreen({Key? key}) : super(key: key);
@@ -21,15 +20,14 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
   TextEditingController schemename = TextEditingController();
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
+  Future<DBResponse>? futureresponse;
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:
-              // Container(
-              //     child:
-              ListView(
+          child: ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -49,10 +47,9 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                           fontSize: 25.0)),
                 ),
                 Expanded(
-                  child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                         InkWell(
                             child: Image.asset('assets/images/bell.png'),
                             onTap: () {
@@ -65,9 +62,10 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) =>
+                                          const LoginScreen()));
                             }),
-                      ])),
+                      ]),
                 )
               ],
             )
@@ -96,7 +94,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                       ),
                     ),
@@ -217,29 +215,6 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                 ),
               ],
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Expanded(
-            //       child: Form(
-            //         key: _formKey,
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: <Widget>[
-            //             TextFormField(
-            //               decoration: const InputDecoration(
-            //                 //icon: const Icon(Icons.person),
-            //                 hintText: 'Enter query type:',
-            //                 labelText: 'Query Type',
-            //               ),
-            //             ),
-            //
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -391,59 +366,136 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             //     ),
             //   ],
             // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        TextFormField(
-                          controller: querytype,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter query type:',
-                            labelText: 'Query Type',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: schemename,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter Scheme Name:',
-                            labelText: 'Scheme Name',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: query,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter your query:',
-                            labelText: 'Query',
-                          ),
-                        ),
-                        Container(
-                            padding:
-                                const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: ElevatedButton(
-                              child: const Text('Get Answer'),
-                              onPressed: () {
-                                log(querytype.text);
-                                log(schemename.text);
-                                log(query.text);
-                              },
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Expanded(
+            //       child: Form(
+            //         key: _formKey,
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: <Widget>[
+            //             TextFormField(
+            //               controller: querytype,
+            //               decoration: const InputDecoration(
+            //                 //icon: const Icon(Icons.person),
+            //                 hintText: 'Enter query type:',
+            //                 labelText: 'Query Type',
+            //               ),
+            //             ),
+            //             TextFormField(
+            //               controller: schemename,
+            //               decoration: const InputDecoration(
+            //                 //icon: const Icon(Icons.person),
+            //                 hintText: 'Enter Scheme Name:',
+            //                 labelText: 'Scheme Name',
+            //               ),
+            //             ),
+            //             TextFormField(
+            //               controller: query,
+            //               decoration: const InputDecoration(
+            //                 //icon: const Icon(Icons.person),
+            //                 hintText: 'Enter your query:',
+            //                 labelText: 'Query',
+            //               ),
+            //             ),
+            //             Container(
+            //                 padding:
+            //                     const EdgeInsets.only(left: 150.0, top: 40.0),
+            //                 child: ElevatedButton(
+            //                   child: const Text('Get Answer'),
+            //                   onPressed: () {
+            //                     log(querytype.text);
+            //                     log(schemename.text);
+            //                     log(query.text);
+            //                   },
+            //                 )),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            Container(
+                alignment: Alignment.center,
+                child: (futureresponse == null)
+                    ? buildColumn()
+                    : buildFutureBuilder())
           ]),
         ],
       )),
+    );
+  }
+
+  Column buildColumn() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        TextField(
+            controller: schemename,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter scheme name:',
+              labelText: 'scheme name',
+            )),
+        TextField(
+            controller: querytype,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the querytype:',
+              labelText: 'querytype',
+            )),
+        TextField(
+            controller: query,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the query:',
+              labelText: 'query',
+            )),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              futureresponse =
+                  getAnswer(schemename.text, query.text, querytype.text, '5');
+            });
+          },
+          child: const Text('get answer'),
+        ),
+      ],
+    );
+  }
+
+  FutureBuilder<DBResponse> buildFutureBuilder() {
+    return FutureBuilder<DBResponse>(
+      future: futureresponse,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          DBResponse? dbResponse = snapshot.data;
+          return Column(
+            children: [
+              Text('Scheme : ${schemename.text}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Similar Score : ${dbResponse?.Similar_score}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Message : ${dbResponse?.Message}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Your Question : ${dbResponse?.Question}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text(
+                  'Similar question that we find : ${dbResponse?.Question_Database}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Answer : ${dbResponse?.Answer}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Reference : ${dbResponse?.Reference}',
+                  style: const TextStyle(fontSize: 25.0)),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

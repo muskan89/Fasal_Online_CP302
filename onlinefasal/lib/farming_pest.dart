@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/farming_pest_data.dart';
 import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming_disease.dart';
-import 'package:onlinefasal/farming_crop.dart';
 import 'package:onlinefasal/farming_soil.dart';
 import 'package:onlinefasal/farming_fertilizer.dart';
 
@@ -31,12 +30,10 @@ class FarmingPestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pestP = Provider.of<PestProvider>(context);
-    final cropP = Provider.of<CropProvider>(context);
     return Scaffold(
       //body: const LoginScreen(),
 
-      body: Container(
-          child: ListView(children: <Widget>[
+      body: ListView(children: <Widget>[
         Column(children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,10 +51,9 @@ class FarmingPestScreen extends StatelessWidget {
                         color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
               ),
               Expanded(
-                child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
                       InkWell(
                           child: Image.asset('assets/images/bell.png'),
                           onTap: () {
@@ -72,7 +68,7 @@ class FarmingPestScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => const LoginScreen()));
                           }),
-                    ])),
+                    ]),
               )
             ],
           )
@@ -341,7 +337,7 @@ class FarmingPestScreen extends StatelessWidget {
                       //)
                       ;
                 }))
-      ])),
+      ]),
     );
   }
 }

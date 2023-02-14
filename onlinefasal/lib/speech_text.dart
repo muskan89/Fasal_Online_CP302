@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:onlinefasal/farming.dart';
-import 'package:onlinefasal/home.dart';
-import 'dart:developer';
-import 'package:onlinefasal/login.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:highlight_text/highlight_text.dart';
 
 class SpeechScreen extends StatefulWidget {
   const SpeechScreen({Key? key}) : super(key: key);

@@ -1,12 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/weather_screen.dart';
-import 'package:onlinefasal/speech_text.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chatscheme.dart';
 import 'package:onlinefasal/askbhaisaab/chatcereals.dart';
@@ -32,10 +29,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:
-              // Container(
-              //     child:
-              ListView(
+          child: ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -55,10 +49,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                           fontSize: 25.0)),
                 ),
                 Expanded(
-                  child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                         InkWell(
                             child: Image.asset('assets/images/bell.png'),
                             onTap: () {
@@ -74,7 +67,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                                       builder: (context) =>
                                           const LoginScreen()));
                             }),
-                      ])),
+                      ]),
                 )
               ],
             )
@@ -191,8 +184,8 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text("Hello! BhaiSaab welcomes you on FasalOnline App",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
@@ -201,8 +194,8 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
+              children: const [
+                Expanded(
                   child: Text(
                       "How can I help you? Please select category from the given options",
                       style: TextStyle(

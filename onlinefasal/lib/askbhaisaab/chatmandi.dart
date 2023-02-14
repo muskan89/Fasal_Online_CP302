@@ -1,12 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/weather_screen.dart';
-import 'package:onlinefasal/speech_text.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/models/mandiRate.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 
@@ -19,15 +18,12 @@ class ChatMandiScreen extends StatefulWidget {
 
 class _ChatMandiScreenState extends State<ChatMandiScreen> {
   TextEditingController cropname = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  Future<MandiRate>? futuremandirate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:
-              // Container(
-              //     child:
-              ListView(
+          child: ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -47,10 +43,9 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
                           fontSize: 25.0)),
                 ),
                 Expanded(
-                  child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                         InkWell(
                             child: Image.asset('assets/images/bell.png'),
                             onTap: () {
@@ -63,9 +58,10 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) =>
+                                          const LoginScreen()));
                             }),
-                      ])),
+                      ]),
                 )
               ],
             )
@@ -94,7 +90,7 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                       ),
                     ),
@@ -179,43 +175,59 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
                   ],
                 ))
           ]),
-          Column(children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        TextFormField(
-                          controller: cropname,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter the crop name:',
-                            labelText: 'Crop Name',
-                          ),
-                        ),
-                        Container(
-                            padding:
-                                const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: ElevatedButton(
-                              child: const Text('Get Answer'),
-                              //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: () {
-                                log(cropname.text);
-                              },
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ]),
+          Container(
+              child: (futuremandirate == null)
+                  ? buildColumn()
+                  : buildFutureBuilder())
         ],
       )),
+    );
+  }
+
+  Column buildColumn() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        TextField(
+            controller: cropname,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the crop:',
+              labelText: 'crop',
+            )),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              futuremandirate = getMandiRate(cropname.text);
+            });
+          },
+          child: const Text('get mandi rate'),
+        ),
+      ],
+    );
+  }
+
+  FutureBuilder<MandiRate> buildFutureBuilder() {
+    return FutureBuilder<MandiRate>(
+      future: futuremandirate,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          MandiRate? mandirate = snapshot.data;
+          return Column(
+            children: [
+              //Text('Error: ${MandiRate?.error}'),
+              Text('crop: ${cropname.text}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('${mandirate?.result}',
+                  style: const TextStyle(fontSize: 20.0)),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

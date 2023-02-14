@@ -4,14 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming.dart';
-import 'package:onlinefasal/farming_crop.dart';
-import 'package:onlinefasal/farming_disease.dart';
-import 'package:onlinefasal/farming_pest.dart';
-import 'package:onlinefasal/farming_soil.dart';
-import 'package:onlinefasal/farming_fertilizer.dart';
 
 class FarmingPestScreendata extends StatelessWidget {
   //const FarmingScreendata({Key? key}) : super(key: key);
@@ -34,8 +29,7 @@ class FarmingPestScreendata extends StatelessWidget {
     return Scaffold(
       //body: const LoginScreen(),
 
-      body: Container(
-          child: ListView(children: <Widget>[
+      body: ListView(children: <Widget>[
         Column(children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,10 +47,9 @@ class FarmingPestScreendata extends StatelessWidget {
                         color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
               ),
               Expanded(
-                child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
                       InkWell(
                           child: Image.asset('assets/images/bell.png'),
                           onTap: () {
@@ -71,7 +64,7 @@ class FarmingPestScreendata extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => const LoginScreen()));
                           }),
-                    ])),
+                    ]),
               )
             ],
           )
@@ -292,9 +285,7 @@ class FarmingPestScreendata extends StatelessWidget {
                 pestP.pests[data].pest_image.toString() == "Not available"
                     ? const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 0))
                     //Text(pestP.pests[index].pest_image)
-                    :
-                    // TODO: we have to add a check for checking null values in data
-                    Image.asset(
+                    : Image.asset(
                         'assets/uploads/${pestP.pests[data].pest_image.substring(0, pestP.pests[data].pest_image.length - 1)}',
                         height: 100,
                         width: 100),
@@ -326,7 +317,7 @@ class FarmingPestScreendata extends StatelessWidget {
             ),
           ),
         )
-      ])),
+      ]),
     );
   }
 }

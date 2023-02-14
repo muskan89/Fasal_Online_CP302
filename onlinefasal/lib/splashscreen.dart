@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:onlinefasal/home.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Container(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         // Image.asset('assets/images/Ellipse2.png'),
         // Image.asset('assets/images/Ellipse2.png'),
         Row(
@@ -42,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
         //Image.asset('assets/images/Ellipse1.png'),
-      ])),
+      ]),
     ));
   }
 }

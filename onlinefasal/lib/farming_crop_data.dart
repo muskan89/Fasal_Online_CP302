@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming.dart';
-import 'package:onlinefasal/farming_crop.dart';
 import 'package:onlinefasal/farming_disease.dart';
 import 'package:onlinefasal/farming_pest.dart';
 import 'package:onlinefasal/farming_soil.dart';
@@ -32,374 +31,371 @@ class FarmingCropScreendata extends StatelessWidget {
   Widget build(BuildContext context) {
     final cropP = Provider.of<CropProvider>(context);
     return Scaffold(
-      //body: const LoginScreen(),
+        //body: const LoginScreen(),
 
-      body: Container(
-          child: ListView(children: <Widget>[
-        Column(children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Image.asset('assets/images/logo.png'),
-                  ],
-                ),
-              ),
-              const Expanded(
-                child: Text("Fasal Online",
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
-              ),
-              Expanded(
-                child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                      InkWell(
-                          child: Image.asset('assets/images/bell.png'),
-                          onTap: () {
-                            log('bell icon pressed');
-                          }),
-                      InkWell(
-                          child: Image.asset('assets/images/user_logo.png'),
-                          onTap: () {
-                            log('user login button pressed');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
-                          }),
-                    ])),
-              )
-            ],
-          )
-        ]),
-        Column(children: <Widget>[
-          Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Color.fromRGBO(0, 194, 146, 0.28),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/home.png',
-                          ),
-                          const Text('Home')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Home button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
-                      },
-                    ),
-                  ),
-                  Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/weather.png'),
-                        const Text('Weather')
-                      ],
-                    ),
-                    onTap: () {
-                      log('weather button pressed');
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Weatherr()));
-                    },
-                  )),
-                  Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/Farming.png'),
-                        const Text('Farming')
-                      ],
-                    ),
-                    onTap: () {
-                      log('farming button pressed');
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FarmingScreen()));
-                    },
-                  )),
-                  Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/govt_schemes.png'),
-                        const Text('Govt. Schemes')
-                      ],
-                    ),
-                    onTap: () {
-                      log('Govt. schemes button pressed');
-                    },
-                  )),
-                  Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/rupee-sign.png'),
-                        const Text('Mandi Rates')
-                      ],
-                    ),
-                    onTap: () {
-                      log('mandi rates button pressed');
-                    },
-                  )),
+        body: ListView(children: <Widget>[
+      Column(children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Image.asset('assets/images/logo.png'),
                 ],
-              ))
-        ]),
-        Column(children: <Widget>[
-          Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Color.fromRGBO(238, 255, 234, 1),
               ),
+            ),
+            const Expanded(
+              child: Text("Fasal Online",
+                  style: TextStyle(
+                      color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+            ),
+            Expanded(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Expanded(
-                  //   child: InkWell(
-                  //     child: Column(
-                  //       children: <Widget>[
-                  //         Image.asset(
-                  //           'assets/images/crop_logo.png',
-                  //         ),
-                  //         const Text('Crops')
-                  //       ],
-                  //     ),
-                  //     onTap: () {
-                  //       log('crops button pressed');
-                  //       Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //               builder: (context) => const FarmingCropScreen()));
-                  //     },
-                  //   ),
-                  // ),
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/pesticide_logo.png'),
-                          const Text('Pests')
-                        ],
-                      ),
-                      onTap: () {
-                        log('pests button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FarmingPestScreen(
-                                    data: cropP.crops[data].id)));
-                      },
-                    ),
-                  ),
-                  Expanded(
-                      child: InkWell(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    InkWell(
+                        child: Image.asset('assets/images/bell.png'),
+                        onTap: () {
+                          log('bell icon pressed');
+                        }),
+                    InkWell(
+                        child: Image.asset('assets/images/user_logo.png'),
+                        onTap: () {
+                          log('user login button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                        }),
+                  ]),
+            )
+          ],
+        )
+      ]),
+      Column(children: <Widget>[
+        Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              color: Color.fromRGBO(0, 194, 146, 0.28),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: InkWell(
                     child: Column(
                       children: <Widget>[
-                        Image.asset('assets/images/disease_logo.png'),
-                        const Text('Diseases')
+                        Image.asset(
+                          'assets/images/home.png',
+                        ),
+                        const Text('Home')
                       ],
                     ),
                     onTap: () {
-                      log('diseases button pressed');
+                      log('Home button pressed');
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FarmingDiseaseScreen(
+                              builder: (context) => const HomeScreen()));
+                    },
+                  ),
+                ),
+                Expanded(
+                    child: InkWell(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset('assets/images/weather.png'),
+                      const Text('Weather')
+                    ],
+                  ),
+                  onTap: () {
+                    log('weather button pressed');
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Weatherr()));
+                  },
+                )),
+                Expanded(
+                    child: InkWell(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset('assets/images/Farming.png'),
+                      const Text('Farming')
+                    ],
+                  ),
+                  onTap: () {
+                    log('farming button pressed');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FarmingScreen()));
+                  },
+                )),
+                Expanded(
+                    child: InkWell(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset('assets/images/govt_schemes.png'),
+                      const Text('Govt. Schemes')
+                    ],
+                  ),
+                  onTap: () {
+                    log('Govt. schemes button pressed');
+                  },
+                )),
+                Expanded(
+                    child: InkWell(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset('assets/images/rupee-sign.png'),
+                      const Text('Mandi Rates')
+                    ],
+                  ),
+                  onTap: () {
+                    log('mandi rates button pressed');
+                  },
+                )),
+              ],
+            ))
+      ]),
+      Column(children: <Widget>[
+        Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              color: Color.fromRGBO(238, 255, 234, 1),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Expanded(
+                //   child: InkWell(
+                //     child: Column(
+                //       children: <Widget>[
+                //         Image.asset(
+                //           'assets/images/crop_logo.png',
+                //         ),
+                //         const Text('Crops')
+                //       ],
+                //     ),
+                //     onTap: () {
+                //       log('crops button pressed');
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => const FarmingCropScreen()));
+                //     },
+                //   ),
+                // ),
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/pesticide_logo.png'),
+                        const Text('Pests')
+                      ],
+                    ),
+                    onTap: () {
+                      log('pests button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FarmingPestScreen(
                                   data: cropP.crops[data].id)));
                     },
-                  )),
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/fertilizer_logo.png'),
-                          const Text('Fertilizer')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Fertilizers button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FarmingFertilizerScreen(
-                                    data: cropP.crops[data].id)));
-                      },
-                    ),
                   ),
-                  Expanded(
+                ),
+                Expanded(
                     child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/soil_logo.png'),
-                          const Text('Soil')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Soil button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FarmingSoilScreen(
-                                    data: cropP.crops[data].id)));
-                      },
-                    ),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset('assets/images/disease_logo.png'),
+                      const Text('Diseases')
+                    ],
                   ),
-                ],
-              ))
-        ]),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 500, minHeight: 50),
-          // child: ListView.builder(
-          //     itemCount: cropP.crops.length,
-          //     itemBuilder: (BuildContext context, int index) {
-          //       return
-          //         //ListTile(
-          //         Expanded(
-          //           child: Container(
-          //               decoration: BoxDecoration(
-          //                   color: Colors.blueAccent,//remove color to make it transpatent
-          //                   border: Border.all(
-          //                       style: BorderStyle.solid,
-          //                       color: Colors.white)),
-          //               child: Center(child: Text(cropP.crops[index].name))),
-          //         )
-          //       //title: Text(cropP.crops[index].name),
-          //       //subtitle: Text(cropP.crops[index].description),
-          //       //)
-          //           ;
-          //     })
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Text(
-                  cropP.crops[data].name,
-                  style: const TextStyle(fontSize: 50),
+                  onTap: () {
+                    log('diseases button pressed');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FarmingDiseaseScreen(
+                                data: cropP.crops[data].id)));
+                  },
+                )),
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/fertilizer_logo.png'),
+                        const Text('Fertilizer')
+                      ],
+                    ),
+                    onTap: () {
+                      log('Fertilizers button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FarmingFertilizerScreen(
+                                  data: cropP.crops[data].id)));
+                    },
+                  ),
                 ),
-                Image.asset('assets/uploads/${cropP.crops[data].cropimage}',
-                    height: 100, width: 100),
-                Text(
-                  cropP.crops[data].description,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Species",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].species,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Category",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].category,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Season",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].season,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Botanical name",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].botanical_name,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Genus",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].genus,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Family",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].family,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Origin",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].origin,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Synonym",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].synonym,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Rotations",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].rotations,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Average yield",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].average_yield,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Minimum yield",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].yield_min.toString(),
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const Text(
-                  "Maximum yield",
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(
-                  cropP.crops[data].yield_max.toString(),
-                  style: const TextStyle(fontSize: 20),
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/soil_logo.png'),
+                        const Text('Soil')
+                      ],
+                    ),
+                    onTap: () {
+                      log('Soil button pressed');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FarmingSoilScreen(
+                                  data: cropP.crops[data].id)));
+                    },
+                  ),
                 ),
               ],
-            ),
+            ))
+      ]),
+      ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 500, minHeight: 50),
+        // child: ListView.builder(
+        //     itemCount: cropP.crops.length,
+        //     itemBuilder: (BuildContext context, int index) {
+        //       return
+        //         //ListTile(
+        //         Expanded(
+        //           child: Container(
+        //               decoration: BoxDecoration(
+        //                   color: Colors.blueAccent,//remove color to make it transpatent
+        //                   border: Border.all(
+        //                       style: BorderStyle.solid,
+        //                       color: Colors.white)),
+        //               child: Center(child: Text(cropP.crops[index].name))),
+        //         )
+        //       //title: Text(cropP.crops[index].name),
+        //       //subtitle: Text(cropP.crops[index].description),
+        //       //)
+        //           ;
+        //     })
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text(
+                cropP.crops[data].name,
+                style: const TextStyle(fontSize: 50),
+              ),
+              Image.asset('assets/uploads/${cropP.crops[data].cropimage}',
+                  height: 100, width: 100),
+              Text(
+                cropP.crops[data].description,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Species",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].species,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Category",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].category,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Season",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].season,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Botanical name",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].botanical_name,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Genus",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].genus,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Family",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].family,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Origin",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].origin,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Synonym",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].synonym,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Rotations",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].rotations,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Average yield",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].average_yield,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Minimum yield",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].yield_min.toString(),
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Text(
+                "Maximum yield",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                cropP.crops[data].yield_max.toString(),
+                style: const TextStyle(fontSize: 20),
+              ),
+            ],
           ),
-        )
-      ])),
-    );
+        ),
+      )
+    ]));
   }
 }

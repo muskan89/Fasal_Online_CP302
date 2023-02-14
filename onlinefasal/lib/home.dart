@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/weather_screen.dart';
-import 'package:onlinefasal/speech_text.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,8 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          child: ListView(
+      body: ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -42,10 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 25.0)),
                 ),
                 Expanded(
-                  child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                         InkWell(
                             child: Image.asset('assets/images/bell.png'),
                             onTap: () {
@@ -61,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       builder: (context) =>
                                           const LoginScreen()));
                             }),
-                      ])),
+                      ]),
                 )
               ],
             )
@@ -239,10 +235,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   color: Colors.white,
                                   helpText: "Ask Bhaisaab...",
-                                  // onSubmitted: (text) => {
-                                  //   log("search text submiited"),
-                                  //   // todo: searchbar functionality
-                                  // },
+                                  onSubmitted: (text) => {
+                                    log("search text submiited"),
+                                    // todo: searchbar functionality
+                                  },
                                   //autoFocus: false,
                                   //closeSearchOnSuffixTap: true,
                                   //animationDurationInMilli: 2000,
@@ -254,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )),
               ))
         ],
-      )),
+      ),
     );
   }
 }

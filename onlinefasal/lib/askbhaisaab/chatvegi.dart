@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/weather_screen.dart';
-import 'package:onlinefasal/speech_text.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/models/dbresponse.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 
@@ -21,15 +19,15 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
   TextEditingController veginame = TextEditingController();
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
+  TextEditingController category = TextEditingController();
+  Future<DBResponse>? futureresponse;
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:
-              // Container(
-              //     child:
-              ListView(
+          child: ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -49,10 +47,9 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                           fontSize: 25.0)),
                 ),
                 Expanded(
-                  child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                         InkWell(
                             child: Image.asset('assets/images/bell.png'),
                             onTap: () {
@@ -65,9 +62,10 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) =>
+                                          const LoginScreen()));
                             }),
-                      ])),
+                      ]),
                 )
               ],
             )
@@ -96,7 +94,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                       ),
                     ),
@@ -476,29 +474,6 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                 ),
               ],
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Expanded(
-            //       child: Form(
-            //         key: _formKey,
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: <Widget>[
-            //             TextFormField(
-            //               decoration: const InputDecoration(
-            //                 //icon: const Icon(Icons.person),
-            //                 hintText: 'Enter query type:',
-            //                 labelText: 'Query Type',
-            //               ),
-            //             ),
-            //
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -625,60 +600,140 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        TextFormField(
-                          controller: veginame,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter Vegetable Name:',
-                            labelText: 'Vegetable Name',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: querytype,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter query type:',
-                            labelText: 'Query Type',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: query,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter your query:',
-                            labelText: 'Query',
-                          ),
-                        ),
-                        Container(
-                            padding: const EdgeInsets.only(
-                                left: 150.0, top: 40.0, bottom: 20.0),
-                            child: ElevatedButton(
-                              child: const Text('Get Answer'),
-                              //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: () {
-                                log(veginame.text);
-                                log(querytype.text);
-                                log(query.text);
-                              },
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Expanded(
+            //       child: Form(
+            //         key: _formKey,
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: <Widget>[
+            //             TextFormField(
+            //               controller: veginame,
+            //               decoration: const InputDecoration(
+            //                 //icon: const Icon(Icons.person),
+            //                 hintText: 'Enter Vegetable Name:',
+            //                 labelText: 'Vegetable Name',
+            //               ),
+            //             ),
+            //             TextFormField(
+            //               controller: querytype,
+            //               decoration: const InputDecoration(
+            //                 //icon: const Icon(Icons.person),
+            //                 hintText: 'Enter query type:',
+            //                 labelText: 'Query Type',
+            //               ),
+            //             ),
+            //             TextFormField(
+            //               controller: query,
+            //               decoration: const InputDecoration(
+            //                 //icon: const Icon(Icons.person),
+            //                 hintText: 'Enter your query:',
+            //                 labelText: 'Query',
+            //               ),
+            //             ),
+            //             Container(
+            //                 padding: const EdgeInsets.only(
+            //                     left: 150.0, top: 40.0, bottom: 20.0),
+            //                 child: ElevatedButton(
+            //                   child: const Text('Get Answer'),
+            //                   //color: Color.fromRGBO(0, 128, 128, 1.0),
+            //                   onPressed: () {
+            //                     log(veginame.text);
+            //                     log(querytype.text);
+            //                     log(query.text);
+            //                   },
+            //                 )),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ]),
+          Container(
+              alignment: Alignment.center,
+              child: (futureresponse == null)
+                  ? buildColumn()
+                  : buildFutureBuilder())
         ],
       )),
+    );
+  }
+
+  Column buildColumn() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        TextField(
+            controller: veginame,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the vegitable:',
+              labelText: 'vegitable name',
+            )),
+        TextField(
+            controller: querytype,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the querytype:',
+              labelText: 'querytype',
+            )),
+        TextField(
+            controller: query,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the query:',
+              labelText: 'query',
+            )),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              futureresponse =
+                  getAnswer(veginame.text, query.text, querytype.text, '3');
+            });
+          },
+          child: const Text('get answer'),
+        ),
+      ],
+    );
+  }
+
+  FutureBuilder<DBResponse> buildFutureBuilder() {
+    return FutureBuilder<DBResponse>(
+      future: futureresponse,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          log("frontend");
+          var string = snapshot.data?.Similar_score.toString();
+          log(string!);
+          DBResponse? dbResponse = snapshot.data;
+          return Column(
+            children: [
+              Text('Vegitable : ${veginame.text}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Similar Score : ${dbResponse?.Similar_score}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Message : ${dbResponse?.Message}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Your Question : ${dbResponse?.Question}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text(
+                  'Similar question that we find : ${dbResponse?.Question_Database}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Answer : ${dbResponse?.Answer}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Reference : ${dbResponse?.Reference}',
+                  style: const TextStyle(fontSize: 25.0)),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

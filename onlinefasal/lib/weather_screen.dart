@@ -16,8 +16,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            child: ListView(children: <Widget>[
+        body: ListView(children: <Widget>[
       Column(children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,10 +34,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
             ),
             Expanded(
-              child: Container(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
                     InkWell(
                         child: Image.asset('assets/images/bell.png'),
                         onTap: () {
@@ -53,7 +51,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               MaterialPageRoute(
                                   builder: (context) => const LoginScreen()));
                         }),
-                  ])),
+                  ]),
             )
           ],
         )
@@ -171,6 +169,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   },
                 ))
           ])
-    ])));
+    ]));
   }
 }

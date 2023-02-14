@@ -1,17 +1,13 @@
+import 'dart:async';
 import 'dart:developer';
-import 'dart:convert';
-import 'dart:js_util';
-import 'package:http/http.dart' as http;
+import 'package:onlinefasal/api/api.dart';
+import '../models/weather.dart';
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
-import 'package:onlinefasal/weather_screen.dart';
-import 'package:onlinefasal/speech_text.dart';
-import 'package:onlinefasal/DioPackage.dart';
+import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
-import 'package:onlinefasal/Content/Cons.dart';
 
 class ChatWeatherScreen extends StatefulWidget {
   const ChatWeatherScreen({Key? key}) : super(key: key);
@@ -21,68 +17,13 @@ class ChatWeatherScreen extends StatefulWidget {
 }
 
 class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
-  // Future<Map<String, dynamic>>? mp = null;
-  //var error, City_id, Temperature, feel_like, Humidity, atm_pressure, weth_Report, Wind_Speed;
-  Future fetchAddresult() async {
-    try{
-      String url = 'http://127.0.0.1:8000/apis/v1/get_weather/$CITY/';
-      final response = await http.get(Uri.parse(url));
-      log(response.body);
-      Map<String, dynamic> data = json.decode(response.body);
-      setState(() {
-        // country and city  name that print in App Bar
-        error = data['error'].toString();
-        City_id = data['City_id'].toString();
-        // to be so sure it should be as string type
-
-        Temperature = data['Temperature'].toString();
-        // round method convert double value into integer
-
-// local time according to location that searched
-        feel_like = data['feel_like'].toString();
-        // temperature in far
-        Humidity = data['Humidity'].toString();
-        atm_pressure = data['atm_pressure'].toString();
-        weth_Report = data['weth_Report'].toString();
-        // we are using two property to get icon according to weather codition
-        // API return unfinished link of icon that why we are using
-        Wind_Speed = data['Wind_Speed'].toString();
-        // print data into consol
-      });
-    }on Exception catch (e) {
-      print(e.toString().toUpperCase());
-    }
-
-    // if (response.statusCode == 200) {
-    //   // setState(() {
-    //   //   mp = json.decode(response.body);
-    //   // });
-    //   //mp = json.decode(response.body);
-    //   log("function");
-    //   //log(response.body);
-    //   return json.decode(response.body);
-    // }else{
-    //   //log("Failed to get weather");
-    //   throw Exception("Failed to get weather");
-    // }
-  }
-
   TextEditingController cityname = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    super.initState();
-    this.fetchAddresult();
-
-  }
+  Future<Weather>? futureweather;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:
-              // Container(
-              //     child:
-              ListView(
+          child: ListView(
         children: <Widget>[
           Column(children: <Widget>[
             Row(
@@ -102,10 +43,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           fontSize: 25.0)),
                 ),
                 Expanded(
-                  child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                         InkWell(
                             child: Image.asset('assets/images/bell.png'),
                             onTap: () {
@@ -118,9 +58,10 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) =>
+                                          const LoginScreen()));
                             }),
-                      ])),
+                      ]),
                 )
               ],
             )
@@ -149,7 +90,7 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                       ),
                     ),
@@ -234,72 +175,72 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                   ],
                 ))
           ]),
-          Column(children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        TextFormField(
-                          controller: cityname,
-                          decoration: const InputDecoration(
-                            //icon: const Icon(Icons.person),
-                            hintText: 'Enter the city:',
-                            labelText: 'City',
-                          ),
-                        ),
-                        Container(
-                            padding:
-                                const EdgeInsets.only(left: 150.0, top: 40.0),
-                            child: ElevatedButton(
-                              child: const Text('Get Answer'),
-                              //color: Color.fromRGBO(0, 128, 128, 1.0),
-                              onPressed: () {
-                                CITY = cityname.text;
-                                log(cityname.text);
-                                fetchAddresult();
-                              },
-                            )),
-
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    City_id,
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 128, 128, 1.0),
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-
-              ],
-            ),
-          ]),
-        Column(children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Expanded(
-                child: Text(
-                  "Temperature: ",
-                  style: TextStyle(
-                      color: Color.fromRGBO(0, 128, 128, 1.0),
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-
-            ],
-          )]),
+          Container(
+              alignment: Alignment.center,
+              child: (futureweather == null)
+                  ? buildColumn()
+                  : buildFutureBuilder())
         ],
       )),
+    );
+  }
+
+  Column buildColumn() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        TextFormField(
+            controller: cityname,
+            decoration: const InputDecoration(
+              //icon: const Icon(Icons.person),
+              hintText: 'Enter the city:',
+              labelText: 'City',
+            )),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              futureweather = getWeather(cityname.text);
+            });
+          },
+          child: const Text('get weather'),
+        ),
+      ],
+    );
+  }
+
+  FutureBuilder<Weather> buildFutureBuilder() {
+    return FutureBuilder<Weather>(
+      future: futureweather,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          Weather? weather = snapshot.data;
+          return Column(
+            children: [
+              //Text('Error: ${weather?.error}'),
+              Text('Location: ${cityname.text}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('City ID: ${weather?.City_id}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Temperature: ${weather?.Temperature}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Feel like: ${weather?.feel_like}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Humidity: ${weather?.Humidity}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Atmospheric Pressure: ${weather?.atm_pressure}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Weather Report: ${weather?.weth_Report}',
+                  style: const TextStyle(fontSize: 25.0)),
+              Text('Wind Speed: ${weather?.wind_Speed}',
+                  style: const TextStyle(fontSize: 25.0)),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

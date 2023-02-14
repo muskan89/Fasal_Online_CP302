@@ -2,17 +2,18 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../models/Crop.dart';
-import '../models/Disease.dart';
-import '../models/Pest.dart';
-import '../models/Soil.dart';
-import '../models/Fertilizer.dart';
-
-
+import 'package:onlinefasal/models/dbresponse.dart';
+import '../models/crop.dart';
+import '../models/disease.dart';
+import '../models/pest.dart';
+import '../models/soil.dart';
+import '../models/fertilizer.dart';
+import '../models/weather.dart';
+import '../models/mandiRate.dart';
 
 class CropProvider with ChangeNotifier {
   CropProvider() {
-    this.fetchTasks();
+    fetchTasks();
   }
 
   List<Crop> _crops = [];
@@ -36,7 +37,7 @@ class CropProvider with ChangeNotifier {
 
 class DiseaseProvider with ChangeNotifier {
   DiseaseProvider() {
-    this.fetchTasks();
+    fetchTasks();
   }
 
   List<Disease> _diseases = [];
@@ -60,7 +61,7 @@ class DiseaseProvider with ChangeNotifier {
 
 class FertilizerProvider with ChangeNotifier {
   FertilizerProvider() {
-    this.fetchTasks();
+    fetchTasks();
   }
 
   List<Fertilizer> _fertilizers = [];
@@ -85,7 +86,7 @@ class FertilizerProvider with ChangeNotifier {
 
 class PestProvider with ChangeNotifier {
   PestProvider() {
-    this.fetchTasks();
+    fetchTasks();
   }
 
   List<Pest> _pests = [];
@@ -109,7 +110,7 @@ class PestProvider with ChangeNotifier {
 
 class SoilProvider with ChangeNotifier {
   SoilProvider() {
-    this.fetchTasks();
+    fetchTasks();
   }
 
   List<Soil> _soils = [];
@@ -127,17 +128,49 @@ class SoilProvider with ChangeNotifier {
       var data = json.decode(response.body) as List;
       log(response.body);
       _soils = data.map<Soil>((json) => Soil.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to fetch soil from database');
     }
   }
 }
 
-// Future<Map<String, dynamic>> fetchAddresult(int a, int b) async {
-//   const url = 'http://127.0.0.1:8000/apis/v1/function/a/b/?format=api';
-//   final response = await http.get(Uri.parse(url));
+Future<Weather> getWeather(String city) async {
+  var url = 'http://127.0.0.1:8000/apis/v1/get_weather/$city/?format=json';
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    log("response body");
+    log(response.body);
+    var data = json.decode(response.body);
+    return Weather.fromJson(data);
+  } else {
+    throw Exception('Failed to get weather');
+  }
+}
 
-//   if (response.statusCode == 200) {
-//     return json.decode(response.body);
-//   } else {
-//     throw Exception('Failed to add numbers');
-//   }
-// }
+Future<MandiRate> getMandiRate(String crop) async {
+  var url = 'http://127.0.0.1:8000/apis/v1/get_mandi/$crop/?format=json';
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    log("response body");
+    log(response.body);
+    var data = json.decode(response.body);
+    return MandiRate.fromJson(data);
+  } else {
+    throw Exception('Failed to get MandiRate');
+  }
+}
+
+Future<DBResponse> getAnswer(
+    String crop, String query, String querytype, String category) async {
+  var url =
+      'http://127.0.0.1:8000/apis/v1/get_answer/$category/$crop/$querytype/$query?format=json';
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    log("response: ");
+    log(response.body);
+    var data = json.decode(response.body);
+    return DBResponse.fromJson(data);
+  } else {
+    throw Exception("Failed to get answer");
+  }
+}
