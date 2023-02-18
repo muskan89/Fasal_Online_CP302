@@ -212,7 +212,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Weather',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     //color: Colors.orange,
                     //textColor: Colors.white,
@@ -225,6 +225,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.orange),
                   ),
                 ),
               ],
@@ -238,7 +241,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Mandi Rate',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     //color: Colors.brown,
                     //textColor: Colors.white,
@@ -251,6 +254,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.brown),
                   ),
                 ),
               ],
@@ -264,7 +270,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Vegetables',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.teal,
                     // textColor: Colors.white,
@@ -277,6 +283,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.teal),
                   ),
                 ),
               ],
@@ -290,7 +299,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Spices',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.red,
                     // textColor: Colors.white,
@@ -303,6 +312,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.red),
                   ),
                 ),
               ],
@@ -316,7 +328,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Schemes',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.blue,
                     // textColor: Colors.white,
@@ -330,6 +342,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                       //
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.blue),
                   ),
                 ),
               ],
@@ -343,7 +358,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Communication',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.black,
                     // textColor: Colors.white,
@@ -356,6 +371,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.black),
                   ),
                 ),
               ],
@@ -369,7 +387,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Fruits',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.orange,
                     // textColor: Colors.white,
@@ -382,6 +400,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.orange),
                   ),
                 ),
               ],
@@ -395,7 +416,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Cereals',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.green,
                     // textColor: Colors.white,
@@ -408,6 +429,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.green),
                   ),
                 ),
               ],
@@ -421,7 +445,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Oilseeds',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.grey,
                     // textColor: Colors.white,
@@ -434,6 +458,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                    style: TextButton.styleFrom(
+                        elevation: 2,
+                        backgroundColor: Colors.grey),
                   ),
                 ),
               ],
@@ -447,7 +474,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   child: TextButton(
                     child: const Text(
                       'Pulses',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0,color: Colors.white),
                     ),
                     // color: Colors.teal,
                     // textColor: Colors.white,
@@ -460,6 +487,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
+                      style: TextButton.styleFrom(
+                          elevation: 2,
+                          backgroundColor: Colors.teal),
                   ),
                 ),
               ],

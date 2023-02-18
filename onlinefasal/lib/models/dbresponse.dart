@@ -20,7 +20,7 @@ class DBResponse {
   factory DBResponse.fromJson(Map<String, dynamic> json) {
     return DBResponse(
         Similar_score:
-            (json['Sililar_score'] != null) ? json['Sililar_score'] : 0.0,
+            (json['Similar_score'] != null) ? json['Similar_score'] : 0.0,
         Message: (json['Message'] != null) ? json['Message'] : "not available",
         Question:
             (json['Question'] != null) ? json['Question'] : "not available",

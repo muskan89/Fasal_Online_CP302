@@ -192,8 +192,8 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
             controller: cropname,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the crop:',
-              labelText: 'crop',
+              hintText: 'Enter the crop',
+              labelText: 'Crop name',
             )),
         ElevatedButton(
           onPressed: () {
@@ -214,12 +214,21 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
         if (snapshot.hasData) {
           MandiRate? mandirate = snapshot.data;
           return Column(
-            children: [
-              //Text('Error: ${MandiRate?.error}'),
-              Text('crop: ${cropname.text}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('${mandirate?.result}',
-                  style: const TextStyle(fontSize: 20.0)),
+            children: <Widget>[
+              Text('Mandi rates',
+                  style: const TextStyle(fontSize: 25.0,color:  Color.fromRGBO(0, 128, 128, 1.0))),
+              // Text('${mandirate?.result}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              Text('${mandirate?.errorr}'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:  [
+                  Expanded(
+                    child: Text('${mandirate?.result}',
+                        style: const TextStyle(fontSize: 15.0)),
+                  ),
+                ],
+              ),
             ],
           );
         } else if (snapshot.hasError) {

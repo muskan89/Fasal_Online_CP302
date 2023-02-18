@@ -441,21 +441,21 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             controller: cropname,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the crop:',
-              labelText: 'crop name',
+              hintText: 'Enter the crop',
+              labelText: 'Crop number',
             )),
         TextField(
             controller: querytype,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the querytype:',
-              labelText: 'querytype',
+              hintText: 'Enter the querytype',
+              labelText: 'querytype number',
             )),
         TextField(
             controller: query,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the query:',
+              hintText: 'Enter the query',
               labelText: 'query',
             )),
         ElevatedButton(
@@ -478,22 +478,89 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
         if (snapshot.hasData) {
           DBResponse? dbResponse = snapshot.data;
           return Column(
-            children: [
-              Text('crop : ${cropname.text}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Similar Score : ${dbResponse?.Similar_score}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Message : ${dbResponse?.Message}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Your Question : ${dbResponse?.Question}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text(
-                  'Similar question that we find : ${dbResponse?.Question_Database}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Answer : ${dbResponse?.Answer}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Reference : ${dbResponse?.Reference}',
-                  style: const TextStyle(fontSize: 25.0)),
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.all(20),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Table(
+                      defaultColumnWidth: FixedColumnWidth(320.0),
+                      border: TableBorder.all(
+                          color: Colors.black,
+                          style: BorderStyle.solid,
+                          width: 2),
+                      children: [
+                        TableRow( children: [
+                          Column(children:[Text('Crop',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${cropname.text}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Similarity Score with our database',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${dbResponse?.Similar_score}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Message',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${dbResponse?.Message}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Your Question',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${dbResponse?.Question}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text(
+                              'Similar question that we find',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text(
+                              '${dbResponse?.Question_Database}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Answer',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${dbResponse?.Answer}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Reference',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${dbResponse?.Reference}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+
+                      ],
+                    ),
+                  )
+              ),
+              // Text('crop : ${cropname.text}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Similar Score : ${dbResponse?.Similar_score}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Message : ${dbResponse?.Message}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Your Question : ${dbResponse?.Question}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text(
+              //     'Similar question that we find : ${dbResponse?.Question_Database}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Answer : ${dbResponse?.Answer}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Reference : ${dbResponse?.Reference}',
+              //     style: const TextStyle(fontSize: 25.0)),
             ],
           );
         } else if (snapshot.hasError) {

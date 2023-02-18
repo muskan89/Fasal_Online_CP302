@@ -14,7 +14,9 @@ import re
 from spellchecker import SpellChecker
 
 spell = SpellChecker()
-dataset = pd.read_csv('D:\\flutter projects\\Fasal_Online_CP302-main\\backend\\fasalonline_app\\apis\\imp_final_data.csv',encoding = 'unicode_escape')
+
+# dataset = pd.read_csv('D:\\flutter projects\\Fasal_Online_CP302-main\\backend\\fasalonline_app\\apis\\imp_final_data.csv',encoding = 'unicode_escape')
+dataset = pd.read_csv('D:\\_7th sem\\CP302\\code_fasal\\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\\imp_final_data.csv')
 
 dataset['QueryType'] = dataset['QueryType'].str.replace(r'\t', '',regex='True')
 from sentence_transformers import SentenceTransformer, util
@@ -156,6 +158,7 @@ def get_answer_database(request,query_type, query,crop,category):
         # print(f"Reference: {dataset_temp['Refer'][res_index]}")
         # print("========================================")
         Question=query
+        Message="Here is your answer!"
         Question_Database=dataset_temp['QueryText'][res_index]
         Answer=dataset_temp['KccAns'][res_index]
         Reference=dataset_temp['Refer'][res_index]
@@ -166,6 +169,7 @@ def get_answer_database(request,query_type, query,crop,category):
         # print(f"Answer: {dataset_temp['KccAns'][res_index]}")
         # print("========================================")
         # print(f" {dataset_temp['Refer'][res_index]}")  
+        Question=query
         Message="We find some similar answer for your question.Thank You "
         Question_Database=dataset_temp['QueryText'][res_index]
         Answer=dataset_temp['KccAns'][res_index]
@@ -244,10 +248,14 @@ def get_mandi_rate(request,crop):
     print(updated_crop)
     #crop.lower()
     resul=""
+    errorr=""
+
     for x in all_data["records"]:
         if x['commodity'].lower() == updated_crop.lower():
             # resul+=x['commodity'].lower()+"\n"
             #print(x['commodity'].lower())
-            resul+="Crop_Name = "+x['commodity']+ " State = "+x['state']+ " District= "+x['district']+  " Market Name= "+x['market']+  " Minimum_price= "+x['min_price']+  "Maximum_price="+x['max_price']+ "Modal_price= "+x['modal_price']+"\n"
+            resul+="Crop_Name : "+x['commodity']+ "\nState : "+x['state']+ "\nDistrict : "+x['district']+  "\nMarket Name : "+x['market']+  "\nMinimum_price : "+x['min_price']+  "\nMaximum_price : "+x['max_price']+ "\nModal_price : "+x['modal_price']+"\n\n"
             #print("Crop_Name = ",x['commodity']," ""State = ",x['state']," " "District=",x['district']," " "Market Name=",x['market']," " "Minimum_price=",x['min_price']," " "Maximum_price=",x['max_price']," " "Modal_price=",x['modal_price'])
-    return Response({'result':resul})
+    if(len(resul)==0):
+        errorr="You entered wrong name of crop. Try again with the correct one."
+    return Response({'result':resul,'error':errorr})

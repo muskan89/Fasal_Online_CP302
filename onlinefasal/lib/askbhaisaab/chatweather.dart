@@ -193,8 +193,8 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
             controller: cityname,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the city:',
-              labelText: 'City',
+              hintText: 'Enter the city',
+              labelText: 'City name',
             )),
         ElevatedButton(
           onPressed: () {
@@ -215,24 +215,96 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
         if (snapshot.hasData) {
           Weather? weather = snapshot.data;
           return Column(
-            children: [
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.all(20),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Table(
+                      defaultColumnWidth: FixedColumnWidth(220.0),
+                      border: TableBorder.all(
+                          color: Colors.black,
+                          style: BorderStyle.solid,
+                          width: 2),
+                      children: [
+                        TableRow( children: [
+                          Column(children:[Text('Location',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${cityname.text}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('City ID',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.City_id}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Temperature',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.Temperature}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Feel like',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.feel_like}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text(
+                              'Humidity',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.Humidity}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Atmospheric Pressure',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.atm_pressure}',
+                              style: const TextStyle(fontSize: 15.0))]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Weather Report',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.weth_Report}',
+                              style: const TextStyle(fontSize: 15.0)),]),
+                        ]),
+                        TableRow( children: [
+                          Column(children:[Text('Wind Speed',
+                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))]),
+                          Column(children:[Text('${weather?.wind_Speed}',
+                              style: const TextStyle(fontSize: 15.0)),]),
+                        ]),
+                      ],
+                    ),
+                  )
+              ),
               //Text('Error: ${weather?.error}'),
-              Text('Location: ${cityname.text}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('City ID: ${weather?.City_id}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Temperature: ${weather?.Temperature}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Feel like: ${weather?.feel_like}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Humidity: ${weather?.Humidity}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Atmospheric Pressure: ${weather?.atm_pressure}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Weather Report: ${weather?.weth_Report}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Wind Speed: ${weather?.wind_Speed}',
-                  style: const TextStyle(fontSize: 25.0)),
+              // Text('Location: ${cityname.text}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('City ID: ${weather?.City_id}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Temperature: ${weather?.Temperature}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Feel like: ${weather?.feel_like}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Humidity: ${weather?.Humidity}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Atmospheric Pressure: ${weather?.atm_pressure}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Weather Report: ${weather?.weth_Report}',
+              //     style: const TextStyle(fontSize: 25.0)),
+              // Text('Wind Speed: ${weather?.wind_Speed}',
+              //     style: const TextStyle(fontSize: 25.0)),
             ],
           );
         } else if (snapshot.hasError) {

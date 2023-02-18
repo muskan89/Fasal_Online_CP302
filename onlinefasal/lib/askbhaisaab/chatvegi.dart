@@ -653,7 +653,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             // ),
           ]),
           Container(
-              alignment: Alignment.center,
+              alignment: Alignment.topLeft,
               child: (futureresponse == null)
                   ? buildColumn()
                   : buildFutureBuilder())
@@ -670,21 +670,21 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             controller: veginame,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the vegitable:',
-              labelText: 'vegitable name',
+              hintText: 'Enter the vegetable',
+              labelText: 'Vegetable number',
             )),
         TextField(
             controller: querytype,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the querytype:',
-              labelText: 'querytype',
+              hintText: 'Enter the querytype',
+              labelText: 'querytype number',
             )),
         TextField(
             controller: query,
             decoration: const InputDecoration(
               //icon: const Icon(Icons.person),
-              hintText: 'Enter the query:',
+              hintText: 'Enter the query',
               labelText: 'query',
             )),
         ElevatedButton(
@@ -710,22 +710,168 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
           log(string!);
           DBResponse? dbResponse = snapshot.data;
           return Column(
-            children: [
-              Text('Vegitable : ${veginame.text}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Similar Score : ${dbResponse?.Similar_score}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Message : ${dbResponse?.Message}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Your Question : ${dbResponse?.Question}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text(
-                  'Similar question that we find : ${dbResponse?.Question_Database}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Answer : ${dbResponse?.Answer}',
-                  style: const TextStyle(fontSize: 25.0)),
-              Text('Reference : ${dbResponse?.Reference}',
-                  style: const TextStyle(fontSize: 25.0)),
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(20),
+                child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                  child: Table(
+                    defaultColumnWidth: FixedColumnWidth(320.0),
+                    border: TableBorder.all(
+                        color: Colors.black,
+                        style: BorderStyle.solid,
+                        width: 2),
+                    children: [
+                      TableRow( children: [
+                        Column(children:[Text('Vegetable Number',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text('${veginame.text}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+                      TableRow( children: [
+                        Column(children:[Text('Similarity Score with our database',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text('${dbResponse?.Similar_score}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+                      TableRow( children: [
+                        Column(children:[Text('Message',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text('${dbResponse?.Message}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+                      TableRow( children: [
+                        Column(children:[Text('Your Question',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text('${dbResponse?.Question}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+                      TableRow( children: [
+                        Column(children:[Text(
+                            'Similar question that we find',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text(
+                            '${dbResponse?.Question_Database}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+                      TableRow( children: [
+                        Column(children:[Text('Answer',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text('${dbResponse?.Answer}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+                      TableRow( children: [
+                        Column(children:[Text('Reference',
+                            style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                                fontWeight: FontWeight.bold))]),
+                        Column(children:[Text('${dbResponse?.Reference}',
+                            style: const TextStyle(fontSize: 15.0))]),
+                      ]),
+
+                    ],
+                  ),
+                )
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Vegetable : ${veginame.text}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Similar Score : ${dbResponse?.Similar_score}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Message : ${dbResponse?.Message}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Your Question : ${dbResponse?.Question}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Similar question that we find : ${dbResponse?.Question_Database}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Answer: ',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 128, 128, 1.0), fontSize: 15.0,fontWeight: FontWeight.bold),
+              //
+              //       ),
+              //
+              //     ),
+              //     Expanded(
+              //       child: Text('${dbResponse?.Answer}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children:  [
+              //     Expanded(
+              //       child: Text('Reference : ${dbResponse?.Reference}',
+              //           style: TextStyle(
+              //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 10.0)),
+              //     ),
+              //   ],
+              // ),
+              //
+              // Text('Vegetable : ${veginame.text}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              // Text('Similar Score : ${dbResponse?.Similar_score}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              // Text('Message : ${dbResponse?.Message}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              // Text('Your Question : ${dbResponse?.Question}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              // Text(
+              //     'Similar question that we find : ${dbResponse?.Question_Database}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              // Text('Answer : ${dbResponse?.Answer}',
+              //     style: const TextStyle(fontSize: 15.0)),
+              // Text('Reference : ${dbResponse?.Reference}',
+              //     style: const TextStyle(fontSize: 15.0)),
             ],
           );
         } else if (snapshot.hasError) {
