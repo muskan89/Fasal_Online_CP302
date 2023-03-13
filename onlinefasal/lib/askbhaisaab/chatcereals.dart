@@ -21,6 +21,8 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
+  int _selectedcereals = 54;
+  int _selectedQueryType=1;
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -197,66 +199,138 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 54 for Barley(Jow)",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            ListTile(
+              leading: Radio<int>(
+                value: 54,
+                groupValue: _selectedcereals,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcereals = value!;
+                  });
+                },
+              ),
+              title: const Text('Barley(Jow)'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 55 for Maize(Kharif)",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 54 for Barley(Jow)",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 55,
+                groupValue: _selectedcereals,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcereals = value!;
+                  });
+                },
+              ),
+              title: const Text('Maize(Kharif)'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 56 for Oats",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 55 for Maize(Kharif)",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 56,
+                groupValue: _selectedcereals,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcereals = value!;
+                  });
+                },
+              ),
+              title: const Text('Oats'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 57 for Wheat",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 56 for Oats",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 57,
+                groupValue: _selectedcereals,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcereals = value!;
+                  });
+                },
+              ),
+              title: const Text('Wheat'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 58 for Rice",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 57 for Wheat",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 58,
+                groupValue: _selectedcereals,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcereals = value!;
+                  });
+                },
+              ),
+              title: const Text('Rice'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 59 for Sugarcane",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 58 for Rice",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 59,
+                groupValue: _selectedcereals,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcereals = value!;
+                  });
+                },
+              ),
+              title: const Text('Sugarcane'),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 59 for Sugarcane",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -280,85 +354,109 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 1 for Cultural Practices",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 1,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Cultural Practices'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 3 for Nutrient Management",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 3,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Nutrient Management'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 4 for Fertilizer Uses",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 4,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Fertilizer Uses'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 5 for Varieties",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 5,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Varieties'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 6 for Weed Management",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 6,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Weed Management'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 7 for Seeds",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 7,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Seeds'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 10 for Water Management",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 10,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Water Management'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 11 for Plant Protection",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 11,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Plant Protection'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -447,7 +545,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             Container(
                 alignment: Alignment.center,
                 child: (futureresponse == null)
-                    ? buildColumn()
+                    ? buildColumn(_selectedQueryType,_selectedcereals)
                     : buildFutureBuilder())
           ]),
         ],
@@ -455,24 +553,24 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
     );
   }
 
-  Column buildColumn() {
+  Column buildColumn(int _selectedQueryType,int _selectedcereals) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextField(
-            controller: cropname,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the crop',
-              labelText: 'Crop number',
-            )),
-        TextField(
-            controller: querytype,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the querytype',
-              labelText: 'querytype number',
-            )),
+        // TextField(
+        //     controller: cropname,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter the crop',
+        //       labelText: 'Crop number',
+        //     )),
+        // TextField(
+        //     controller: querytype,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter the querytype',
+        //       labelText: 'querytype number',
+        //     )),
         TextField(
             controller: query,
             decoration: const InputDecoration(
@@ -484,7 +582,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
           onPressed: () {
             setState(() {
               futureresponse =
-                  getAnswer(cropname.text, query.text, querytype.text, '8');
+                  getAnswer(_selectedcereals.toString(), query.text, _selectedQueryType.toString(), '8');
             });
           },
           child: const Text('get answer'),
@@ -512,13 +610,13 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                           style: BorderStyle.solid,
                           width: 2),
                       children: [
-                        TableRow( children: [
-                          Column(children:[Text('Crop',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${cropname.text}',
-                              style: const TextStyle(fontSize: 15.0))]),
-                        ]),
+                        // TableRow( children: [
+                        //   Column(children:[Text('Crop',
+                        //       style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                        //           fontWeight: FontWeight.bold))]),
+                        //   Column(children:[Text('${_selectedcereals}',
+                        //       style: const TextStyle(fontSize: 15.0))]),
+                        // ]),
                         TableRow( children: [
                           Column(children:[Text('Similarity Score with our database',
                               style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),

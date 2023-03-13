@@ -22,6 +22,8 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
+  int _selectedcomm = 8;
+  int _selectedQueryType=71;
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -195,26 +197,50 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 8 for Contact Number",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            ListTile(
+              leading: Radio<int>(
+                value: 8,
+                groupValue: _selectedcomm,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcomm = value!;
+                  });
+                },
+              ),
+              title: const Text('Contact Number'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 9 for Address",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 8 for Contact Number",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 9,
+                groupValue: _selectedcomm,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcomm = value!;
+                  });
+                },
+              ),
+              title: const Text('Address'),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 9 for Address",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -238,36 +264,72 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 71 for Institution",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 71 for Institution",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 71,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Institution'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 72 for Krishi Vigyan Kendras",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            ListTile(
+              leading: Radio<int>(
+                value: 72,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Krishi Vigyan Kendras'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 73 for Nodal Officer Details (Statewise)",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 72 for Krishi Vigyan Kendras",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 73,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Nodal Officer Details (Statewise)'),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 73 for Nodal Officer Details (Statewise)",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -355,7 +417,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             Container(
                 alignment: Alignment.center,
                 child: (futureresponse == null)
-                    ? buildColumn()
+                    ? buildColumn(_selectedcomm,_selectedQueryType)
                     : buildFutureBuilder())
           ]),
         ],
@@ -363,24 +425,24 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
     );
   }
 
-  Column buildColumn() {
+  Column buildColumn(int _selectedcomm,int _selectedQueryType) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextField(
-            controller: placename,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter place number',
-              labelText: 'Place number',
-            )),
-        TextField(
-            controller: querytype,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the querytype',
-              labelText: 'querytype number',
-            )),
+        // TextField(
+        //     controller: placename,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter place number',
+        //       labelText: 'Place number',
+        //     )),
+        // TextField(
+        //     controller: querytype,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter the querytype',
+        //       labelText: 'querytype number',
+        //     )),
         TextField(
             controller: query,
             decoration: const InputDecoration(
@@ -392,7 +454,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
           onPressed: () {
             setState(() {
               futureresponse =
-                  getAnswer(placename.text, query.text, querytype.text, '6');
+                  getAnswer(_selectedcomm.toString(), query.text, _selectedQueryType.toString(), '6');
             });
           },
           child: const Text('get answer'),
@@ -420,13 +482,13 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                           style: BorderStyle.solid,
                           width: 2),
                       children: [
-                        TableRow( children: [
-                          Column(children:[Text('Communication',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${placename.text}',
-                              style: const TextStyle(fontSize: 15.0))]),
-                        ]),
+                        // TableRow( children: [
+                        //   Column(children:[Text('Communication',
+                        //       style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                        //           fontWeight: FontWeight.bold))]),
+                        //   Column(children:[Text('${_selectedcomm}',
+                        //       style: const TextStyle(fontSize: 15.0))]),
+                        // ]),
                         TableRow( children: [
                           Column(children:[Text('Similarity Score with our database',
                               style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
