@@ -210,12 +210,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Weather',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    //color: Colors.orange,
-                    //textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -226,8 +220,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.orange),
+                        elevation: 2, backgroundColor: Colors.orange),
+                    child: const Text(
+                      'Weather',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -239,12 +236,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Mandi Rate',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    //color: Colors.brown,
-                    //textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -255,8 +246,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.brown),
+                        elevation: 2, backgroundColor: Colors.brown),
+                    child: const Text(
+                      'Mandi Rate',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -268,12 +262,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Vegetables',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.teal,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -284,8 +272,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.teal),
+                        elevation: 2, backgroundColor: Colors.teal),
+                    child: const Text(
+                      'Vegetables',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -297,12 +288,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Spices',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.red,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -313,8 +298,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.red),
+                        elevation: 2, backgroundColor: Colors.red),
+                    child: const Text(
+                      'Spices',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -326,12 +314,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Schemes',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.blue,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -343,8 +325,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       //
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.blue),
+                        elevation: 2, backgroundColor: Colors.blue),
+                    child: const Text(
+                      'Schemes',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -356,12 +341,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Communication',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.black,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -372,8 +351,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.black),
+                        elevation: 2, backgroundColor: Colors.black),
+                    child: const Text(
+                      'Communication',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -385,12 +367,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Fruits',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.orange,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -401,8 +377,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.orange),
+                        elevation: 2, backgroundColor: Colors.orange),
+                    child: const Text(
+                      'Fruits',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -414,12 +393,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Cereals',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.green,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -430,8 +403,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.green),
+                        elevation: 2, backgroundColor: Colors.green),
+                    child: const Text(
+                      'Cereals',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -443,12 +419,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Oilseeds',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.grey,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -459,8 +429,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                       );
                     },
                     style: TextButton.styleFrom(
-                        elevation: 2,
-                        backgroundColor: Colors.grey),
+                        elevation: 2, backgroundColor: Colors.grey),
+                    child: const Text(
+                      'Oilseeds',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -472,12 +445,6 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                   width: 400,
                   padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
                   child: TextButton(
-                    child: const Text(
-                      'Pulses',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),
-                    ),
-                    // color: Colors.teal,
-                    // textColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).push(
                         // With MaterialPageRoute, you can pass data between pages,
@@ -487,9 +454,12 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                         ),
                       );
                     },
-                      style: TextButton.styleFrom(
-                          elevation: 2,
-                          backgroundColor: Colors.teal),
+                    style: TextButton.styleFrom(
+                        elevation: 2, backgroundColor: Colors.teal),
+                    child: const Text(
+                      'Pulses',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ],

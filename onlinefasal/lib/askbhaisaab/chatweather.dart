@@ -8,6 +8,8 @@ import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:avatar_glow/avatar_glow.dart';
 
 class ChatWeatherScreen extends StatefulWidget {
   const ChatWeatherScreen({Key? key}) : super(key: key);
@@ -19,6 +21,38 @@ class ChatWeatherScreen extends StatefulWidget {
 class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
   TextEditingController cityname = TextEditingController();
   Future<Weather>? futureweather;
+
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {}
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,17 +223,41 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextFormField(
-            controller: cityname,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the city',
-              labelText: 'City name',
-            )),
+        Row(
+          children: [
+            SizedBox(
+                width: 300,
+                child: TextFormField(
+                    controller: cityname,
+                    decoration: const InputDecoration(
+                      //icon: const Icon(Icons.person),
+                      hintText: 'Enter city name',
+                      labelText: 'City name',
+                    ))),
+            AvatarGlow(
+              animate: _isListening,
+              glowColor: Theme.of(context).primaryColor,
+              endRadius: 20.0,
+              duration: const Duration(milliseconds: 2000),
+              repeatPauseDuration: const Duration(milliseconds: 100),
+              repeat: true,
+              child: FloatingActionButton(
+                onPressed: _listen,
+                child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+              ),
+            ),
+          ],
+        ),
+        SingleChildScrollView(
+          reverse: true,
+          child: Text(_text,
+              style: const TextStyle(
+                  color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+        ),
         ElevatedButton(
           onPressed: () {
             setState(() {
-              futureweather = getWeather(cityname.text);
+              futureweather = getWeather(_text != '' ? _text : cityname.text);
             });
           },
           child: const Text('get weather'),
@@ -217,77 +275,123 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
           return Column(
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Table(
-                      defaultColumnWidth: FixedColumnWidth(220.0),
+                      defaultColumnWidth: const FixedColumnWidth(220.0),
                       border: TableBorder.all(
                           color: Colors.black,
                           style: BorderStyle.solid,
                           width: 2),
                       children: [
-                        TableRow( children: [
-                          Column(children:[Text('Location',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${cityname.text}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Location',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text(_text != '' ? _text : cityname.text,
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('City ID',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.City_id}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('City ID',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.City_id}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Temperature',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.Temperature}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Temperature',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.Temperature}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Feel like',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.feel_like}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Feel like',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.feel_like}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text(
-                              'Humidity',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.Humidity}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Humidity',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.Humidity}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Atmospheric Pressure',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.atm_pressure}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Atmospheric Pressure',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.atm_pressure}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Weather Report',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.weth_Report}',
-                              style: const TextStyle(fontSize: 15.0)),]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Weather Report',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.weth_Report}',
+                                style: const TextStyle(fontSize: 15.0)),
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Wind Speed',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${weather?.wind_Speed}',
-                              style: const TextStyle(fontSize: 15.0)),]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Wind Speed',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${weather?.wind_Speed}',
+                                style: const TextStyle(fontSize: 15.0)),
+                          ]),
                         ]),
                       ],
                     ),
-                  )
-              ),
+                  )),
               //Text('Error: ${weather?.error}'),
               // Text('Location: ${cityname.text}',
               //     style: const TextStyle(fontSize: 25.0)),

@@ -6,6 +6,8 @@ import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:onlinefasal/models/mandiRate.dart';
+import 'package:onlinefasal/askbhaisaab/chatmandi.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -169,6 +171,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       onTap: () {
                         log('mandi rates button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatMandiScreen()));
                       },
                     )),
                   ],

@@ -8,6 +8,8 @@ import 'package:onlinefasal/models/mandiRate.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:avatar_glow/avatar_glow.dart';
 
 class ChatMandiScreen extends StatefulWidget {
   const ChatMandiScreen({Key? key}) : super(key: key);
@@ -19,6 +21,38 @@ class ChatMandiScreen extends StatefulWidget {
 class _ChatMandiScreenState extends State<ChatMandiScreen> {
   TextEditingController cropname = TextEditingController();
   Future<MandiRate>? futuremandirate;
+
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {}
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,17 +222,42 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextField(
-            controller: cropname,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the crop',
-              labelText: 'Crop name',
-            )),
+        Row(
+          children: [
+            SizedBox(
+                width: 300,
+                child: TextField(
+                    controller: cropname,
+                    decoration: const InputDecoration(
+                      //icon: const Icon(Icons.person),
+                      hintText: 'Enter the crop',
+                      labelText: 'Crop name',
+                    ))),
+            AvatarGlow(
+              animate: _isListening,
+              glowColor: Theme.of(context).primaryColor,
+              endRadius: 20.0,
+              duration: const Duration(milliseconds: 2000),
+              repeatPauseDuration: const Duration(milliseconds: 100),
+              repeat: true,
+              child: FloatingActionButton(
+                onPressed: _listen,
+                child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+              ),
+            ),
+          ],
+        ),
+        SingleChildScrollView(
+          reverse: true,
+          child: Text(_text,
+              style: const TextStyle(
+                  color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+        ),
         ElevatedButton(
           onPressed: () {
             setState(() {
-              futuremandirate = getMandiRate(cropname.text);
+              futuremandirate =
+                  getMandiRate(_text != '' ? _text : cropname.text);
             });
           },
           child: const Text('get mandi rate'),
@@ -215,14 +274,15 @@ class _ChatMandiScreenState extends State<ChatMandiScreen> {
           MandiRate? mandirate = snapshot.data;
           return Column(
             children: <Widget>[
-              Text('Mandi rates',
-                  style: const TextStyle(fontSize: 25.0,color:  Color.fromRGBO(0, 128, 128, 1.0))),
+              const Text('Mandi rates',
+                  style: TextStyle(
+                      fontSize: 25.0, color: Color.fromRGBO(0, 128, 128, 1.0))),
               // Text('${mandirate?.result}',
               //     style: const TextStyle(fontSize: 15.0)),
               Text('${mandirate?.errorr}'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:  [
+                children: [
                   Expanded(
                     child: Text('${mandirate?.result}',
                         style: const TextStyle(fontSize: 15.0)),

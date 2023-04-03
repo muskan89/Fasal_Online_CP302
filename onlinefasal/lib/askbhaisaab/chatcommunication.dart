@@ -8,6 +8,8 @@ import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:avatar_glow/avatar_glow.dart';
 
 class ChatCommunicationScreen extends StatefulWidget {
   const ChatCommunicationScreen({Key? key}) : super(key: key);
@@ -22,8 +24,40 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
+  int _selectedcomm = 8;
+  int _selectedQueryType = 71;
 
-  final _formKey = GlobalKey<FormState>();
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {}
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,26 +229,50 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 8 for Contact Number",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            ListTile(
+              leading: Radio<int>(
+                value: 8,
+                groupValue: _selectedcomm,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcomm = value!;
+                  });
+                },
+              ),
+              title: const Text('Contact Number'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 9 for Address",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 8 for Contact Number",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 9,
+                groupValue: _selectedcomm,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedcomm = value!;
+                  });
+                },
+              ),
+              title: const Text('Address'),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 9 for Address",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -238,36 +296,72 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 71 for Institution",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 71 for Institution",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 71,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Institution'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 72 for Krishi Vigyan Kendras",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            ListTile(
+              leading: Radio<int>(
+                value: 72,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Krishi Vigyan Kendras'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 73 for Nodal Officer Details (Statewise)",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 72 for Krishi Vigyan Kendras",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 73,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Nodal Officer Details (Statewise)'),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 73 for Nodal Officer Details (Statewise)",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -355,7 +449,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             Container(
                 alignment: Alignment.center,
                 child: (futureresponse == null)
-                    ? buildColumn()
+                    ? buildColumn(_selectedcomm, _selectedQueryType)
                     : buildFutureBuilder())
           ]),
         ],
@@ -363,36 +457,63 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
     );
   }
 
-  Column buildColumn() {
+  Column buildColumn(int selectedcomm, int selectedQueryType) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextField(
-            controller: placename,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter place number',
-              labelText: 'Place number',
-            )),
-        TextField(
-            controller: querytype,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the querytype',
-              labelText: 'querytype number',
-            )),
-        TextField(
-            controller: query,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the query',
-              labelText: 'query',
-            )),
+        // TextField(
+        //     controller: placename,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter place number',
+        //       labelText: 'Place number',
+        //     )),
+        // TextField(
+        //     controller: querytype,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter the querytype',
+        //       labelText: 'querytype number',
+        //     )),
+        Row(
+          children: [
+            SizedBox(
+                width: 300,
+                child: TextField(
+                    controller: query,
+                    decoration: const InputDecoration(
+                      //icon: const Icon(Icons.person),
+                      hintText: 'Enter the query',
+                      labelText: 'query',
+                    ))),
+            AvatarGlow(
+              animate: _isListening,
+              glowColor: Theme.of(context).primaryColor,
+              endRadius: 20.0,
+              duration: const Duration(milliseconds: 2000),
+              repeatPauseDuration: const Duration(milliseconds: 100),
+              repeat: true,
+              child: FloatingActionButton(
+                onPressed: _listen,
+                child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+              ),
+            ),
+          ],
+        ),
+        SingleChildScrollView(
+          reverse: true,
+          child: Text(_text,
+              style: const TextStyle(
+                  color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+        ),
         ElevatedButton(
           onPressed: () {
             setState(() {
-              futureresponse =
-                  getAnswer(placename.text, query.text, querytype.text, '6');
+              futureresponse = getAnswer(
+                  selectedcomm.toString(),
+                  _text != '' ? _text : query.text,
+                  selectedQueryType.toString(),
+                  '6');
             });
           },
           child: const Text('get answer'),
@@ -410,72 +531,104 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
           return Column(
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Table(
-                      defaultColumnWidth: FixedColumnWidth(320.0),
+                      defaultColumnWidth: const FixedColumnWidth(320.0),
                       border: TableBorder.all(
                           color: Colors.black,
                           style: BorderStyle.solid,
                           width: 2),
                       children: [
-                        TableRow( children: [
-                          Column(children:[Text('Communication',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${placename.text}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        // TableRow( children: [
+                        //   Column(children:[Text('Communication',
+                        //       style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                        //           fontWeight: FontWeight.bold))]),
+                        //   Column(children:[Text('${_selectedcomm}',
+                        //       style: const TextStyle(fontSize: 15.0))]),
+                        // ]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Similarity Score with our database',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Similar_score}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Similarity Score with our database',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Similar_score}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Message',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Message}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Message',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Message}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Your Question',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Question}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Your Question',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Question}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Similar question that we find',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Question_Database}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text(
-                              'Similar question that we find',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text(
-                              '${dbResponse?.Question_Database}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Answer',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Answer}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Answer',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Answer}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Reference',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Reference}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Reference',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Reference}',
-                              style: const TextStyle(fontSize: 15.0))]),
-                        ]),
-
                       ],
                     ),
-                  )
-              ),
+                  )),
               // Text('communication : ${placename.text}',
               //     style: const TextStyle(fontSize: 25.0)),
               // Text('Similar Score : ${dbResponse?.Similar_score}',

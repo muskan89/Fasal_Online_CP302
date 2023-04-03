@@ -81,9 +81,7 @@ class _WeatherrState extends State<Weatherr> {
   Future getLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    if (position != null) {
-      getWeatherByLocation(position.latitude, position.longitude);
-    }
+    getWeatherByLocation(position.latitude, position.longitude);
   }
 
   bool loading = false;
@@ -122,9 +120,9 @@ class _WeatherrState extends State<Weatherr> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            child: buildTextField(),
+                          SizedBox(
                             width: size.width / 1.6,
+                            child: buildTextField(),
                           ),
                           IconButton(
                             icon: const Icon(

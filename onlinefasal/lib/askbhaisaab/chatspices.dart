@@ -7,6 +7,8 @@ import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:avatar_glow/avatar_glow.dart';
 
 class ChatSpicesScreen extends StatefulWidget {
   const ChatSpicesScreen({Key? key}) : super(key: key);
@@ -20,8 +22,40 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
+  int _selectedspices = 28;
+  int _selectedQueryType = 1;
 
-  final _formKey = GlobalKey<FormState>();
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {}
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,37 +227,72 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 28 for Coriander",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 28 for Coriander",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 28,
+                groupValue: _selectedspices,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedspices = value!;
+                  });
+                },
+              ),
+              title: const Text('Coriander'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 29 for Ginger",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 29 for Ginger",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 29,
+                groupValue: _selectedspices,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedspices = value!;
+                  });
+                },
+              ),
+              title: const Text('Ginger'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 30 for Turmeric",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 30 for Turmeric",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            ListTile(
+              leading: Radio<int>(
+                value: 30,
+                groupValue: _selectedspices,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedspices = value!;
+                  });
+                },
+              ),
+              title: const Text('Turmeric'),
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -247,86 +316,190 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 1 for Cultural Practices",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+            ListTile(
+              leading: Radio<int>(
+                value: 1,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Cultural Practices'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 3 for Nutrient Management",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 3,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Nutrient Management'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 4 for Fertilizer Uses",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 4,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Fertilizer Uses'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 5 for Varieties",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 5,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Varieties'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 6 for Weed Management",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 6,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Weed Management'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 7 for Seeds",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 7,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Seeds'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 10 for Water Management",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 10,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Water Management'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("Enter 11 for Plant Protection",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
+
+            ListTile(
+              leading: Radio<int>(
+                value: 11,
+                groupValue: _selectedQueryType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedQueryType = value!;
+                  });
+                },
+              ),
+              title: const Text('Plant Protection'),
             ),
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 1 for Cultural Practices",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 3 for Nutrient Management",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 4 for Fertilizer Uses",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 5 for Varieties",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 6 for Weed Management",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 7 for Seeds",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 10 for Water Management",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("Enter 11 for Plant Protection",
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -426,32 +599,59 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextField(
-            controller: spicename,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the spice',
-              labelText: 'Spice number',
-            )),
-        TextField(
-            controller: querytype,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the querytype',
-              labelText: 'querytype number',
-            )),
-        TextField(
-            controller: query,
-            decoration: const InputDecoration(
-              //icon: const Icon(Icons.person),
-              hintText: 'Enter the query',
-              labelText: 'query',
-            )),
+        // TextField(
+        //     controller: spicename,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter the spice',
+        //       labelText: 'Spice number',
+        //     )),
+        // TextField(
+        //     controller: querytype,
+        //     decoration: const InputDecoration(
+        //       //icon: const Icon(Icons.person),
+        //       hintText: 'Enter the querytype',
+        //       labelText: 'querytype number',
+        //     )),
+        Row(
+          children: [
+            SizedBox(
+                width: 300,
+                child: TextField(
+                    controller: query,
+                    decoration: const InputDecoration(
+                      //icon: const Icon(Icons.person),
+                      hintText: 'Enter the query',
+                      labelText: 'query',
+                    ))),
+            AvatarGlow(
+              animate: _isListening,
+              glowColor: Theme.of(context).primaryColor,
+              endRadius: 20.0,
+              duration: const Duration(milliseconds: 2000),
+              repeatPauseDuration: const Duration(milliseconds: 100),
+              repeat: true,
+              child: FloatingActionButton(
+                onPressed: _listen,
+                child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+              ),
+            ),
+          ],
+        ),
+        SingleChildScrollView(
+          reverse: true,
+          child: Text(_text,
+              style: const TextStyle(
+                  color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+        ),
         ElevatedButton(
           onPressed: () {
             setState(() {
-              futureresponse =
-                  getAnswer(spicename.text, query.text, querytype.text, '4');
+              futureresponse = getAnswer(
+                  _selectedspices.toString(),
+                  _text != '' ? _text : query.text,
+                  _selectedQueryType.toString(),
+                  '4');
             });
           },
           child: const Text('get answer'),
@@ -469,72 +669,104 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
           return Column(
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Table(
-                      defaultColumnWidth: FixedColumnWidth(320.0),
+                      defaultColumnWidth: const FixedColumnWidth(320.0),
                       border: TableBorder.all(
                           color: Colors.black,
                           style: BorderStyle.solid,
                           width: 2),
                       children: [
-                        TableRow( children: [
-                          Column(children:[Text('Spice',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${spicename.text}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        // TableRow( children: [
+                        //   Column(children:[Text('Spice',
+                        //       style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
+                        //           fontWeight: FontWeight.bold))]),
+                        //   Column(children:[Text('${_selectedspices}',
+                        //       style: const TextStyle(fontSize: 15.0))]),
+                        // ]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Similarity Score with our database',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Similar_score}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Similarity Score with our database',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Similar_score}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Message',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Message}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Message',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Message}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Your Question',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Question}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Your Question',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Question}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Similar question that we find',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Question_Database}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text(
-                              'Similar question that we find',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text(
-                              '${dbResponse?.Question_Database}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Answer',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Answer}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Answer',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Answer}',
-                              style: const TextStyle(fontSize: 15.0))]),
+                        TableRow(children: [
+                          Column(children: const [
+                            Text('Reference',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color.fromRGBO(0, 128, 128, 1.0),
+                                    fontWeight: FontWeight.bold))
+                          ]),
+                          Column(children: [
+                            Text('${dbResponse?.Reference}',
+                                style: const TextStyle(fontSize: 15.0))
+                          ]),
                         ]),
-                        TableRow( children: [
-                          Column(children:[Text('Reference',
-                              style: const TextStyle(fontSize: 15.0,color: Color.fromRGBO(0, 128, 128, 1.0),
-                                  fontWeight: FontWeight.bold))]),
-                          Column(children:[Text('${dbResponse?.Reference}',
-                              style: const TextStyle(fontSize: 15.0))]),
-                        ]),
-
                       ],
                     ),
-                  )
-              ),
+                  )),
               // Text('spice : ${spicename.text}',
               //     style: const TextStyle(fontSize: 25.0)),
               // Text('Similar Score : ${dbResponse?.Similar_score}',
