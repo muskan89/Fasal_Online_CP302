@@ -15,8 +15,8 @@ from spellchecker import SpellChecker
 
 spell = SpellChecker()
 
-# dataset = pd.read_csv('D:\\flutter projects\\Fasal_Online_CP302-main\\backend\\fasalonline_app\\apis\\imp_final_data.csv',encoding = 'unicode_escape')
-dataset = pd.read_csv('D:\\_7th sem\\CP302\\code_fasal\\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\\imp_final_data.csv')
+dataset = pd.read_csv('D:\\flutter projects\\btp\\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\\imp_final_data.csv',encoding = 'unicode_escape')
+#dataset = pd.read_csv('D:\\_7th sem\\CP302\\code_fasal\\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\\imp_final_data.csv')
 
 dataset['QueryType'] = dataset['QueryType'].str.replace(r'\t', '',regex='True')
 from sentence_transformers import SentenceTransformer, util

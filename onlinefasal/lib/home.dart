@@ -235,10 +235,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   color: Colors.white,
                                   helpText: "Ask Bhaisaab...",
-                                  // onSubmitted: (text) => {
-                                  //   log("search text submiited"),
-                                  //   // todo: searchbar functionality
-                                  // },
+                                  onSubmitted: (text) => {
+                                    log("search text submiited"),
+                                    // todo: searchbar functionality
+                                  },
                                   //autoFocus: false,
                                   //closeSearchOnSuffixTap: true,
                                   //animationDurationInMilli: 2000,

@@ -286,7 +286,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                         diseaseP.diseases[data].disease_image.toString() == ",")
                     ? const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 0))
                     : (Image.asset(
-                        'assets/uploads/${diseaseP.diseases[data].disease_image.substring(0, diseaseP.diseases[data].disease_image.length - 1)}',
+                        'assets/uploads/${diseaseP.diseases[data].disease_image}',
                         height: 100,
                         width: 100)),
                 const Text(

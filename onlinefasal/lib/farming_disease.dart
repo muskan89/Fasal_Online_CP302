@@ -300,7 +300,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                                               padding: EdgeInsets.fromLTRB(
                                                   0, 0, 0, 0))
                                           : (Image.asset(
-                                              'assets/uploads/${diseaseP.diseases[index].disease_image.substring(0, diseaseP.diseases[index].disease_image.length - 1)}',
+                                              'assets/uploads/${diseaseP.diseases[index].disease_image}',
                                               height: 80,
                                               width: 80)),
                                       // : Text(diseaseP
