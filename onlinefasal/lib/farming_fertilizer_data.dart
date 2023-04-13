@@ -8,6 +8,10 @@ import 'package:onlinefasal/dio_package.dart';
 import 'package:provider/provider.dart';
 import 'package:onlinefasal/farming.dart';
 
+import 'askbhaisaab/chathome.dart';
+import 'askbhaisaab/chatmandi.dart';
+import 'askbhaisaab/chatscheme.dart';
+
 class FarmingFertilizerScreendata extends StatelessWidget {
   //const FarmingScreendata({Key? key}) : super(key: key);
   final int data;
@@ -130,28 +134,60 @@ class FarmingFertilizerScreendata extends StatelessWidget {
                   )),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/govt_schemes.png'),
-                        const Text('Govt. Schemes')
-                      ],
-                    ),
-                    onTap: () {
-                      log('Govt. schemes button pressed');
-                    },
-                  )),
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/bhaisaab.jpg',
+                              width: 20,
+                              height: 20,
+                              //fit: BoxFit.cover,
+                            ),
+                            const Text('AskBhaisaab')
+                            //const Text('Farming')
+                          ],
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatHomeScreen()));
+                        },
+                      )),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/rupee-sign.png'),
-                        const Text('Mandi Rates')
-                      ],
-                    ),
-                    onTap: () {
-                      log('mandi rates button pressed');
-                    },
-                  )),
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/govt_schemes.png',
+                                height: 20, width: 20),
+                            const Text('Govt.Scheme')
+                          ],
+                        ),
+                        onTap: () {
+                          log('mandi rates button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatSchemeScreen()));
+                        },
+                      )),
+                  Expanded(
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/rupee-sign.png',
+                                height: 20, width: 20),
+                            const Text('Mandi Rates')
+                          ],
+                        ),
+                        onTap: () {
+                          log('mandi rates button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatMandiScreen()));
+                        },
+                      )),
                 ],
               ))
         ]),

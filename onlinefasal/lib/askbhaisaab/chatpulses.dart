@@ -11,6 +11,9 @@ import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import 'chatmandi.dart';
+import 'chatscheme.dart';
+
 class ChatPulsesScreen extends StatefulWidget {
   const ChatPulsesScreen({Key? key}) : super(key: key);
 
@@ -188,28 +191,38 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                     )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/govt_schemes.png'),
-                          const Text('Govt. Schemes')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Govt. schemes button pressed');
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/govt_schemes.png',
+                                  height: 20, width: 20),
+                              const Text('Govt.Scheme')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatSchemeScreen()));
+                          },
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/rupee-sign.png'),
-                          const Text('Mandi Rates')
-                        ],
-                      ),
-                      onTap: () {
-                        log('mandi rates button pressed');
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/rupee-sign.png',
+                                  height: 20, width: 20),
+                              const Text('Mandi Rates')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatMandiScreen()));
+                          },
+                        )),
                   ],
                 ))
           ]),

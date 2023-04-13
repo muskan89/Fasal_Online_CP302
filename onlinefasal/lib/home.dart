@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:onlinefasal/askbhaisaab/chatscheme.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
@@ -156,16 +157,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Text('Govt.Scheme')
                         ],
                       ),
-                      onTap: () {
-                        log('Govt. schemes button pressed');
-                      },
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatSchemeScreen()));
+                          },
                     )),
                     Expanded(
                         child: InkWell(
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/rupee-sign.png',
-                              height: 22, width: 22),
+                              height: 20, width: 20),
                           const Text('Mandi Rates')
                         ],
                       ),
@@ -188,73 +193,545 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 200,
                 fit: BoxFit.fill,
               )),
-          Container(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: SizedBox(
-                height: 75,
-                width: 50,
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xffffffff),
-                        border: Border.all(
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(2),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black,
-                            offset: Offset(
-                              1.0,
-                              1.0,
-                            ),
-                            blurRadius: 5.0,
-                            spreadRadius: 1.0,
-                          ), //BoxShadow
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(0.0, 0.0),
-                            blurRadius: 0.0,
-                            spreadRadius: 0.0,
-                          ), //BoxShadow
-                        ]),
-                    child: ListView(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            // Image.asset(
-                            //   'assets/images/bhaisaab.jpg',
-                            //   width: 34,
-                            //   height: 44,
-                            //   fit: BoxFit.cover,
-                            // ),
-                            Container(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: AnimSearchBar(
-                                  width: 320,
-                                  textController: textController,
-                                  onSuffixTap: () {
-                                    setState(() {
-                                      textController.clear();
-                                    });
-                                  },
-                                  color: Colors.white,
-                                  helpText: "Ask Bhaisaab...",
-                                  onSubmitted: (text) => {
-                                    log("search text submiited"),
-                                    // todo: searchbar functionality
-                                  },
-                                  //autoFocus: false,
-                                  //closeSearchOnSuffixTap: true,
-                                  //animationDurationInMilli: 2000,
-                                  //rtl: true,
-                                ))
-                          ],
-                        )
-                      ],
-                    )),
-              ))
+          Column(children: <Widget>[
+            Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Color.fromRGBO(0, 0, 0, 0),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Expanded(
+                    //   child: InkWell(
+                    //     child: Column(
+                    //       children: <Widget>[
+                    //         Image.asset('assets/images/home.png',
+                    //             height: 20, width: 20),
+                    //         const Text('Home')
+                    //       ],
+                    //     ),
+                    //     onTap: () {
+                    //       log('Home button pressed');
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => const HomeScreen()));
+                    //     },
+                    //   ),
+                    // ),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/mausam.jpg',
+                                  height: 130, width: 190,fit: BoxFit.fill),
+                              const Text('Weather')
+                            ],
+                          ),
+                          onTap: () {
+                            log('weather button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Weatherr()));
+                          },
+                        )),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/kisani.png',
+                                  height: 130, width: 190,fit: BoxFit.fill),
+                              const Text('Farming')
+                            ],
+                          ),
+                          onTap: () {
+                            log('farming button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FarmingScreen()));
+                          },
+                        )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset(
+                    //             'assets/images/bhaisaab.jpg',
+                    //             width: 20,
+                    //             height: 20,
+                    //             //fit: BoxFit.cover,
+                    //           ),
+                    //           const Text('AskBhaisaab')
+                    //           //const Text('Farming')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('chat bot button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => const ChatHomeScreen()));
+                    //       },
+                    //     )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/govt_schemes.png',
+                    //               height: 20, width: 20),
+                    //           const Text('Govt.Scheme')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('Govt. schemes button pressed');
+                    //       },
+                    //     )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/rupee-sign.png',
+                    //               height: 22, width: 22),
+                    //           const Text('Mandi Rates')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('mandi rates button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => const ChatMandiScreen()));
+                    //       },
+                    //     )),
+                  ],
+                ))
+          ]),
+          Column(children: <Widget>[
+            Container(
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(0, 0, 0, 0),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Expanded(
+                    //   child: InkWell(
+                    //     child: Column(
+                    //       children: <Widget>[
+                    //         Image.asset('assets/images/home.png',
+                    //             height: 20, width: 20),
+                    //         const Text('Home')
+                    //       ],
+                    //     ),
+                    //     onTap: () {
+                    //       log('Home button pressed');
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => const HomeScreen()));
+                    //     },
+                    //   ),
+                    // ),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/weather.png',
+                    //               height: 90, width: 90),
+                    //           const Text('Weather')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('weather button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => Weatherr()));
+                    //       },
+                    //     )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/Farming.png',
+                    //               height: 90, width: 90),
+                    //           const Text('Farming')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('farming button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => const FarmingScreen()));
+                    //       },
+                    //     )),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaabbbb.png',
+                                width: 190,
+                                height: 130,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('AskBhaisaab')
+                              //const Text('Farming')
+                            ],
+                          ),
+                          onTap: () {
+                            log('chat bot button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatHomeScreen()));
+                          },
+                        )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/govt_schemes.png',
+                    //               height: 20, width: 20),
+                    //           const Text('Govt.Scheme')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('Govt. schemes button pressed');
+                    //       },
+                    //     )),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/rupee-sign.jpg',
+                                  height: 130, width: 190,fit: BoxFit.fill),
+                              const Text('Mandi Rates')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatMandiScreen()));
+                          },
+                        )),
+                  ],
+                ))
+          ]),
+          Column(children: <Widget>[
+            Container(
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(0, 0, 0, 0),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Expanded(
+                    //   child: InkWell(
+                    //     child: Column(
+                    //       children: <Widget>[
+                    //         Image.asset('assets/images/home.png',
+                    //             height: 20, width: 20),
+                    //         const Text('Home')
+                    //       ],
+                    //     ),
+                    //     onTap: () {
+                    //       log('Home button pressed');
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => const HomeScreen()));
+                    //     },
+                    //   ),
+                    // ),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/weather.png',
+                    //               height: 90, width: 90),
+                    //           const Text('Weather')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('weather button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => Weatherr()));
+                    //       },
+                    //     )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('assets/images/Farming.png',
+                    //               height: 90, width: 90),
+                    //           const Text('Farming')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('farming button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => const FarmingScreen()));
+                    //       },
+                    //     )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset(
+                    //             'images/bhaisaabbbb.png',
+                    //             width: 190,
+                    //             height: 140,
+                    //             fit: BoxFit.cover,
+                    //           ),
+                    //           const Text('AskBhaisaab')
+                    //           //const Text('Farming')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('chat bot button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => const ChatHomeScreen()));
+                    //       },
+                    //     )),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/govt.png',
+                                  height: 110, width: 190),
+                              const Text('Govt.Scheme')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatSchemeScreen()));
+                          },
+                        )),
+                    // Expanded(
+                    //     child: InkWell(
+                    //       child: Column(
+                    //         children: <Widget>[
+                    //           Image.asset('images/rupee-sign.jpg',
+                    //               height: 140, width: 190,fit: BoxFit.fill),
+                    //           const Text('Mandi Rates')
+                    //         ],
+                    //       ),
+                    //       onTap: () {
+                    //         log('mandi rates button pressed');
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => const ChatMandiScreen()));
+                    //       },
+                    //     )),
+                  ],
+                ))
+          ]),
+            // Column(
+            //   // crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   children: <Widget>[
+            //   Expanded(
+            //   child: Column(
+            //   crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   children: <Widget>[
+            //   Expanded(
+            //   child: Container(
+            //   color: Colors.red,
+            //   ),
+            //   ),
+            //   Expanded(
+            //   child: Container(
+            //   color: Colors.yellow,
+            //   ),
+            //   ),
+            //   ],
+            //   ),
+            //   ),
+            //   Expanded(
+            //   child: Column(
+            //   crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   children: <Widget>[
+            //   Expanded(
+            //   child: Container(
+            //   color: Colors.purple,
+            //   ),
+            //   ),
+            //   Expanded(
+            //   child: Container(
+            //   color: Colors.black,
+            //   ),
+            //   ),
+            //   ],
+            //   ),
+            //   ),
+            //   ],
+            // ),
+
+
+
+
+
+
+
+
+
+          // Container(
+          //   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          //   child: ListView(
+          //
+          //   )
+          // ),
+
+          // Container(
+          //     child: Column(
+          //     children: <Widget>[
+          //       Row(
+          //         //crossAxisAlignment: CrossAxisAlignment.stretch,
+          //         children: <Widget>[
+          //           Expanded(
+          //             child: Column(
+          //               crossAxisAlignment: CrossAxisAlignment.stretch,
+          //               children: <Widget>[
+          //                 Expanded(
+          //                   child: Container(
+          //                     color: Colors.red,
+          //                   ),
+          //                 ),
+          //                 Expanded(
+          //                   child: Container(
+          //                     color: Colors.yellow,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //           Expanded(
+          //             child: Column(
+          //               crossAxisAlignment: CrossAxisAlignment.stretch,
+          //               children: <Widget>[
+          //                 Expanded(
+          //                   child: Container(
+          //                     color: Colors.purple,
+          //                   ),
+          //                 ),
+          //                 Expanded(
+          //                   child: Container(
+          //                     color: Colors.black,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       ]
+          //       )
+          // )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          // Container(
+          //     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          //     child: SizedBox(
+          //       height: 75,
+          //       width: 50,
+          //       child: Container(
+          //           decoration: BoxDecoration(
+          //               color: const Color(0xffffffff),
+          //               border: Border.all(
+          //                 width: 2,
+          //               ),
+          //               borderRadius: BorderRadius.circular(2),
+          //               boxShadow: const [
+          //                 BoxShadow(
+          //                   color: Colors.black,
+          //                   offset: Offset(
+          //                     1.0,
+          //                     1.0,
+          //                   ),
+          //                   blurRadius: 5.0,
+          //                   spreadRadius: 1.0,
+          //                 ), //BoxShadow
+          //                 BoxShadow(
+          //                   color: Colors.white,
+          //                   offset: Offset(0.0, 0.0),
+          //                   blurRadius: 0.0,
+          //                   spreadRadius: 0.0,
+          //                 ), //BoxShadow
+          //               ]),
+          //           child: ListView(
+          //             children: <Widget>[
+          //               Row(
+          //                 mainAxisAlignment: MainAxisAlignment.start,
+          //                 //crossAxisAlignment: CrossAxisAlignment.center,
+          //                 children: <Widget>[
+          //                   // Image.asset(
+          //                   //   'assets/images/bhaisaab.jpg',
+          //                   //   width: 34,
+          //                   //   height: 44,
+          //                   //   fit: BoxFit.cover,
+          //                   // ),
+          //                   Container(
+          //                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          //                       child: AnimSearchBar(
+          //                         width: 320,
+          //                         textController: textController,
+          //                         onSuffixTap: () {
+          //                           setState(() {
+          //                             textController.clear();
+          //                           });
+          //                         },
+          //                         color: Colors.white,
+          //                         helpText: "Ask Bhaisaab...",
+          //                         // onSubmitted: (text) => {
+          //                         //   log("search text submiited"),
+          //                         //   // todo: searchbar functionality
+          //                         // },
+          //                         //autoFocus: false,
+          //                         //closeSearchOnSuffixTap: true,
+          //                         //animationDurationInMilli: 2000,
+          //                         //rtl: true,
+          //                       ))
+          //                 ],
+          //               )
+          //             ],
+          //           )),
+          //     ))
         ],
       ),
     );

@@ -156,37 +156,49 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                     )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/govt_schemes.png'),
-                          const Text('Govt. Schemes')
-                        ],
-                      ),
-                      onTap: () {
-                        log('Govt. schemes button pressed');
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/govt_schemes.png',
+                                  height: 20, width: 20),
+                              const Text('Govt.Scheme')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatSchemeScreen()));
+                          },
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/rupee-sign.png'),
-                          const Text('Mandi Rates')
-                        ],
-                      ),
-                      onTap: () {
-                        log('mandi rates button pressed');
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/rupee-sign.png',
+                                  height: 20, width: 20),
+                              const Text('Mandi Rates')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ChatMandiScreen()));
+                          },
+                        )),
                   ],
                 ))
           ]),
-          Column(children: <Widget>[
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Expanded(
-                  child: Text("Hello! BhaiSaab welcomes you on FasalOnline App",
+                  child: Text("  Hello! BhaiSaab welcomes you on FasalOnline",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
@@ -197,18 +209,18 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               children: const [
                 Expanded(
                   child: Text(
-                      "How can I help you? Please select category from the given options",
+                      "  How can I help you? Please select category from the given options",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
                 ),
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -230,11 +242,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -256,11 +268,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -282,11 +294,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -308,11 +320,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -335,11 +347,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -361,11 +373,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -387,11 +399,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -413,11 +425,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -439,11 +451,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 400,
-                  padding: const EdgeInsets.fromLTRB(100, 10, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(

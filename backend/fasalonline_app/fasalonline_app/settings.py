@@ -92,7 +92,8 @@ DATABASES = {
 
         'NAME': 'fasalonline_agriculture',
         'USER': 'postgres',
-        'PASSWORD': '17102003',
+        #'PASSWORD': '17102003',
+        'PASSWORD': '56789',
         'HOST': 'localhost',
         'PORT': 5432
 

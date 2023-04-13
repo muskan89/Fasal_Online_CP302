@@ -6,6 +6,10 @@ import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/farming_crop.dart';
 
+import 'askbhaisaab/chathome.dart';
+import 'askbhaisaab/chatmandi.dart';
+import 'askbhaisaab/chatscheme.dart';
+
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
 
@@ -131,36 +135,60 @@ class _FarmingScreenState extends State<FarmingScreen> {
                   )),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/images/govt_schemes.png',
-                          height: 20,
-                          width: 20,
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/bhaisaab.jpg',
+                              width: 20,
+                              height: 20,
+                              //fit: BoxFit.cover,
+                            ),
+                            const Text('AskBhaisaab')
+                            //const Text('Farming')
+                          ],
                         ),
-                        const Text('Govt. Schemes')
-                      ],
-                    ),
-                    onTap: () {
-                      log('Govt. schemes button pressed');
-                    },
-                  )),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatHomeScreen()));
+                        },
+                      )),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/images/rupee-sign.png',
-                          height: 20,
-                          width: 20,
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/govt_schemes.png',
+                                height: 20, width: 20),
+                            const Text('Govt.Scheme')
+                          ],
                         ),
-                        const Text('Mandi Rates')
-                      ],
-                    ),
-                    onTap: () {
-                      log('mandi rates button pressed');
-                    },
-                  )),
+                        onTap: () {
+                          log('mandi rates button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatSchemeScreen()));
+                        },
+                      )),
+                  Expanded(
+                      child: InkWell(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/rupee-sign.png',
+                                height: 20, width: 20),
+                            const Text('Mandi Rates')
+                          ],
+                        ),
+                        onTap: () {
+                          log('mandi rates button pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatMandiScreen()));
+                        },
+                      )),
                 ],
               ))
         ]),
@@ -168,17 +196,17 @@ class _FarmingScreenState extends State<FarmingScreen> {
           Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Color.fromRGBO(238, 255, 234, 1),
+                color: Color.fromRGBO(0, 0, 0, 0),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Expanded(
                   InkWell(
                     child: Column(
                       children: <Widget>[
                         Image.asset(
-                          'assets/images/crop_logo.png',
+                          'assets/images/crop.png',
                         ),
                         const Text('Crops')
                       ],
