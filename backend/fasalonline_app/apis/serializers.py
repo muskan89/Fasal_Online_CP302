@@ -87,3 +87,32 @@ class ChemicalFertilizerSerializer(serializers.ModelSerializer):
             'amount_max',
         )
         model = models.ChemicalFertilizer
+
+
+class VarietySerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'crop',
+            'state',
+            'variety_name',
+            'seed_rate',
+            'sowing_time',
+            'duration',
+            'average_yield',
+            'height',
+            'features',
+            'suitable_regions',
+            'tolerant_to',
+            'added',
+            'v_image',
+            'seed_rate_min',
+            'seed_rate_max',
+            'duration_min',
+            'duration_max',
+            'average_yield_min',
+            'average_yield_max',
+            'height_min',
+            'height_max',
+
+        )
+        model = models.Variety

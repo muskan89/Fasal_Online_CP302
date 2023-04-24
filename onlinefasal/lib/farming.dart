@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
@@ -9,6 +10,7 @@ import 'package:onlinefasal/farming_crop.dart';
 import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
+import 'mandirate.dart';
 
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
@@ -114,25 +116,44 @@ class _FarmingScreenState extends State<FarmingScreen> {
                     },
                   )),
                   Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/images/Farming.png',
-                          height: 20,
-                          width: 20,
+                    child: InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.teal,
+                            width: 0.0,
+                          ),
+                          borderRadius: BorderRadius.circular(0.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.teal.withOpacity(0.5),
+                              Colors.teal.withOpacity(0.2),
+                            ],
+                          ),
                         ),
-                        const Text('Farming')
-                      ],
-                    ),
-                    onTap: () {
-                      log('farming button pressed');
-                      Navigator.push(
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/Farming.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            const Text('Farming')
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        log('farming button pressed');
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const FarmingScreen()));
-                    },
-                  )),
+                          MaterialPageRoute(builder: (context) => const FarmingScreen()),
+                        );
+                      },
+                    ),
+                  ),
+
                   Expanded(
                       child: InkWell(
                         child: Column(
@@ -169,7 +190,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ChatSchemeScreen()));
+                                  builder: (context) => const govtSchemeScreen()));
                         },
                       )),
                   Expanded(
@@ -186,7 +207,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ChatMandiScreen()));
+                                  builder: (context) => const MandiScreen()));
                         },
                       )),
                 ],

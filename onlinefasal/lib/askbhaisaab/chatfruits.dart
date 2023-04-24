@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:onlinefasal/dio_package.dart';
@@ -11,6 +12,7 @@ import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 import 'chatscheme.dart';
 
@@ -26,7 +28,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
-  int _selectedFruit = 41;
+  int _selectedFruit = 32;
   int _selectedQueryType = 1;
 
   late stt.SpeechToText _speech;
@@ -168,27 +170,45 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -203,7 +223,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -220,7 +240,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -243,7 +263,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             ),
             ListTile(
               leading: Radio<int>(
-                value: 41,
+                value: 32,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -275,7 +295,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 42,
+                value: 33,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -297,7 +317,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 43,
+                value: 34,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -319,7 +339,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 44,
+                value: 35,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -341,7 +361,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 45,
+                value: 36,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -363,7 +383,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 46,
+                value: 37,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -385,7 +405,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 47,
+                value: 38,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -407,7 +427,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 48,
+                value: 39,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -429,7 +449,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 49,
+                value: 40,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -451,7 +471,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 50,
+                value: 41,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -473,7 +493,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 51,
+                value: 42,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -495,7 +515,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 52,
+                value: 43,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {
@@ -517,7 +537,7 @@ class _ChatFruitsScreenState extends State<ChatFruitsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 53,
+                value: 44,
                 groupValue: _selectedFruit,
                 onChanged: (value) {
                   setState(() {

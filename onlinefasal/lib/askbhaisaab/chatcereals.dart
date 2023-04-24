@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:onlinefasal/dio_package.dart';
@@ -11,6 +12,7 @@ import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 import 'chatscheme.dart';
 
@@ -26,7 +28,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
-  int _selectedcereals = 54;
+  int _selectedcereals = 45;
   int _selectedQueryType = 1;
 
   late stt.SpeechToText _speech;
@@ -171,27 +173,45 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -206,7 +226,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -223,7 +243,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -235,7 +255,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
               children: const [
                 Expanded(
                   child: Text(
-                    "Crop Names",
+                    "Cereal Names",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 128, 128, 1.0),
                         fontSize: 20.0,
@@ -246,7 +266,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             ),
             ListTile(
               leading: Radio<int>(
-                value: 54,
+                value: 45,
                 groupValue: _selectedcereals,
                 onChanged: (value) {
                   setState(() {
@@ -254,7 +274,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
                   });
                 },
               ),
-              title: const Text('Barley(Jow)'),
+              title: const Text('Barley'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -268,7 +288,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 55,
+                value: 46,
                 groupValue: _selectedcereals,
                 onChanged: (value) {
                   setState(() {
@@ -290,7 +310,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 56,
+                value: 47,
                 groupValue: _selectedcereals,
                 onChanged: (value) {
                   setState(() {
@@ -312,7 +332,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 57,
+                value: 48,
                 groupValue: _selectedcereals,
                 onChanged: (value) {
                   setState(() {
@@ -334,7 +354,7 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 58,
+                value: 49,
                 groupValue: _selectedcereals,
                 onChanged: (value) {
                   setState(() {
@@ -354,18 +374,18 @@ class _ChatCerealsScreenState extends State<ChatCerealsScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 59,
-                groupValue: _selectedcereals,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedcereals = value!;
-                  });
-                },
-              ),
-              title: const Text('Sugarcane'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 59,
+            //     groupValue: _selectedcereals,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedcereals = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Sugarcane'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [

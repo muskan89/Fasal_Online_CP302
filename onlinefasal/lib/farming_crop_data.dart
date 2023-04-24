@@ -1,5 +1,6 @@
 import 'dart:developer';
-
+import 'package:onlinefasal/govtscheme.dart';
+import 'package:translator/translator.dart';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/home.dart';
@@ -15,6 +16,7 @@ import 'package:onlinefasal/farming_fertilizer.dart';
 import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
+import 'mandirate.dart';
 
 class FarmingCropScreendata extends StatelessWidget {
   //const FarmingScreendata({Key? key}) : super(key: key);
@@ -31,9 +33,14 @@ class FarmingCropScreendata extends StatelessWidget {
 
 //class _FarmingScreendataState extends State<FarmingScreendata> {
   TextEditingController textController = TextEditingController();
+  final translator = GoogleTranslator();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     final cropP = Provider.of<CropProvider>(context);
+    //var p=null;
+    var cropnamehindi= translator.translate(cropP.crops[data].name, to: 'hi');
+
+
     return Scaffold(
         //body: const LoginScreen(),
 
@@ -121,21 +128,44 @@ class FarmingCropScreendata extends StatelessWidget {
                   },
                 )),
                 Expanded(
-                    child: InkWell(
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset('assets/images/Farming.png'),
-                      const Text('Farming')
-                    ],
-                  ),
-                  onTap: () {
-                    log('farming button pressed');
-                    Navigator.push(
+                  child: InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.teal,
+                          width: 0.0,
+                        ),
+                        borderRadius: BorderRadius.circular(0.0),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.teal.withOpacity(0.5),
+                            Colors.teal.withOpacity(0.2),
+                          ],
+                        ),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/Farming.png',
+                            height: 20,
+                            width: 20,
+                          ),
+                          const Text('Farming')
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      log('farming button pressed');
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const FarmingScreen()));
-                  },
-                )),
+                        MaterialPageRoute(builder: (context) => const FarmingScreen()),
+                      );
+                    },
+                  ),
+                ),
+
                 Expanded(
                     child: InkWell(
                       child: Column(
@@ -172,7 +202,7 @@ class FarmingCropScreendata extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ChatSchemeScreen()));
+                                builder: (context) => const govtSchemeScreen()));
                       },
                     )),
                 Expanded(
@@ -189,7 +219,7 @@ class FarmingCropScreendata extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ChatMandiScreen()));
+                                builder: (context) => const MandiScreen()));
                       },
                     )),
               ],
@@ -322,8 +352,14 @@ class FarmingCropScreendata extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
+              //(p==null)?translat(cropP.crops[data].name):
+              // translat(cropP.crops[data].name).then((value) => {
+              //   Text(value);
+              // }),
+              buildFutureBuilder(cropP.crops[data].name, 'hi'),
               Text(
                 cropP.crops[data].name,
+                //translat(cropP.crops[data].name) as Future<String>,
                 style: const TextStyle(fontSize: 50),
               ),
               Image.asset('assets/uploads/${cropP.crops[data].cropimage}',
@@ -332,6 +368,7 @@ class FarmingCropScreendata extends StatelessWidget {
                 cropP.crops[data].description,
                 style: const TextStyle(fontSize: 20),
               ),
+              buildFutureBuilder(cropP.crops[data].description,'hi'),
               const Text(
                 "Species",
                 style: TextStyle(fontSize: 30),
@@ -340,10 +377,12 @@ class FarmingCropScreendata extends StatelessWidget {
                 cropP.crops[data].species,
                 style: const TextStyle(fontSize: 20),
               ),
+              buildFutureBuilder(cropP.crops[data].species,'hi'),
               const Text(
                 "Category",
                 style: TextStyle(fontSize: 30),
               ),
+              buildFutureBuilder(cropP.crops[data].category,'hi'),
               Text(
                 cropP.crops[data].category,
                 style: const TextStyle(fontSize: 20),
@@ -433,5 +472,33 @@ class FarmingCropScreendata extends StatelessWidget {
         ),
       )
     ]));
+  }
+  // Future<String> translat(String eng) async{
+  //   var hind= await translator.translate(eng, to: 'hi');
+  //   var ty=hind.text;
+  //   //return ty;
+  //   // return Text(
+  //   //   ty,
+  //   //   style: const TextStyle(fontSize: 20),
+  //   // );
+  // }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
   }
 }

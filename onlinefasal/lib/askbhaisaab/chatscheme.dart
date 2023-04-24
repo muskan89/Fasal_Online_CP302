@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
@@ -11,6 +12,7 @@ import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 
 class ChatSchemeScreen extends StatefulWidget {
@@ -25,8 +27,8 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
-  int _selectedscheme = 2;
-  int _selectedQueryType = 31;
+  int _selectedscheme = 25;
+  int _selectedQueryType = 2;
 
   late stt.SpeechToText _speech;
   bool _isListening = false;
@@ -167,27 +169,45 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -202,7 +222,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -219,27 +239,27 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
                 ))
           ]),
           Column(children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text(
-                    "Query Types",
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 128, 128, 1.0),
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text(
+            //         "Query Types",
+            //         style: TextStyle(
+            //             color: Color.fromRGBO(0, 128, 128, 1.0),
+            //             fontSize: 20.0,
+            //             fontWeight: FontWeight.bold),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -251,28 +271,28 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 2,
-                groupValue: _selectedscheme,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedscheme = value!;
-                  });
-                },
-              ),
-              title: const Text('Government Schemes'),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  child: Text("",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-                ),
-              ],
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 2,
+            //     groupValue: _selectedscheme,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedscheme = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Government Schemes'),
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     Expanded(
+            //       child: Text("",hi u
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
+            //     ),
+            //   ],
+            // ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -299,15 +319,15 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 31,
-                groupValue: _selectedQueryType,
+                value: 25,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Pradhan Mantri KISAN Samman Nidhi Yojana'),
+              title: const Text('Pradhan Mantri Fasal Bima Yojana (PMFBY)'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,27 +342,27 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 32,
-                groupValue: _selectedQueryType,
+                value: 26,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Pradhan Mantri Krishi Sinchai Yojana (PMKSY)'),
+              title: const Text('PM Kisan Credit card Yojna'),
             ),
             ListTile(
               leading: Radio<int>(
-                value: 33,
-                groupValue: _selectedQueryType,
+                value: 27,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Saur Sinchai Yojana'),
+              title: const Text('Pradhan Mantri KISAN Samman Nidhi Yojana'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -366,15 +386,15 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 34,
-                groupValue: _selectedQueryType,
+                value: 28,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Rashtriya Krishi Vikas Yojana'),
+              title: const Text('Pradhan Mantri Kisan Maan-Dhan Yojana'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -389,15 +409,15 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 35,
-                groupValue: _selectedQueryType,
+                value: 29,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Pradhan Mantri Fasal Bima Yojana (PMFBY)'),
+              title: const Text('PM Kusum Yojana'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -412,15 +432,15 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 36,
-                groupValue: _selectedQueryType,
+                value: 30,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Pradhan Mantri Kisan Maan-Dhan Yojana'),
+              title: const Text('Pardhan Mantri Kisan SAMPADA Yojana'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -434,15 +454,15 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 37,
-                groupValue: _selectedQueryType,
+                value: 31,
+                groupValue: _selectedscheme,
                 onChanged: (value) {
                   setState(() {
-                    _selectedQueryType = value!;
+                    _selectedscheme = value!;
                   });
                 },
               ),
-              title: const Text('Soil Health Card Scheme'),
+              title: const Text('Machinery/Equipment Subsidy'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -454,18 +474,18 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 38,
-                groupValue: _selectedQueryType,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedQueryType = value!;
-                  });
-                },
-              ),
-              title: const Text('PM Kusum Yojana'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 38,
+            //     groupValue: _selectedQueryType,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedQueryType = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('PM Kusum Yojana'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -477,18 +497,18 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 39,
-                groupValue: _selectedQueryType,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedQueryType = value!;
-                  });
-                },
-              ),
-              title: const Text('Pardhan Mantri Kisan SAMPADA Yojana'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 39,
+            //     groupValue: _selectedQueryType,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedQueryType = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Pardhan Mantri Kisan SAMPADA Yojana'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -499,18 +519,18 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 40,
-                groupValue: _selectedQueryType,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedQueryType = value!;
-                  });
-                },
-              ),
-              title: const Text('Machinery/Equipment Subsidy'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 40,
+            //     groupValue: _selectedQueryType,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedQueryType = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Machinery/Equipment Subsidy'),
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -597,7 +617,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
             Container(
                 alignment: Alignment.center,
                 child: (futureresponse == null)
-                    ? buildColumn(_selectedscheme, _selectedQueryType)
+                    ? buildColumn(_selectedQueryType,_selectedscheme)
                     : buildFutureBuilder())
           ]),
         ],
@@ -605,7 +625,7 @@ class _ChatSchemeScreenState extends State<ChatSchemeScreen> {
     );
   }
 
-  Column buildColumn(int selectedscheme, int selectedQueryType) {
+  Column buildColumn(int selectedQueryType,int selectedscheme) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

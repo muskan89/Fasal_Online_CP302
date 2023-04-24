@@ -16,6 +16,8 @@ urlpatterns = [
     path('weed/<int:pk>/',DetailWeed.as_view()),
     path('fertilizer/',ListChemicalFertilizer.as_view()),
     path('fertilizer/<int:pk>/',DetailChemicalFertilizer.as_view()),
+    path('variety/<int:pk>',DetailVariety.as_view()),
+    path('variety/',ListVariety.as_view()),
     path('get_answer/<str:category>/<str:crop>/<str:query_type>/<str:query>/',get_answer_database),
     path('get_weather/<str:CITY>/',get_weather_info),
     path('get_mandi/<str:crop>/',get_mandi_rate),

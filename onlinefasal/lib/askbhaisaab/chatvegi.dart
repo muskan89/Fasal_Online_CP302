@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:onlinefasal/dio_package.dart';
@@ -10,6 +11,7 @@ import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 import 'chatscheme.dart';
 
@@ -168,27 +170,45 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -203,7 +223,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -220,7 +240,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -283,7 +303,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Turnip'),
+              title: const Text('Tomato'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -305,7 +325,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Tomato'),
+              title: const Text('Sweet Potato'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -327,7 +347,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Sweet Potato'),
+              title: const Text('Sponge Gourd'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -349,7 +369,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Squash Melon'),
+              title: const Text('Radish'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -371,7 +391,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Sponge Gourd'),
+              title: const Text('Rabi Onion'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -393,7 +413,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Spinach (Palak)'),
+              title: const Text('Pumpkin'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -415,7 +435,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Radish'),
+              title: const Text('Potato'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -437,7 +457,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Rabi Onion(Pyaz)'),
+              title: const Text('Peas'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -459,7 +479,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Pumpkin'),
+              title: const Text('Okra'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -481,7 +501,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Potato'),
+              title: const Text('Kharif Onion'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -503,7 +523,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Peas'),
+              title: const Text('Garlic'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -525,7 +545,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Okra'),
+              title: const Text('Cucumber'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -547,7 +567,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Long Melon'),
+              title: const Text('Chilli'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -569,7 +589,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Lettuce'),
+              title: const Text('Cauliflower'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -591,7 +611,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Kharif Onion(Pyaz)'),
+              title: const Text('Carrot'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -613,7 +633,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Garlic'),
+              title: const Text('Bitter Gourd'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -635,7 +655,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Cucumber'),
+              title: const Text('Capsicum'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -657,7 +677,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Chilli'),
+              title: const Text('Cabbage'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -679,7 +699,7 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
                   });
                 },
               ),
-              title: const Text('Cauliflower'),
+              title: const Text('Brinjal'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -691,18 +711,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 21,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Carrot'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 21,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Carrot'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -713,18 +733,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 22,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Beetroot'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 22,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Beetroot'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -735,18 +755,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 23,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Bitter Gourd'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 23,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Bitter Gourd'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -757,18 +777,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 24,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Capsicum'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 24,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Capsicum'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -779,18 +799,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 25,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Capsicum'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 25,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Capsicum'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -801,18 +821,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 26,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Broccoli'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 26,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Broccoli'),
+            // ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: const [
@@ -823,18 +843,18 @@ class _ChatVegiScreenState extends State<ChatVegiScreen> {
             //     ),
             //   ],
             // ),
-            ListTile(
-              leading: Radio<int>(
-                value: 27,
-                groupValue: _selectedvegi,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedvegi = value!;
-                  });
-                },
-              ),
-              title: const Text('Brinjal'),
-            ),
+            // ListTile(
+            //   leading: Radio<int>(
+            //     value: 27,
+            //     groupValue: _selectedvegi,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _selectedvegi = value!;
+            //       });
+            //     },
+            //   ),
+            //   title: const Text('Brinjal'),
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [

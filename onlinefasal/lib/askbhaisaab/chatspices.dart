@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:onlinefasal/farming.dart';
 import 'package:onlinefasal/login.dart';
@@ -10,6 +11,7 @@ import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 import 'chatscheme.dart';
 
@@ -25,7 +27,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
-  int _selectedspices = 28;
+  int _selectedspices = 21;
   int _selectedQueryType = 1;
 
   late stt.SpeechToText _speech;
@@ -167,27 +169,45 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -202,7 +222,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -219,7 +239,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -252,7 +272,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 28,
+                value: 21,
                 groupValue: _selectedspices,
                 onChanged: (value) {
                   setState(() {
@@ -274,7 +294,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 29,
+                value: 22,
                 groupValue: _selectedspices,
                 onChanged: (value) {
                   setState(() {
@@ -296,7 +316,7 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 30,
+                value: 23,
                 groupValue: _selectedspices,
                 onChanged: (value) {
                   setState(() {
@@ -305,6 +325,18 @@ class _ChatSpicesScreenState extends State<ChatSpicesScreen> {
                 },
               ),
               title: const Text('Turmeric'),
+            ),
+            ListTile(
+              leading: Radio<int>(
+                value: 24,
+                groupValue: _selectedspices,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedspices = value!;
+                  });
+                },
+              ),
+              title: const Text('Sugarcane'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

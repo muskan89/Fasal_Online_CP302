@@ -3,8 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/splashscreen.dart';
 import 'package:provider/provider.dart';
+import 'package:translator/translator.dart';
 
-void main() {
+void main() async{
+  final translator = GoogleTranslator();
+
+  final input = "Welcome to fasal online";
+
+  //print(await translator.translate(input, from: 'en', to: 'hi').toString());
+  // prints Hello. Are you okay?
+  print(await translator.translate("Weather", to: 'hi').toString());
+
+  var translation = await translator.translate("home", to: 'hi');
+  var p=translation.toString();
+  print(p);
+  // prints Dart jest bardzo fajny!
+
+  print(await "example".translate(to: 'pt'));
   runApp(const MyApp());
 }
 

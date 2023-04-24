@@ -1,5 +1,6 @@
 import 'dart:developer';
-
+import 'package:onlinefasal/govtscheme.dart';
+import 'package:translator/translator.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:onlinefasal/askbhaisaab/chatscheme.dart';
@@ -9,6 +10,7 @@ import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:onlinefasal/models/mandiRate.dart';
 import 'package:onlinefasal/askbhaisaab/chatmandi.dart';
+import 'Content/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController textController = TextEditingController();
+  
+  final translator = GoogleTranslator();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,19 +80,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Expanded(
                       child: InkWell(
-                        child: Column(
-                          children: <Widget>[
-                            Image.asset('assets/images/home.png',
-                                height: 20, width: 20),
-                            const Text('Home')
-                          ],
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/home.png',
+                                height: 20,
+                                width: 20,
+                              ),
+                              const Text('Home')
+                            ],
+                          ),
                         ),
                         onTap: () {
                           log('Home button pressed');
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          );
                         },
                       ),
                     ),
@@ -162,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                     )),
                     Expanded(

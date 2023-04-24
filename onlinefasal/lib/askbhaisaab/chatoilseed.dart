@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
@@ -11,6 +12,7 @@ import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 import 'chatscheme.dart';
 
@@ -26,7 +28,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
-  int _selectedoilseed = 60;
+  int _selectedoilseed = 50;
   int _selectedQueryType = 1;
 
   late stt.SpeechToText _speech;
@@ -168,27 +170,45 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -203,7 +223,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -220,7 +240,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -232,7 +252,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
               children: const [
                 Expanded(
                   child: Text(
-                    "Crop Names",
+                    "Oilseed Names",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 128, 128, 1.0),
                         fontSize: 20.0,
@@ -253,7 +273,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 60,
+                value: 50,
                 groupValue: _selectedoilseed,
                 onChanged: (value) {
                   setState(() {
@@ -275,7 +295,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 61,
+                value: 51,
                 groupValue: _selectedoilseed,
                 onChanged: (value) {
                   setState(() {
@@ -297,7 +317,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 62,
+                value: 52,
                 groupValue: _selectedoilseed,
                 onChanged: (value) {
                   setState(() {
@@ -319,7 +339,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 63,
+                value: 53,
                 groupValue: _selectedoilseed,
                 onChanged: (value) {
                   setState(() {
@@ -615,7 +635,7 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
     );
   }
 
-  FutureBuilder<DBResponse> buildFutureBuilder() {
+  FutureBuilder<DBResponse> buildFutureBuilder(){
     return FutureBuilder<DBResponse>(
       future: futureresponse,
       builder: (context, snapshot) {

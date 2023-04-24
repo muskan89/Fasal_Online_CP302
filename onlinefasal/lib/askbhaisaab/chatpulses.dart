@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
+import 'package:onlinefasal/mandirate.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
@@ -26,7 +28,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
-  int _selectedpulses = 64;
+  int _selectedpulses = 54;
   int _selectedQueryType = 1;
 
   late stt.SpeechToText _speech;
@@ -168,27 +170,45 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -203,7 +223,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -220,7 +240,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -243,7 +263,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             ),
             ListTile(
               leading: Radio<int>(
-                value: 64,
+                value: 54,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {
@@ -275,7 +295,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 65,
+                value: 55,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {
@@ -297,7 +317,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 66,
+                value: 56,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {
@@ -319,7 +339,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 67,
+                value: 57,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {
@@ -331,7 +351,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             ),
             ListTile(
               leading: Radio<int>(
-                value: 68,
+                value: 58,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {
@@ -353,7 +373,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 69,
+                value: 59,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {
@@ -375,7 +395,7 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 70,
+                value: 60,
                 groupValue: _selectedpulses,
                 onChanged: (value) {
                   setState(() {

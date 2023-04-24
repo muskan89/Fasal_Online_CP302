@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
@@ -15,6 +16,7 @@ import 'package:onlinefasal/farming_soil.dart';
 import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
+import 'mandirate.dart';
 
 class FarmingFertilizerScreen extends StatelessWidget {
   //const FarmingFertilizerScreen({Key? key}) : super(key: key);
@@ -121,21 +123,44 @@ class FarmingFertilizerScreen extends StatelessWidget {
                     },
                   )),
                   Expanded(
-                      child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/Farming.png'),
-                        const Text('Farming')
-                      ],
-                    ),
-                    onTap: () {
-                      log('farming button pressed');
-                      Navigator.push(
+                    child: InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.teal,
+                            width: 0.0,
+                          ),
+                          borderRadius: BorderRadius.circular(0.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.teal.withOpacity(0.5),
+                              Colors.teal.withOpacity(0.2),
+                            ],
+                          ),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/Farming.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            const Text('Farming')
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        log('farming button pressed');
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const FarmingScreen()));
-                    },
-                  )),
+                          MaterialPageRoute(builder: (context) => const FarmingScreen()),
+                        );
+                      },
+                    ),
+                  ),
+
                   Expanded(
                       child: InkWell(
                         child: Column(
@@ -172,7 +197,7 @@ class FarmingFertilizerScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ChatSchemeScreen()));
+                                  builder: (context) => const govtSchemeScreen()));
                         },
                       )),
                   Expanded(
@@ -189,7 +214,7 @@ class FarmingFertilizerScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ChatMandiScreen()));
+                                  builder: (context) => const MandiScreen()));
                         },
                       )),
                 ],
@@ -260,22 +285,39 @@ class FarmingFertilizerScreen extends StatelessWidget {
                   )),
                   Expanded(
                     child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/fertilizer_logo.png'),
-                          const Text('Fertilizer')
-                        ],
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.lightGreen,
+                            width: 0.0,
+                          ),
+                          borderRadius: BorderRadius.circular(0.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.lightGreen.withOpacity(0.5),
+                              Colors.lightGreen.withOpacity(0.2),
+                            ],
+                          ),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset('assets/images/fertilizer_logo.png'),
+                            const Text('Fertilizer')
+                          ],
+                        ),
                       ),
                       onTap: () {
                         log('Fertilizers button pressed');
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    FarmingFertilizerScreen(data: data)));
+                          context,
+                          MaterialPageRoute(builder: (context) => FarmingFertilizerScreen(data: data)),
+                        );
                       },
                     ),
                   ),
+
                   Expanded(
                     child: InkWell(
                       child: Column(

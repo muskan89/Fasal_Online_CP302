@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/farming.dart';
+import 'package:onlinefasal/govtscheme.dart';
 import 'package:onlinefasal/login.dart';
 import 'package:onlinefasal/dio_package.dart';
 import 'package:onlinefasal/home.dart';
@@ -11,6 +12,7 @@ import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../mandirate.dart';
 import 'chatmandi.dart';
 import 'chatscheme.dart';
 
@@ -28,7 +30,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
   TextEditingController query = TextEditingController();
   Future<DBResponse>? futureresponse;
   int _selectedcomm = 8;
-  int _selectedQueryType = 71;
+  int _selectedQueryType = 61;
 
   late stt.SpeechToText _speech;
   bool _isListening = false;
@@ -169,27 +171,45 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                       },
                     )),
                     Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 34,
-                            height: 44,
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(0.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.teal.withOpacity(0.5),
+                                Colors.teal.withOpacity(0.2),
+                              ],
+                            ),
                           ),
-                          const Text('Ask Bhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 34,
+                                height: 44,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text('Ask Bhaisaab')
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          log('chat bot button pressed');
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                            MaterialPageRoute(builder: (context) => const ChatHomeScreen()),
+                          );
+                        },
+                      ),
+                    )
+                    ,
                     Expanded(
                         child: InkWell(
                           child: Column(
@@ -204,7 +224,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -221,7 +241,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -321,7 +341,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 71,
+                value: 61,
                 groupValue: _selectedQueryType,
                 onChanged: (value) {
                   setState(() {
@@ -333,7 +353,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             ),
             ListTile(
               leading: Radio<int>(
-                value: 72,
+                value: 62,
                 groupValue: _selectedQueryType,
                 onChanged: (value) {
                   setState(() {
@@ -355,7 +375,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             // ),
             ListTile(
               leading: Radio<int>(
-                value: 73,
+                value: 63,
                 groupValue: _selectedQueryType,
                 onChanged: (value) {
                   setState(() {
@@ -462,7 +482,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
             Container(
                 alignment: Alignment.center,
                 child: (futureresponse == null)
-                    ? buildColumn(_selectedcomm, _selectedQueryType)
+                    ? buildColumn(_selectedQueryType, _selectedcomm)
                     : buildFutureBuilder())
           ]),
         ],
@@ -470,7 +490,7 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
     );
   }
 
-  Column buildColumn(int selectedcomm, int selectedQueryType) {
+  Column buildColumn(int selectedQueryType,int selectedcomm) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -523,9 +543,9 @@ class _ChatCommunicationScreenState extends State<ChatCommunicationScreen> {
           onPressed: () {
             setState(() {
               futureresponse = getAnswer(
-                  selectedcomm.toString(),
-                  _text != '' ? _text : query.text,
                   selectedQueryType.toString(),
+                  _text != '' ? _text : query.text,
+                  selectedcomm.toString(),
                   '6');
             });
           },
