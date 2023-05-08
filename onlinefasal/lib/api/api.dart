@@ -23,7 +23,7 @@ class CropProvider with ChangeNotifier {
   }
 
   fetchTasks() async {
-    const url = 'http://127.0.0.1:8000/apis/v1/crop/?format=json';
+    const url = 'http://172.21.71.8:8000/apis/v1/crop/?format=json';
     final response = await http.get(Uri.parse(url));
     //log(response.toString());
     log(response.body.toString());
@@ -47,7 +47,7 @@ class DiseaseProvider with ChangeNotifier {
   }
 
   fetchTasks() async {
-    const url = 'http://127.0.0.1:8000/apis/v1/disease/?format=json';
+    const url = 'http://172.21.71.8:8000/apis/v1/disease/?format=json';
     final response = await http.get(Uri.parse(url));
     //log(response.toString());
     log(response.body.toString());
@@ -71,7 +71,7 @@ class FertilizerProvider with ChangeNotifier {
   }
 
   fetchTasks() async {
-    const url = 'http://127.0.0.1:8000/apis/v1/fertilizer/?format=json';
+    const url = 'http://172.21.71.8:8000/apis/v1/fertilizer/?format=json';
     final response = await http.get(Uri.parse(url));
     //log(response.toString());
     log(response.body.toString());
@@ -96,7 +96,7 @@ class PestProvider with ChangeNotifier {
   }
 
   fetchTasks() async {
-    const url = 'http://127.0.0.1:8000/apis/v1/pest/?format=json';
+    const url = 'http://172.21.71.8:8000/apis/v1/pest/?format=json';
     final response = await http.get(Uri.parse(url));
     //log(response.toString());
     log(response.body.toString());
@@ -120,7 +120,7 @@ class SoilProvider with ChangeNotifier {
   }
 
   fetchTasks() async {
-    const url = 'http://127.0.0.1:8000/apis/v1/soil/?format=json';
+    const url = 'http://172.21.71.8:8000/apis/v1/soil/?format=json';
     final response = await http.get(Uri.parse(url));
     //log(response.toString());
     log(response.body.toString());
@@ -135,7 +135,7 @@ class SoilProvider with ChangeNotifier {
 }
 
 Future<Weather> getWeather(String city) async {
-  var url = 'http://127.0.0.1:8000/apis/v1/get_weather/$city/?format=json';
+  var url = 'http://172.21.71.8:8000/apis/v1/get_weather/$city/?format=json';
   final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     log("response body");
@@ -148,7 +148,7 @@ Future<Weather> getWeather(String city) async {
 }
 
 Future<MandiRate> getMandiRate(String crop) async {
-  var url = 'http://127.0.0.1:8000/apis/v1/get_mandi/$crop/?format=json';
+  var url = 'http://172.21.71.8:8000/apis/v1/get_mandi/$crop/?format=json';
   final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     log("response body");
@@ -163,7 +163,7 @@ Future<MandiRate> getMandiRate(String crop) async {
 Future<DBResponse> getAnswer(
     String crop, String query, String querytype, String category) async {
   var url =
-      'http://127.0.0.1:8000/apis/v1/get_answer/$category/$crop/$querytype/$query?format=json';
+      'http://172.21.71.8:8000/apis/v1/get_answer/$category/$crop/$querytype/$query?format=json';
   final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     log("response: ");

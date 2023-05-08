@@ -11,6 +11,10 @@ import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 import '../mandirate.dart';
 import 'chatmandi.dart';
@@ -27,6 +31,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
   TextEditingController cropname = TextEditingController();
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
+  final translator = GoogleTranslator();
+
   Future<DBResponse>? futureresponse;
   int _selectedoilseed = 50;
   int _selectedQueryType = 1;
@@ -79,8 +85,11 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: Text("Fasal Online",
+                Expanded(
+                  child: (language=='Hindi') ?Text("फसल औनलाईन",
+                      style: TextStyle(
+                          color: Color.fromRGBO(0, 194, 146, 1),
+                          fontSize: 25.0)):Text("Fasal Online",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 194, 146, 1),
                           fontSize: 25.0)),
@@ -102,17 +111,18 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const LoginScreen()));
+                                      const LoginScreen()));
                             }),
                       ]),
                 )
               ],
             )
           ]),
+
           Column(children: <Widget>[
             Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Color.fromRGBO(0, 194, 146, 0.28),
                 ),
                 child: Row(
@@ -120,55 +130,66 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   children: [
                     Expanded(
                       child: InkWell(
-                        child: Column(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/home.png',
-                            ),
-                            const Text('Home')
-                          ],
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/home.png',
+                                height: 20,
+                                width: 20,
+                              ),
+                              (language == 'Hindi') ? Text('होम') : Text('Home')
+                            ],
+                          ),
                         ),
                         onTap: () {
                           log('Home button pressed');
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
+                          );
                         },
                       ),
                     ),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/weather.png'),
-                          const Text('Weather')
-                        ],
-                      ),
-                      onTap: () {
-                        log('weather button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Weatherr()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/weather.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Weather", 'hi') : Text('Weather')
+                            ],
+                          ),
+                          onTap: () {
+                            log('weather button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Weatherr()));
+                          },
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/Farming.png'),
-                          const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('farming button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingScreen()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/Farming.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Farming", 'hi') : Text('Farming')
+
+                            ],
+                          ),
+                          onTap: () {
+                            log('farming button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (
+                                        context) => const FarmingScreen()));
+                          },
+                        )),
                     Expanded(
                       child: InkWell(
                         child: Container(
@@ -195,7 +216,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                                 height: 44,
                                 fit: BoxFit.cover,
                               ),
-                              const Text('Ask Bhaisaab')
+
+                              (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
                             ],
                           ),
                         ),
@@ -209,13 +231,14 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                       ),
                     )
                     ,
+
                     Expanded(
                         child: InkWell(
                           child: Column(
                             children: <Widget>[
                               Image.asset('assets/images/govt_schemes.png',
                                   height: 20, width: 20),
-                              const Text('Govt.Scheme')
+                              (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                             ],
                           ),
                           onTap: () {
@@ -223,7 +246,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const govtSchemeScreen()));
+                                    builder: (
+                                        context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -232,7 +256,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                             children: <Widget>[
                               Image.asset('assets/images/rupee-sign.png',
                                   height: 20, width: 20),
-                              const Text('Mandi Rates')
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Mandi Rates", 'hi') : Text('Mandi Rates')
                             ],
                           ),
                           onTap: () {
@@ -240,7 +265,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MandiScreen()));
+                                    builder: (
+                                        context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -249,9 +275,15 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 Expanded(
-                  child: Text(
+                  child: (language == 'Hindi') ? Text(
+                    "तिलहन के नाम",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 128, 128, 1.0),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                  ):Text(
                     "Oilseed Names",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -281,7 +313,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Groundnut'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Groundnut", 'hi') : Text('Groundnut'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,7 +336,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Mustard'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Mustard", 'hi') : Text('Mustard'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -325,7 +359,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Soybean'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Soybean", 'hi') : Text('Soybean'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -347,7 +382,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Sunflower'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Sunflower", 'hi') : Text('Sunflower'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -362,9 +398,10 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 Expanded(
-                  child: Text("Query Types",
+                  child: (language == 'Hindi') ? buildFutureBuildergr(
+                      "Question Types", 'hi') :Text("Query Types",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 128, 128, 1.0),
                           fontSize: 20.0,
@@ -382,7 +419,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Cultural Practices'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Cultural Practices", 'hi') :  Text('Cultural Practices'),
             ),
 
             ListTile(
@@ -395,7 +433,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Nutrient Management'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Nutrient Management", 'hi') :  Text('Nutrient Management'),
             ),
 
             ListTile(
@@ -408,7 +447,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Fertilizer Uses'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Fertilizer Uses", 'hi') :  Text('Fertilizer Uses'),
             ),
 
             ListTile(
@@ -421,7 +461,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Varieties'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Varieties", 'hi') :  Text('Varieties'),
             ),
 
             ListTile(
@@ -434,7 +475,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Weed Management'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Weed Management", 'hi') :  Text('Weed Management'),
             ),
 
             ListTile(
@@ -447,7 +489,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Seeds'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Seeds", 'hi') :  Text('Seeds'),
             ),
 
             ListTile(
@@ -460,7 +503,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Water Management'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Water Management", 'hi') :  Text('Water Management'),
             ),
 
             ListTile(
@@ -473,7 +517,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   });
                 },
               ),
-              title: const Text('Plant Protection'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Plant Protection", 'hi') :  Text('Plant Protection'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -594,10 +639,10 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                 width: 300,
                 child: TextField(
                     controller: query,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       //icon: const Icon(Icons.person),
-                      hintText: 'Enter the query',
-                      labelText: 'query',
+                      hintText: (language == 'Hindi') ? 'प्रश्न दर्ज करें ': 'Enter the query',
+                      labelText: (language == 'Hindi') ? 'प्रश्न': 'query',
                     ))),
             AvatarGlow(
               animate: _isListening,
@@ -629,7 +674,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                   '9');
             });
           },
-          child: const Text('get answer'),
+          child: (language == 'Hindi') ? buildFutureBuildertr(
+              "get the answer", 'hi'): Text('get answer'),
         ),
       ],
     );
@@ -655,93 +701,69 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
                           width: 2),
                       children: [
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Crop',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              "Message", 'hi'):
+                          Text('Message',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('$_selectedoilseed',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Message}', 'hi'):Text('${dbResponse?.Message}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Similarity Score with our database',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              'Your Question', 'hi'):
+                          Text('Your Question',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Similar_score}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Question}', 'hi'):Text('${dbResponse?.Question}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Message',
+                          Column(children:  [
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                'Similar question that we find', 'hi'):Text('Similar question that we find',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
                                     fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Message}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Question_Database}', 'hi'):Text('${dbResponse?.Question_Database}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Your Question',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              "Answer", 'hi'):Text('Answer',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Question}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Similar question that we find',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Question_Database}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Answer',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Answer}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Reference',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Reference}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Answer}', 'hi'):Text('${dbResponse?.Answer}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
@@ -761,8 +783,8 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
               //     style: const TextStyle(fontSize: 25.0)),
               // Text('Answer : ${dbResponse?.Answer}',
               //     style: const TextStyle(fontSize: 25.0)),
-              // Text('Reference : ${dbResponse?.Reference}',
-              //     style: const TextStyle(fontSize: 25.0)),
+              Text('Reference : ${dbResponse?.Reference}',
+                  style: const TextStyle(fontSize: 10.0)),
             ],
           );
         } else if (snapshot.hasError) {
@@ -770,6 +792,58 @@ class _ChatOilseedScreenState extends State<ChatOilseedScreen> {
         }
 
         return const CircularProgressIndicator();
+      },
+    );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuildertr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuildergr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuilderans(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              fontSize: 15.0,
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }

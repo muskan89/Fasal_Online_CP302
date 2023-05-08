@@ -16,7 +16,7 @@ import numpy as np
 import re
 from googletrans import Translator
 # dataset = pd.read_csv('Dataset1.csv',encoding = 'unicode_escape')
-dataset = pd.read_csv('D:\\_7th sem\\CP302\\code_fasal\\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\\Dataset1.csv',encoding = 'unicode_escape')
+dataset = pd.read_csv('D:\\_7th sem\\CP302\\code_fasal\\Fasal_Online_CP302\\backend\\fasalonline_app\\apis\\Dataset1.csv.xls',encoding = 'unicode_escape')
 
 from sentence_transformers import SentenceTransformer, util
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -204,6 +204,12 @@ def get_answer_database(request,query_type, query,crop,category):
     """
         returns the answer from the database based on query
     """
+    lang = translator.detect(query).lang
+    #if lang not in ['en', 'hi']:
+        #print("Please ask your question in either English or Hindi.")
+        #return
+    if lang == 'hi':
+        query = translator.translate(query, dest='en').text
     subset_data = dataset.loc[dataset['Category'] == category_dict[category]]
     subset_data = subset_data.loc[subset_data['Crop'] == crop_dict[crop]]
     subset_data = subset_data.loc[subset_data['QueryType'] == query_type_dict[query_type]]
@@ -213,12 +219,7 @@ def get_answer_database(request,query_type, query,crop,category):
     # Single list of sentences
     sentences = questions
     #Compute embeddings
-    lang = translator.detect(query).lang
-    #if lang not in ['en', 'hi']:
-        #print("Please ask your question in either English or Hindi.")
-        #return
-    if lang == 'hi':
-        query = translator.translate(query, dest='en').text
+    
 
     #print(f"Your language is: {lang}")
     #print(f"Your query: {query}")
@@ -274,8 +275,8 @@ def get_answer_database(request,query_type, query,crop,category):
         Message="Here is your answer!"
         Question_Database=dataset_temp['QueryText'][res_index]
         Answer=dataset_temp['KccAns'][res_index]
-        if lang == 'hi':
-            Answer = translator.translate(Answer, dest='hi').text
+        # if lang == 'hi':
+        #     Answer = translator.translate(Answer, dest='hi').text
         Reference=dataset_temp['Refer'][res_index]
         # for i, ind in enumerate(sorted_results[1:4]):
         #   ques = dataset_temp['QueryText'][ind]
@@ -291,15 +292,15 @@ def get_answer_database(request,query_type, query,crop,category):
         # print(f" {dataset_temp['Refer'][res_index]}")  
         Question=query
         Message="We have some similar question answer for you.Thank You"
-        if lang == 'hi':
-            Message = translator.translate(Message, dest='hi').text
+        # if lang == 'hi':
+        #     Message = translator.translate(Message, dest='hi').text
         Question_Database=dataset_temp['QueryText'][res_index]
         Answer=dataset_temp['KccAns'][res_index]
         Reference=dataset_temp['Refer'][res_index]
     else:
         Message="Sorry.We are not find your question in our database. But we also answer various types of queries like 1.Plant Protection 2.Cultural Practices 3.Government Schemes 4.Nutrient Management 5.Fertilizer Uses 6.Varieties 7.Weed Management 8.Others 9.Seeds 10.Water Management"
-        if lang == 'hi':
-            Message = translator.translate(Message, dest='hi').text
+        # if lang == 'hi':
+        #     Message = translator.translate(Message, dest='hi').text
         # print("========================================")
         # print(f"Sorry.We are not find your question in our database. But we also answer various types of queries like 1.Plant Protection 2.Cultural Practices 3.Government Schemes 4.Nutrient Management 5.Fertilizer Uses 6.Varieties 7.Weed Management 8.Others 9.Seeds 10.Water Management")
     return Response({'Similar_score':sim_scr,'Message': Message, 'Question': Question, 'Question_Database':Question_Database, 'Answer':Answer,'Reference':Reference})
@@ -308,6 +309,9 @@ def get_answer_database(request,query_type, query,crop,category):
 @api_view()
 @permission_classes([AllowAny])
 def get_weather_info(request,CITY):
+    lang = translator.detect(CITY).lang
+    if lang == 'hi':
+        CITY=translator.translate(CITY, dest='en').text
     API_KEY = "9a86fa9066224859399de5ee1bb8602e"
     URL = BASE_URL + "q=" + CITY + "&appid=" + API_KEY
     response = requests.get(URL)
@@ -367,10 +371,10 @@ def get_weather_info(request,CITY):
 @api_view()
 @permission_classes([AllowAny])
 def get_mandi_rate(request,crop):
-    # lang = translator.detect(crop).lang
-    # if lang == 'hi':
-    #     crop=translator.translate(crop, dest='en').text
-    # #if lang not in ['en', 'hi']:
+    lang = translator.detect(crop).lang
+    if lang == 'hi':
+        crop=translator.translate(crop, dest='en').text
+    #if lang not in ['en', 'hi']:
         #print("Please ask your question in either English or Hindi.")
         #return
     
@@ -390,7 +394,7 @@ def get_mandi_rate(request,crop):
             #     resul+="Crop_Name : "+com+ "\nState : "+x['state']+ "\nDistrict : "+x['district']+  "\nMarket Name : "+x['market']+  "\nMinimum_price : "+x['min_price']+  "\nMaximum_price : "+x['max_price']+ "\nModal_price : "+x['modal_price']+"\n\n"
             # #print("Crop_Name = ",x['commodity']," ""State = ",x['state']," " "District=",x['district']," " "Market Name=",x['market']," " "Minimum_price=",x['min_price']," " "Maximum_price=",x['max_price']," " "Modal_price=",x['modal_price'])
             # else:
-            resul+="Crop_Name : "+x['commodity']+ "\nState : "+x['state']+ "\nDistrict : "+x['district']+  "\nMarket Name : "+x['market']+  "\nMinimum_price : Rs. "+x['min_price']+  "\nMaximum_price : Rs. "+x['max_price']+ "\nModal_price : Rs. "+x['modal_price']+"\n\n"
+            resul+="Crop Name : "+x['commodity']+ "\nState : "+x['state']+ "\nDistrict : "+x['district']+  "\nMarket Name : "+x['market']+  "\nMinimum price : Rs "+x['min_price']+  "\nMaximum price : Rs "+x['max_price']+ "\nModal price : Rs "+x['modal_price']+"\n\n"
     if(len(resul)==0):
         errorr="You entered wrong name of crop. Try again with the correct one."
         # if lang == 'hi':

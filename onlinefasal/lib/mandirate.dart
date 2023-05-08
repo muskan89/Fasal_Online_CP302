@@ -12,7 +12,8 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 
 import 'govtscheme.dart';
-
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 
 class MandiScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class MandiScreen extends StatefulWidget {
 class _MandiScreenState extends State<MandiScreen> {
   TextEditingController cropname = TextEditingController();
   Future<MandiRate>? futuremandirate;
-
+  final translator = GoogleTranslator();
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = '';
@@ -74,8 +75,11 @@ class _MandiScreenState extends State<MandiScreen> {
                         ],
                       ),
                     ),
-                    const Expanded(
-                      child: Text("Fasal Online",
+                    Expanded(
+                      child: (language=='Hindi') ?Text("फसल औनलाईन",
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 194, 146, 1),
+                              fontSize: 25.0)):Text("Fasal Online",
                           style: TextStyle(
                               color: Color.fromRGBO(0, 194, 146, 1),
                               fontSize: 25.0)),
@@ -120,7 +124,7 @@ class _MandiScreenState extends State<MandiScreen> {
                                 Image.asset(
                                   'assets/images/home.png',
                                 ),
-                                const Text('Home')
+                                (language == 'Hindi') ? Text('होम') : Text('Home')
                               ],
                             ),
                             onTap: () {
@@ -137,7 +141,9 @@ class _MandiScreenState extends State<MandiScreen> {
                               child: Column(
                                 children: <Widget>[
                                   Image.asset('assets/images/weather.png'),
-                                  const Text('Weather')
+                                  (language == 'Hindi') ? buildFutureBuildertrans(
+                                      "Weather", 'hi') : Text('Weather')
+
                                 ],
                               ),
                               onTap: () {
@@ -153,7 +159,9 @@ class _MandiScreenState extends State<MandiScreen> {
                               child: Column(
                                 children: <Widget>[
                                   Image.asset('assets/images/Farming.png'),
-                                  const Text('Farming')
+                                  (language == 'Hindi') ? buildFutureBuildertrans(
+                                      "Farming", 'hi') : Text('Farming')
+
                                 ],
                               ),
                               onTap: () {
@@ -174,7 +182,7 @@ class _MandiScreenState extends State<MandiScreen> {
                                     height: 20,
                                     //fit: BoxFit.cover,
                                   ),
-                                  const Text('AskBhaisaab')
+                                  (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
                                   //const Text('Farming')
                                 ],
                               ),
@@ -192,7 +200,8 @@ class _MandiScreenState extends State<MandiScreen> {
                                 children: <Widget>[
                                   Image.asset('assets/images/govt_schemes.png',
                                       height: 20, width: 20),
-                                  const Text('Govt.Scheme')
+                                  (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
+
                                 ],
                               ),
                               onTap: () {
@@ -227,8 +236,8 @@ class _MandiScreenState extends State<MandiScreen> {
                                     'assets/images/rupee-sign.png',
                                     height: 20,
                                     width: 20,
-                                  ),
-                                  const Text('Mandi Rates')
+                                  ),(language == 'Hindi') ? buildFutureBuildertrans(
+                                      "Mandi Rates", 'hi') : Text('Mandi Rates')
                                 ],
                               ),
                             ),
@@ -264,10 +273,10 @@ class _MandiScreenState extends State<MandiScreen> {
                 width: 300,
                 child: TextField(
                     controller: cropname,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       //icon: const Icon(Icons.person),
-                      hintText: 'Enter the crop',
-                      labelText: 'Crop name',
+                      hintText: (language == 'Hindi') ? 'फसल का नाम दर्ज करें ': 'Enter the crop' ,
+                      labelText: (language == 'Hindi') ? 'फसल का नाम': 'Crop name',
                     ))),
             AvatarGlow(
               animate: _isListening,
@@ -296,7 +305,7 @@ class _MandiScreenState extends State<MandiScreen> {
                   getMandiRate(_text != '' ? _text : cropname.text);
             });
           },
-          child: const Text('get mandi rate'),
+          child:  (language == 'Hindi') ? buildFutureBuildertrans('get mandi rate','hi'): Text('get mandi rate'),
         ),
       ],
     );
@@ -310,7 +319,7 @@ class _MandiScreenState extends State<MandiScreen> {
           MandiRate? mandirate = snapshot.data;
           return Column(
             children: <Widget>[
-              const Text('Mandi rates',
+          (language == 'Hindi') ? buildFutureBuildertransg('Mandi rates','hi'): Text('Mandi rates',
                   style: TextStyle(
                       fontSize: 25.0, color: Color.fromRGBO(0, 128, 128, 1.0))),
               // Text('${mandirate?.result}',
@@ -320,7 +329,7 @@ class _MandiScreenState extends State<MandiScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Text('${mandirate?.result}',
+                    child: (language == 'Hindi') ? buildFutureBuildertrans('${mandirate?.result}','hi'):Text('${mandirate?.result}',
                         style: const TextStyle(fontSize: 15.0)),
                   ),
                 ],
@@ -332,6 +341,39 @@ class _MandiScreenState extends State<MandiScreen> {
         }
 
         return const CircularProgressIndicator();
+      },
+    );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuildertrans(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuildertransg(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              fontSize: 25.0, color: Color.fromRGBO(0, 128, 128, 1.0)));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }

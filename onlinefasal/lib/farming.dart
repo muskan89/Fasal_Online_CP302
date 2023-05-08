@@ -11,6 +11,8 @@ import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
 import 'mandirate.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 class FarmingScreen extends StatefulWidget {
   const FarmingScreen({Key? key}) : super(key: key);
@@ -21,6 +23,7 @@ class FarmingScreen extends StatefulWidget {
 
 class _FarmingScreenState extends State<FarmingScreen> {
   TextEditingController textController = TextEditingController();
+  final translator = GoogleTranslator();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +41,14 @@ class _FarmingScreenState extends State<FarmingScreen> {
                   ],
                 ),
               ),
-              const Expanded(
-                child: Text("Fasal Online",
+              Expanded(
+                child: (language=='Hindi') ?Text("फसल औनलाईन",
                     style: TextStyle(
-                        color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)):Text("Fasal Online",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)),
               ),
               Expanded(
                 child: Row(
@@ -59,13 +66,15 @@ class _FarmingScreenState extends State<FarmingScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
+                                    builder: (context) =>
+                                    const LoginScreen()));
                           }),
                     ]),
               )
             ],
           )
         ]),
+
         Column(children: <Widget>[
           Container(
               decoration: const BoxDecoration(
@@ -84,7 +93,8 @@ class _FarmingScreenState extends State<FarmingScreen> {
                             height: 20,
                             width: 20,
                           ),
-                          const Text('Home')
+                          (language == 'Hindi') ? Text('होम') : Text('Home')
+
                         ],
                       ),
                       onTap: () {
@@ -105,7 +115,9 @@ class _FarmingScreenState extends State<FarmingScreen> {
                           height: 20,
                           width: 20,
                         ),
-                        const Text('Weather')
+                        (language == 'Hindi') ? buildFutureBuilder(
+                            "Weather", 'hi') : Text('Weather')
+
                       ],
                     ),
                     onTap: () {
@@ -140,7 +152,8 @@ class _FarmingScreenState extends State<FarmingScreen> {
                               height: 20,
                               width: 20,
                             ),
-                            const Text('Farming')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Farming", 'hi') : Text('Farming')
                           ],
                         ),
                       ),
@@ -164,7 +177,8 @@ class _FarmingScreenState extends State<FarmingScreen> {
                               height: 20,
                               //fit: BoxFit.cover,
                             ),
-                            const Text('AskBhaisaab')
+                            (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
+
                             //const Text('Farming')
                           ],
                         ),
@@ -182,7 +196,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                           children: <Widget>[
                             Image.asset('assets/images/govt_schemes.png',
                                 height: 20, width: 20),
-                            const Text('Govt.Scheme')
+                            (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                           ],
                         ),
                         onTap: () {
@@ -199,7 +213,8 @@ class _FarmingScreenState extends State<FarmingScreen> {
                           children: <Widget>[
                             Image.asset('assets/images/rupee-sign.png',
                                 height: 20, width: 20),
-                            const Text('Mandi Rates')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Mandi Rates", 'hi') : Text('Mandi Rates')
                           ],
                         ),
                         onTap: () {
@@ -229,7 +244,7 @@ class _FarmingScreenState extends State<FarmingScreen> {
                         Image.asset(
                           'assets/images/crop.png',
                         ),
-                        const Text('Crops')
+                        (language=='Hindi')?buildFutureBuilder('Crops','hi'):Text('Crops')
                       ],
                     ),
                     onTap: () {
@@ -313,5 +328,24 @@ class _FarmingScreenState extends State<FarmingScreen> {
         ]),
       ]),
     );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
   }
 }

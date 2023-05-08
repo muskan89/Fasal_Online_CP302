@@ -13,6 +13,8 @@ import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
 import 'mandirate.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 class FarmingSoilScreendata extends StatelessWidget {
   //const FarmingScreendata({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class FarmingSoilScreendata extends StatelessWidget {
 
 //class _FarmingScreendataState extends State<FarmingScreendata> {
   TextEditingController textController = TextEditingController();
+  final translator = GoogleTranslator();
   @override
   Widget build(BuildContext context) {
     final soilP = Provider.of<SoilProvider>(context);
@@ -47,10 +50,14 @@ class FarmingSoilScreendata extends StatelessWidget {
                   ],
                 ),
               ),
-              const Expanded(
-                child: Text("Fasal Online",
+              Expanded(
+                child: (language=='Hindi') ?Text("फसल औनलाईन",
                     style: TextStyle(
-                        color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)):Text("Fasal Online",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)),
               ),
               Expanded(
                 child: Row(
@@ -68,13 +75,15 @@ class FarmingSoilScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
+                                    builder: (context) =>
+                                    const LoginScreen()));
                           }),
                     ]),
               )
             ],
           )
         ]),
+
         Column(children: <Widget>[
           Container(
               decoration: const BoxDecoration(
@@ -90,8 +99,11 @@ class FarmingSoilScreendata extends StatelessWidget {
                         children: <Widget>[
                           Image.asset(
                             'assets/images/home.png',
+                            height: 20,
+                            width: 20,
                           ),
-                          const Text('Home')
+                          (language == 'Hindi') ? Text('होम') : Text('Home')
+
                         ],
                       ),
                       onTap: () {
@@ -105,19 +117,25 @@ class FarmingSoilScreendata extends StatelessWidget {
                   ),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/weather.png'),
-                        const Text('Weather')
-                      ],
-                    ),
-                    onTap: () {
-                      log('weather button pressed');
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/weather.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Weather", 'hi') : Text('Weather')
 
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Weatherr()));
-                    },
-                  )),
+                          ],
+                        ),
+                        onTap: () {
+                          log('weather button pressed');
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Weatherr()));
+                        },
+                      )),
                   Expanded(
                     child: InkWell(
                       child: Container(
@@ -143,7 +161,8 @@ class FarmingSoilScreendata extends StatelessWidget {
                               height: 20,
                               width: 20,
                             ),
-                            const Text('Farming')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Farming", 'hi') : Text('Farming')
                           ],
                         ),
                       ),
@@ -167,7 +186,8 @@ class FarmingSoilScreendata extends StatelessWidget {
                               height: 20,
                               //fit: BoxFit.cover,
                             ),
-                            const Text('AskBhaisaab')
+                            (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
+
                             //const Text('Farming')
                           ],
                         ),
@@ -185,7 +205,7 @@ class FarmingSoilScreendata extends StatelessWidget {
                           children: <Widget>[
                             Image.asset('assets/images/govt_schemes.png',
                                 height: 20, width: 20),
-                            const Text('Govt.Scheme')
+                            (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                           ],
                         ),
                         onTap: () {
@@ -202,7 +222,8 @@ class FarmingSoilScreendata extends StatelessWidget {
                           children: <Widget>[
                             Image.asset('assets/images/rupee-sign.png',
                                 height: 20, width: 20),
-                            const Text('Mandi Rates')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Mandi Rates", 'hi') : Text('Mandi Rates')
                           ],
                         ),
                         onTap: () {
@@ -340,72 +361,263 @@ class FarmingSoilScreendata extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 //if(soilP.soils[data].type!=null)
-                Text(
-                  soilP.soils[data].type,
-                  style: const TextStyle(fontSize: 50),
+
+                (language=='Hindi')? buildFutureBuilderhead(soilP.soils[data].type, 'hi'):Text(
+                    soilP.soils[data].type,style: TextStyle(
+                    color: Color.fromRGBO(49, 177, 177, 1.0),
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold)
                 ),
-                const Text(
-                  "water content",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                //if(soilP.soils[data].water_content!=null)
-                Text(
-                  soilP.soils[data].water_content,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Water Content",'hi'): Text(
+                        "Water Content",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "ph",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].water_content,'hi'):Text(
+                        soilP.soils[data].water_content,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  //soilP.soils[data].ph!=null ?
-                  soilP.soils[data].ph,
-                  style: const TextStyle(fontSize: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "minimum water content",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Ph",'hi'): Text(
+                        "Ph",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  //soilP.soils[data].water_content_min.toString()!=null ?
-                  soilP.soils[data].water_content_min.toString(),
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].ph,'hi'):Text(
+                        soilP.soils[data].ph,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "maximum water content",
-                  style: TextStyle(fontSize: 30),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  //soilP.soils[data].water_content_max.toString()!=null ?
-                  soilP.soils[data].water_content_max.toString(),
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Minimum Water Content",'hi'): Text(
+                        "Minimum Water Content",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "minimum ph",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].water_content_min.toString(),'hi'):Text(
+                        soilP.soils[data].water_content_min.toString(),
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  //soilP.soils[data].ph_min.toString()!=null ?
-                  soilP.soils[data].ph_min.toString(),
-                  style: const TextStyle(fontSize: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "maximum ph",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Maximum Water Content",'hi'): Text(
+                        "Maximum Water Conten",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                //if(soilP.soils[data].ph_max.toString()!=null )
-                Text(
-                  soilP.soils[data].ph_max.toString(),
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].water_content_max.toString(),'hi'):Text(
+                        soilP.soils[data].water_content_max.toString(),
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "State",
-                  style: TextStyle(fontSize: 30),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                //if(soilP.soils[data].water_content!=null)
-                Text(
-                  soilP.soils[data].state,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Minimum Ph",'hi'): Text(
+                        "Minimum Ph",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].ph_min.toString(),'hi'):Text(
+                        soilP.soils[data].ph_min.toString(),
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Maximum Ph",'hi'): Text(
+                        "Maximum Ph",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].ph_max.toString(),'hi'):Text(
+                        soilP.soils[data].ph_max.toString(),
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("State",'hi'): Text(
+                        "State",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(soilP.soils[data].state,'hi'):Text(
+                        soilP.soils[data].state,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -413,5 +625,60 @@ class FarmingSoilScreendata extends StatelessWidget {
         )
       ]),
     );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 15));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
+  }
+  FutureBuilder<String> buildFutureBuilderhead(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: TextStyle(
+              color: Color.fromRGBO(49, 177, 177, 1.0),
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold),);
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
+  }
+  FutureBuilder<String> buildFutureBuildersubhead(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: TextStyle(
+              color: Colors.teal,
+              fontSize: 17.0,
+              fontWeight: FontWeight.bold),);
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
   }
 }

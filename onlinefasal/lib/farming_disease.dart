@@ -17,6 +17,8 @@ import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
 import 'mandirate.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 class FarmingDiseaseScreen extends StatelessWidget {
 //   const FarmingDiseaseScreen({Key? key}) : super(key: key);
@@ -34,6 +36,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
     required this.data,
   }) : super(key: key);
   TextEditingController textController = TextEditingController();
+  final translator = GoogleTranslator();
   @override
   Widget build(BuildContext context) {
     final diseaseP = Provider.of<DiseaseProvider>(context);
@@ -53,10 +56,14 @@ class FarmingDiseaseScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Expanded(
-                child: Text("Fasal Online",
+              Expanded(
+                child: (language=='Hindi') ?Text("फसल औनलाईन",
                     style: TextStyle(
-                        color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)):Text("Fasal Online",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)),
               ),
               Expanded(
                 child: Row(
@@ -74,13 +81,15 @@ class FarmingDiseaseScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
+                                    builder: (context) =>
+                                    const LoginScreen()));
                           }),
                     ]),
               )
             ],
           )
         ]),
+
         Column(children: <Widget>[
           Container(
               decoration: const BoxDecoration(
@@ -96,8 +105,11 @@ class FarmingDiseaseScreen extends StatelessWidget {
                         children: <Widget>[
                           Image.asset(
                             'assets/images/home.png',
+                            height: 20,
+                            width: 20,
                           ),
-                          const Text('Home')
+                          (language == 'Hindi') ? Text('होम') : Text('Home')
+
                         ],
                       ),
                       onTap: () {
@@ -111,19 +123,25 @@ class FarmingDiseaseScreen extends StatelessWidget {
                   ),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/weather.png'),
-                        const Text('Weather')
-                      ],
-                    ),
-                    onTap: () {
-                      log('weather button pressed');
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/weather.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Weather", 'hi') : Text('Weather')
 
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Weatherr()));
-                    },
-                  )),
+                          ],
+                        ),
+                        onTap: () {
+                          log('weather button pressed');
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Weatherr()));
+                        },
+                      )),
                   Expanded(
                     child: InkWell(
                       child: Container(
@@ -149,7 +167,8 @@ class FarmingDiseaseScreen extends StatelessWidget {
                               height: 20,
                               width: 20,
                             ),
-                            const Text('Farming')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Farming", 'hi') : Text('Farming')
                           ],
                         ),
                       ),
@@ -173,7 +192,8 @@ class FarmingDiseaseScreen extends StatelessWidget {
                               height: 20,
                               //fit: BoxFit.cover,
                             ),
-                            const Text('AskBhaisaab')
+                            (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
+
                             //const Text('Farming')
                           ],
                         ),
@@ -191,7 +211,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                           children: <Widget>[
                             Image.asset('assets/images/govt_schemes.png',
                                 height: 20, width: 20),
-                            const Text('Govt.Scheme')
+                            (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                           ],
                         ),
                         onTap: () {
@@ -208,7 +228,8 @@ class FarmingDiseaseScreen extends StatelessWidget {
                           children: <Widget>[
                             Image.asset('assets/images/rupee-sign.png',
                                 height: 20, width: 20),
-                            const Text('Mandi Rates')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Mandi Rates", 'hi') : Text('Mandi Rates')
                           ],
                         ),
                         onTap: () {
@@ -255,7 +276,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/pesticide_logo.png'),
-                          const Text('Pests')
+                          (language=='Hindi')?buildFutureBuilder("Pests",'hi'): Text('Pests')
                         ],
                       ),
                       onTap: () {
@@ -289,7 +310,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             Image.asset('assets/images/disease_logo.png'),
-                            const Text('Diseases')
+                            (language=='Hindi')?buildFutureBuilder("Diseases",'hi'): Text('Diseases')
                           ],
                         ),
                       ),
@@ -308,7 +329,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/fertilizer_logo.png'),
-                          const Text('Fertilizer')
+                          (language=='Hindi')?buildFutureBuilder("Fertilizer",'hi'): Text('Fertilizer')
                         ],
                       ),
                       onTap: () {
@@ -326,7 +347,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/images/soil_logo.png'),
-                          const Text('Soil')
+                          (language=='Hindi')?buildFutureBuilder("Soil",'hi'): Text('Soil')
                         ],
                       ),
                       onTap: () {
@@ -379,7 +400,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                                               padding: EdgeInsets.fromLTRB(
                                                   0, 0, 0, 0))
                                           : (Image.asset(
-                                              'assets/uploads/${diseaseP.diseases[index].disease_image}',
+                                              'assets/uploads/${diseaseP.diseases[index].disease_image.toString()}',
                                               height: 80,
                                               width: 80)),
                                       // : Text(diseaseP
@@ -387,7 +408,7 @@ class FarmingDiseaseScreen extends StatelessWidget {
                                       const Padding(
                                           padding:
                                               EdgeInsets.fromLTRB(10, 0, 0, 0)),
-                                      Text(diseaseP.diseases[index].common_name,
+                                      (language=='Hindi')?buildFutureBuilder(diseaseP.diseases[index].common_name,'hi'):Text(diseaseP.diseases[index].common_name,
                                           style: const TextStyle(
                                             fontSize: 20.0,
                                           )),
@@ -418,5 +439,24 @@ class FarmingDiseaseScreen extends StatelessWidget {
                 }))
       ]),
     );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
   }
 }

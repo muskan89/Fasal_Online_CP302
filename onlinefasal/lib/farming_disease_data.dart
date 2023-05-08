@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:onlinefasal/api/api.dart';
 import 'package:onlinefasal/govtscheme.dart';
@@ -13,6 +12,8 @@ import 'askbhaisaab/chathome.dart';
 import 'askbhaisaab/chatmandi.dart';
 import 'askbhaisaab/chatscheme.dart';
 import 'mandirate.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 class FarmingDiseaseScreendata extends StatelessWidget {
   //const FarmingScreendata({Key? key}) : super(key: key);
@@ -29,6 +30,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
 
 //class _FarmingScreendataState extends State<FarmingScreendata> {
   TextEditingController textController = TextEditingController();
+  final translator = GoogleTranslator();
   @override
   Widget build(BuildContext context) {
     final diseaseP = Provider.of<DiseaseProvider>(context);
@@ -47,10 +49,14 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                   ],
                 ),
               ),
-              const Expanded(
-                child: Text("Fasal Online",
+              Expanded(
+                child: (language=='Hindi') ?Text("फसल औनलाईन",
                     style: TextStyle(
-                        color: Color.fromRGBO(0, 194, 146, 1), fontSize: 25.0)),
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)):Text("Fasal Online",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 194, 146, 1),
+                        fontSize: 25.0)),
               ),
               Expanded(
                 child: Row(
@@ -68,13 +74,15 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
+                                    builder: (context) =>
+                                    const LoginScreen()));
                           }),
                     ]),
               )
             ],
           )
         ]),
+
         Column(children: <Widget>[
           Container(
               decoration: const BoxDecoration(
@@ -90,8 +98,11 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                         children: <Widget>[
                           Image.asset(
                             'assets/images/home.png',
+                            height: 20,
+                            width: 20,
                           ),
-                          const Text('Home')
+                          (language == 'Hindi') ? Text('होम') : Text('Home')
+
                         ],
                       ),
                       onTap: () {
@@ -105,19 +116,25 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                   ),
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/weather.png'),
-                        const Text('Weather')
-                      ],
-                    ),
-                    onTap: () {
-                      log('weather button pressed');
+                        child: Column(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/weather.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Weather", 'hi') : Text('Weather')
 
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Weatherr()));
-                    },
-                  )),
+                          ],
+                        ),
+                        onTap: () {
+                          log('weather button pressed');
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Weatherr()));
+                        },
+                      )),
                   Expanded(
                     child: InkWell(
                       child: Container(
@@ -143,7 +160,8 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                               height: 20,
                               width: 20,
                             ),
-                            const Text('Farming')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Farming", 'hi') : Text('Farming')
                           ],
                         ),
                       ),
@@ -167,7 +185,8 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                               height: 20,
                               //fit: BoxFit.cover,
                             ),
-                            const Text('AskBhaisaab')
+                            (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
+
                             //const Text('Farming')
                           ],
                         ),
@@ -185,7 +204,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                           children: <Widget>[
                             Image.asset('assets/images/govt_schemes.png',
                                 height: 20, width: 20),
-                            const Text('Govt.Scheme')
+                            (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                           ],
                         ),
                         onTap: () {
@@ -202,7 +221,8 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                           children: <Widget>[
                             Image.asset('assets/images/rupee-sign.png',
                                 height: 20, width: 20),
-                            const Text('Mandi Rates')
+                            (language == 'Hindi') ? buildFutureBuilder(
+                                "Mandi Rates", 'hi') : Text('Mandi Rates')
                           ],
                         ),
                         onTap: () {
@@ -215,8 +235,7 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                       )),
                 ],
               ))
-        ]),
-        // Column(children: <Widget>[
+        ]),// Column(children: <Widget>[
         //   Container(
         //       decoration: const BoxDecoration(
         //         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -339,9 +358,12 @@ class FarmingDiseaseScreendata extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text(
-                  diseaseP.diseases[data].common_name,
-                  style: const TextStyle(fontSize: 50),
+
+                (language=='Hindi')? buildFutureBuilderhead(diseaseP.diseases[data].common_name, 'hi'):Text(
+                    diseaseP.diseases[data].common_name,style: TextStyle(
+                    color: Color.fromRGBO(49, 177, 177, 1.0),
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold)
                 ),
                 (diseaseP.diseases[data].disease_image.toString().isEmpty ||
                         diseaseP.diseases[data].disease_image.toString() == ",")
@@ -350,45 +372,169 @@ class FarmingDiseaseScreendata extends StatelessWidget {
                         'assets/uploads/${diseaseP.diseases[data].disease_image}',
                         height: 100,
                         width: 100)),
-                const Text(
-                  "Symptoms: ",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Symptoms",'hi'): Text(
+                        "Symptoms",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  diseaseP.diseases[data].symptoms,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(diseaseP.diseases[data].symptoms,'hi'):Text(
+                        diseaseP.diseases[data].symptoms,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "Type: ",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  diseaseP.diseases[data].type,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Type",'hi'): Text(
+                        "Type",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "Measures: ",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(diseaseP.diseases[data].type,'hi'):Text(
+                        diseaseP.diseases[data].type,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  diseaseP.diseases[data].measures,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "Scientific Name: ",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Measures",'hi'): Text(
+                        "Measures",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  diseaseP.diseases[data].name,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(diseaseP.diseases[data].measures,'hi'):Text(
+                        diseaseP.diseases[data].measures,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "State: ",
-                  style: TextStyle(fontSize: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  diseaseP.diseases[data].state,
-                  style: const TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("Scientific Name",'hi'): Text(
+                        "Scientific Name",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(diseaseP.diseases[data].name,'hi'):Text(
+                        diseaseP.diseases[data].name,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: Text(
+                        "",
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuildersubhead("State",'hi'): Text(
+                        "State",style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:  [
+                    Expanded(
+                      child: (language=='Hindi')?buildFutureBuilder(diseaseP.diseases[data].state,'hi'):Text(
+                        diseaseP.diseases[data].state,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -396,5 +542,60 @@ class FarmingDiseaseScreendata extends StatelessWidget {
         )
       ]),
     );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 15));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
+  }
+  FutureBuilder<String> buildFutureBuilderhead(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: TextStyle(
+              color: Color.fromRGBO(49, 177, 177, 1.0),
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold),);
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
+  }
+  FutureBuilder<String> buildFutureBuildersubhead(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: TextStyle(
+              color: Colors.teal,
+              fontSize: 17.0,
+              fontWeight: FontWeight.bold),);
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+
   }
 }

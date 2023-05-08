@@ -12,6 +12,8 @@ import 'package:onlinefasal/home.dart';
 import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 import 'chatmandi.dart';
 import 'chatscheme.dart';
@@ -25,6 +27,8 @@ class ChatWeatherScreen extends StatefulWidget {
 
 class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
   TextEditingController cityname = TextEditingController();
+  final translator = GoogleTranslator();
+
   Future<Weather>? futureweather;
 
   late stt.SpeechToText _speech;
@@ -75,8 +79,11 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: Text("Fasal Online",
+                Expanded(
+                  child: (language=='Hindi') ?Text("फसल औनलाईन",
+                      style: TextStyle(
+                          color: Color.fromRGBO(0, 194, 146, 1),
+                          fontSize: 25.0)):Text("Fasal Online",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 194, 146, 1),
                           fontSize: 25.0)),
@@ -98,17 +105,18 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const LoginScreen()));
+                                      const LoginScreen()));
                             }),
                       ]),
                 )
               ],
             )
           ]),
+
           Column(children: <Widget>[
             Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Color.fromRGBO(0, 194, 146, 0.28),
                 ),
                 child: Row(
@@ -116,55 +124,66 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                   children: [
                     Expanded(
                       child: InkWell(
-                        child: Column(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/home.png',
-                            ),
-                            const Text('Home')
-                          ],
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/home.png',
+                                height: 20,
+                                width: 20,
+                              ),
+                              (language == 'Hindi') ? Text('होम') : Text('Home')
+                            ],
+                          ),
                         ),
                         onTap: () {
                           log('Home button pressed');
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
+                          );
                         },
                       ),
                     ),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/weather.png'),
-                          const Text('Weather')
-                        ],
-                      ),
-                      onTap: () {
-                        log('weather button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Weatherr()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/weather.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Weather", 'hi') : Text('Weather')
+                            ],
+                          ),
+                          onTap: () {
+                            log('weather button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Weatherr()));
+                          },
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/Farming.png'),
-                          const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('farming button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingScreen()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/Farming.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Farming", 'hi') : Text('Farming')
+
+                            ],
+                          ),
+                          onTap: () {
+                            log('farming button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (
+                                        context) => const FarmingScreen()));
+                          },
+                        )),
                     Expanded(
                       child: InkWell(
                         child: Container(
@@ -191,7 +210,8 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                                 height: 44,
                                 fit: BoxFit.cover,
                               ),
-                              const Text('Ask Bhaisaab')
+
+                              (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
                             ],
                           ),
                         ),
@@ -205,13 +225,14 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                       ),
                     )
                     ,
+
                     Expanded(
                         child: InkWell(
                           child: Column(
                             children: <Widget>[
                               Image.asset('assets/images/govt_schemes.png',
                                   height: 20, width: 20),
-                              const Text('Govt.Scheme')
+                              (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                             ],
                           ),
                           onTap: () {
@@ -219,7 +240,8 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const govtSchemeScreen()));
+                                    builder: (
+                                        context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -228,7 +250,8 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                             children: <Widget>[
                               Image.asset('assets/images/rupee-sign.png',
                                   height: 20, width: 20),
-                              const Text('Mandi Rates')
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Mandi Rates", 'hi') : Text('Mandi Rates')
                             ],
                           ),
                           onTap: () {
@@ -236,7 +259,8 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MandiScreen()));
+                                    builder: (
+                                        context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -262,10 +286,10 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                 width: 300,
                 child: TextFormField(
                     controller: cityname,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       //icon: const Icon(Icons.person),
-                      hintText: 'Enter city name',
-                      labelText: 'City name',
+                      hintText: (language == 'Hindi') ? 'शहर का नाम दर्ज करें ': 'Enter city name',
+                      labelText: (language == 'Hindi') ? 'शहर का नाम ': 'City name',
                     ))),
             AvatarGlow(
               animate: _isListening,
@@ -293,7 +317,8 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
               futureweather = getWeather(_text != '' ? _text : cityname.text);
             });
           },
-          child: const Text('get weather'),
+          child: (language == 'Hindi') ? buildFutureBuildertr(
+              "Tell about the weather", 'hi'): Text('get weather'),
         ),
       ],
     );
@@ -319,8 +344,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           width: 2),
                       children: [
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Location',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Location", 'hi'):Text('Location',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -332,8 +358,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('City ID',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "City ID", 'hi'):Text('City ID',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -345,8 +372,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Temperature',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Temperature", 'hi'):Text('Temperature',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -358,8 +386,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Feel like',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Feel like", 'hi'):Text('Feel like',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -371,8 +400,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Humidity',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Humidity", 'hi'):Text('Humidity',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -384,8 +414,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Atmospheric Pressure',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Atmospheric Pressure", 'hi'):Text('Atmospheric Pressure',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -397,8 +428,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Weather Report',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Weather Report", 'hi'):Text('Weather Report',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -410,8 +442,9 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Wind Speed',
+                          Column(children:  [
+                            (language == 'Hindi') ? buildFutureBuilderans(
+                                "Wind Speed", 'hi'):Text('Wind Speed',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -449,6 +482,58 @@ class _ChatWeatherScreenState extends State<ChatWeatherScreen> {
         }
 
         return const CircularProgressIndicator();
+      },
+    );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuildertr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuildergr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuilderans(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: TextStyle(
+              fontSize: 15.0,
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }

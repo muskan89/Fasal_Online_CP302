@@ -11,6 +11,9 @@ import 'package:onlinefasal/askbhaisaab/chathome.dart';
 import 'package:onlinefasal/models/mandiRate.dart';
 import 'package:onlinefasal/askbhaisaab/chatmandi.dart';
 import 'Content/constants.dart';
+import 'package:translator/translator.dart';
+
+import 'mandirate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,8 +24,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController textController = TextEditingController();
-  
   final translator = GoogleTranslator();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: Text("Fasal Online",
+                 Expanded(
+                  child: (language=='Hindi') ?Text("फसल औनलाईन",
+                      style: TextStyle(
+                          color: Color.fromRGBO(0, 194, 146, 1),
+                          fontSize: 25.0)):Text("Fasal Online",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 194, 146, 1),
                           fontSize: 25.0)),
@@ -62,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const LoginScreen()));
+                                      const LoginScreen()));
                             }),
                       ]),
                 )
@@ -103,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 20,
                                 width: 20,
                               ),
-                              const Text('Home')
+                              (language == 'Hindi') ? Text('होम') : Text('Home')
                             ],
                           ),
                         ),
@@ -111,101 +117,110 @@ class _HomeScreenState extends State<HomeScreen> {
                           log('Home button pressed');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
                           );
                         },
                       ),
                     ),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/weather.png',
-                              height: 20, width: 20),
-                          const Text('Weather')
-                        ],
-                      ),
-                      onTap: () {
-                        log('weather button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Weatherr()));
-                      },
-                    )),
-                    Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/Farming.png',
-                              height: 20, width: 20),
-                          const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('farming button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingScreen()));
-                      },
-                    )),
-                    Expanded(
-                        child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/bhaisaab.jpg',
-                            width: 20,
-                            height: 20,
-                            //fit: BoxFit.cover,
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/weather.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuilder(
+                                  "Weather", 'hi') : Text('Weather')
+                            ],
                           ),
-                          const Text('AskBhaisaab')
-                          //const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('chat bot button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatHomeScreen()));
-                      },
-                    )),
+                          onTap: () {
+                            log('weather button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Weatherr()));
+                          },
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/govt_schemes.png',
-                              height: 20, width: 20),
-                          const Text('Govt.Scheme')
-                        ],
-                      ),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/Farming.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuilder(
+                                  "Farming", 'hi') : Text('Farming')
+
+                            ],
+                          ),
+                          onTap: () {
+                            log('farming button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (
+                                        context) => const FarmingScreen()));
+                          },
+                        )),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/bhaisaab.jpg',
+                                width: 20,
+                                height: 20,
+                                //fit: BoxFit.cover,
+                              ),
+                              (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
+                              //const Text('Farming')
+                            ],
+                          ),
+                          onTap: () {
+                            log('chat bot button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (
+                                        context) => const ChatHomeScreen()));
+                          },
+                        )),
+                    Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/govt_schemes.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
+                            ],
+                          ),
                           onTap: () {
                             log('mandi rates button pressed');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const govtSchemeScreen()));
+                                    builder: (
+                                        context) => const govtSchemeScreen()));
                           },
-                    )),
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/rupee-sign.png',
-                              height: 20, width: 20),
-                          const Text('Mandi Rates')
-                        ],
-                      ),
-                      onTap: () {
-                        log('mandi rates button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChatMandiScreen()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/rupee-sign.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuilder(
+                                  "Mandi Rates", 'hi') : Text('Mandi Rates')
+                            ],
+                          ),
+                          onTap: () {
+                            log('mandi rates button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (
+                                        context) => const MandiScreen()));
+                          },
+                        )),
                   ],
                 ))
           ]),
@@ -217,6 +232,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 200,
                 fit: BoxFit.fill,
               )),
+          DropdownButton<String>(
+            value: language,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 12,
+            elevation: 1,
+            style: const TextStyle(color: Colors.teal),
+            underline: Container(
+              height: 2,
+              width: 25,
+              color: Colors.tealAccent,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                language = newValue!;
+              });
+            },
+            items: <String>['English', 'Hindi']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
           Column(children: <Widget>[
             Container(
                 decoration: const BoxDecoration(
@@ -249,8 +288,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: <Widget>[
                               Image.asset('assets/images/mausam.jpg',
-                                  height: 130, width: 190,fit: BoxFit.fill),
-                              const Text('Weather')
+                                  height: 130, width: 190, fit: BoxFit.fill),
+                              (language == 'Hindi') ? buildFutureBuilder(
+                                  "Weather", 'hi') : Text('Weather')
                             ],
                           ),
                           onTap: () {
@@ -266,8 +306,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: <Widget>[
                               Image.asset('assets/images/kisani.png',
-                                  height: 130, width: 190,fit: BoxFit.fill),
-                              const Text('Farming')
+                                  height: 130, width: 190, fit: BoxFit.fill),
+                              (language == 'Hindi') ? buildFutureBuilder(
+                                  "Farming", 'hi') : Text('Farming')
                             ],
                           ),
                           onTap: () {
@@ -275,7 +316,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmingScreen()));
+                                    builder: (
+                                        context) => const FarmingScreen()));
                           },
                         )),
                     // Expanded(
@@ -403,7 +445,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 130,
                                 fit: BoxFit.cover,
                               ),
-                              const Text('AskBhaisaab')
+                              (language == 'Hindi') ? Text('आस्क भाईसाब') : Text('AskBhaisaab')
+
                               //const Text('Farming')
                             ],
                           ),
@@ -412,7 +455,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatHomeScreen()));
+                                    builder: (
+                                        context) => const ChatHomeScreen()));
                           },
                         )),
                     // Expanded(
@@ -433,8 +477,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: <Widget>[
                               Image.asset('assets/images/rupee-sign.jpg',
-                                  height: 130, width: 190,fit: BoxFit.fill),
-                              const Text('Mandi Rates')
+                                  height: 130, width: 190, fit: BoxFit.fill),
+                              (language == 'Hindi') ? buildFutureBuilder(
+                                  "Mandi Rates", 'hi') : Text('Mandi Rates')
                             ],
                           ),
                           onTap: () {
@@ -442,7 +487,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatMandiScreen()));
+                                    builder: (
+                                        context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -536,7 +582,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: <Widget>[
                               Image.asset('assets/images/govt.png',
                                   height: 110, width: 190),
-                              const Text('Govt.Scheme')
+                              (language == 'Hindi') ? Text('सरकारी योजना') : Text('Govt.Scheme')
                             ],
                           ),
                           onTap: () {
@@ -544,7 +590,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChatSchemeScreen()));
+                                    builder: (
+                                        context) => const ChatSchemeScreen()));
                           },
                         )),
                     // Expanded(
@@ -567,52 +614,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ))
           ]),
-            // Column(
-            //   // crossAxisAlignment: CrossAxisAlignment.stretch,
-            //   children: <Widget>[
-            //   Expanded(
-            //   child: Column(
-            //   crossAxisAlignment: CrossAxisAlignment.stretch,
-            //   children: <Widget>[
-            //   Expanded(
-            //   child: Container(
-            //   color: Colors.red,
-            //   ),
-            //   ),
-            //   Expanded(
-            //   child: Container(
-            //   color: Colors.yellow,
-            //   ),
-            //   ),
-            //   ],
-            //   ),
-            //   ),
-            //   Expanded(
-            //   child: Column(
-            //   crossAxisAlignment: CrossAxisAlignment.stretch,
-            //   children: <Widget>[
-            //   Expanded(
-            //   child: Container(
-            //   color: Colors.purple,
-            //   ),
-            //   ),
-            //   Expanded(
-            //   child: Container(
-            //   color: Colors.black,
-            //   ),
-            //   ),
-            //   ],
-            //   ),
-            //   ),
-            //   ],
-            // ),
-
-
-
-
-
-
-
+          // Column(
+          //   // crossAxisAlignment: CrossAxisAlignment.stretch,
+          //   children: <Widget>[
+          //   Expanded(
+          //   child: Column(
+          //   crossAxisAlignment: CrossAxisAlignment.stretch,
+          //   children: <Widget>[
+          //   Expanded(
+          //   child: Container(
+          //   color: Colors.red,
+          //   ),
+          //   ),
+          //   Expanded(
+          //   child: Container(
+          //   color: Colors.yellow,
+          //   ),
+          //   ),
+          //   ],
+          //   ),
+          //   ),
+          //   Expanded(
+          //   child: Column(
+          //   crossAxisAlignment: CrossAxisAlignment.stretch,
+          //   children: <Widget>[
+          //   Expanded(
+          //   child: Container(
+          //   color: Colors.purple,
+          //   ),
+          //   ),
+          //   Expanded(
+          //   child: Container(
+          //   color: Colors.black,
+          //   ),
+          //   ),
+          //   ],
+          //   ),
+          //   ),
+          //   ],
+          // ),
 
 
           // Container(
@@ -667,26 +707,6 @@ class _HomeScreenState extends State<HomeScreen> {
           //       ]
           //       )
           // )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
           // Container(
@@ -758,6 +778,24 @@ class _HomeScreenState extends State<HomeScreen> {
           //     ))
         ],
       ),
+    );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }

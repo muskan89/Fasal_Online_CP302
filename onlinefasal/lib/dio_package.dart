@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'Content/constants.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:translator/translator.dart';
 
 // hey guys today we are learing that how to get your current location weather using geolocation publication
 class Weatherr extends StatefulWidget {
@@ -12,6 +13,7 @@ class Weatherr extends StatefulWidget {
 }
 
 class _WeatherrState extends State<Weatherr> {
+  final translator = GoogleTranslator();
   // create a async method to get data from API
   Future getWeather() async {
     // use try catch block for any exception
@@ -132,7 +134,7 @@ class _WeatherrState extends State<Weatherr> {
                             ),
                             onPressed: () {
                               setState(() {
-                                location = controller.text;
+                                location = (language=='hindi')? buildFutureBuilder(controller.text, 'en') :controller.text;
                                 loading = false;
                               });
                               getWeather();
@@ -143,20 +145,20 @@ class _WeatherrState extends State<Weatherr> {
                     ),
                     // buildWeatherIcon(),
                     buildTempField(height),
-                    // buildRowData(
-                    //   data: tempf.toString() + ' f',
-                    //   text: 'Temp in F',
-                    // ),
+                    buildRowData(
+                      data: tempf.toString() + ' f',
+                      text: 'Temperature (degree F)',
+                    ),
                     const SizedBox(height: 10),
                     buildRowData(
                       data: '$humidity %',
                       text: 'Humidity',
                     ),
                     const SizedBox(height: 10),
-                    // buildRowData(
-                    //   data: wind.toString() + ' Kph',
-                    //   text: 'Wind',
-                    // ),
+                    buildRowData(
+                      data: wind.toString() + ' Km per hour',
+                      text: '        Wind',
+                    ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2),
                     const SizedBox(height: 10),
@@ -191,11 +193,13 @@ class _WeatherrState extends State<Weatherr> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        (language == 'Hindi') ? buildFutureBuilder(
+            text, 'hi') : Text(
           text,
           style: customGrey,
         ),
-        Text(
+        (language == 'Hindi') ? buildFutureBuilder(
+            data, 'hi') :Text(
           data,
           style: customGrey,
         ),
@@ -231,7 +235,8 @@ class _WeatherrState extends State<Weatherr> {
     return TextField(
       controller: controller,
       decoration: const InputDecoration(
-        hintText: 'Search City',
+        hintText: 'Search City/शहर खोजें',
+        //(language == 'Hindi') ? 'शहर खोजें' :'Search City',
         hintStyle: TextStyle(
           color: Colors.black,
         ),
@@ -298,6 +303,39 @@ class _WeatherrState extends State<Weatherr> {
           ),
         ),
       ],
+    );
+  }Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuilder(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: customGrey);
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuilderappdata(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: smallText.copyWith(
+            color: Colors.black,
+          ),);
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }

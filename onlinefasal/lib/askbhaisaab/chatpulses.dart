@@ -12,6 +12,8 @@ import 'package:onlinefasal/mandirate.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 import 'chatmandi.dart';
 import 'chatscheme.dart';
@@ -27,6 +29,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
   TextEditingController pulsename = TextEditingController();
   TextEditingController querytype = TextEditingController();
   TextEditingController query = TextEditingController();
+  final translator = GoogleTranslator();
+
   Future<DBResponse>? futureresponse;
   int _selectedpulses = 54;
   int _selectedQueryType = 1;
@@ -79,8 +83,11 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: Text("Fasal Online",
+                Expanded(
+                  child: (language=='Hindi') ?Text("फसल औनलाईन",
+                      style: TextStyle(
+                          color: Color.fromRGBO(0, 194, 146, 1),
+                          fontSize: 25.0)):Text("Fasal Online",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 194, 146, 1),
                           fontSize: 25.0)),
@@ -102,17 +109,18 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const LoginScreen()));
+                                      const LoginScreen()));
                             }),
                       ]),
                 )
               ],
             )
           ]),
+
           Column(children: <Widget>[
             Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Color.fromRGBO(0, 194, 146, 0.28),
                 ),
                 child: Row(
@@ -120,55 +128,66 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   children: [
                     Expanded(
                       child: InkWell(
-                        child: Column(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/home.png',
-                            ),
-                            const Text('Home')
-                          ],
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/home.png',
+                                height: 20,
+                                width: 20,
+                              ),
+                              (language == 'Hindi') ? Text('होम') : Text('Home')
+                            ],
+                          ),
                         ),
                         onTap: () {
                           log('Home button pressed');
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
+                          );
                         },
                       ),
                     ),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/weather.png'),
-                          const Text('Weather')
-                        ],
-                      ),
-                      onTap: () {
-                        log('weather button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Weatherr()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/weather.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Weather", 'hi') : Text('Weather')
+                            ],
+                          ),
+                          onTap: () {
+                            log('weather button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Weatherr()));
+                          },
+                        )),
                     Expanded(
                         child: InkWell(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset('assets/images/Farming.png'),
-                          const Text('Farming')
-                        ],
-                      ),
-                      onTap: () {
-                        log('farming button pressed');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FarmingScreen()));
-                      },
-                    )),
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/Farming.png',
+                                  height: 20, width: 20),
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Farming", 'hi') : Text('Farming')
+
+                            ],
+                          ),
+                          onTap: () {
+                            log('farming button pressed');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (
+                                        context) => const FarmingScreen()));
+                          },
+                        )),
                     Expanded(
                       child: InkWell(
                         child: Container(
@@ -195,7 +214,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                                 height: 44,
                                 fit: BoxFit.cover,
                               ),
-                              const Text('Ask Bhaisaab')
+
+                              (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
                             ],
                           ),
                         ),
@@ -209,13 +229,14 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                       ),
                     )
                     ,
+
                     Expanded(
                         child: InkWell(
                           child: Column(
                             children: <Widget>[
                               Image.asset('assets/images/govt_schemes.png',
                                   height: 20, width: 20),
-                              const Text('Govt.Scheme')
+                              (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                             ],
                           ),
                           onTap: () {
@@ -223,7 +244,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const govtSchemeScreen()));
+                                    builder: (
+                                        context) => const govtSchemeScreen()));
                           },
                         )),
                     Expanded(
@@ -232,7 +254,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                             children: <Widget>[
                               Image.asset('assets/images/rupee-sign.png',
                                   height: 20, width: 20),
-                              const Text('Mandi Rates')
+                              (language == 'Hindi') ? buildFutureBuildertr(
+                                  "Mandi Rates", 'hi') : Text('Mandi Rates')
                             ],
                           ),
                           onTap: () {
@@ -240,7 +263,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MandiScreen()));
+                                    builder: (
+                                        context) => const MandiScreen()));
                           },
                         )),
                   ],
@@ -249,9 +273,15 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
           Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 Expanded(
-                  child: Text(
+                  child: (language == 'Hindi') ? Text(
+                    "दालों के नाम",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 128, 128, 1.0),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                  ):Text(
                     "Pulse Names",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 128, 128, 1.0),
@@ -271,7 +301,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Lentil'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Lentil", 'hi') : Text('Lentil'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,7 +334,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Bengal Gram'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Bengal Gram", 'hi') : Text('Bengal Gram'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -325,7 +357,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Green Gram'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Green Gram", 'hi') : Text('Green Gram'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -347,7 +380,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Kidney Bean'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Kidney Bean", 'hi') : Text('Kidney Bean'),
             ),
             ListTile(
               leading: Radio<int>(
@@ -359,7 +393,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Mash'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Mash Pulse", 'hi') : Text('Mash'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -381,7 +416,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Pigeon Pea'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Pigeon Pea", 'hi') : Text('Pigeon Pea'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -403,7 +439,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('RiceBean'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "RiceBean", 'hi') : Text('RiceBean'),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -428,9 +465,10 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 Expanded(
-                  child: Text("Query Types",
+                  child: (language == 'Hindi') ? buildFutureBuildergr(
+                      "Question Types", 'hi') :Text("Query Types",
                       style: TextStyle(
                           color: Color.fromRGBO(0, 128, 128, 1.0),
                           fontSize: 20.0,
@@ -438,86 +476,6 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                 ),
               ],
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 1 for Cultural Practices",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 3 for Nutrient Management",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 4 for Fertilizer Uses",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 5 for Varieties",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 6 for Weed Management",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 7 for Seeds",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 10 for Water Management",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     Expanded(
-            //       child: Text("Enter 11 for Plant Protection",
-            //           style: TextStyle(
-            //               color: Color.fromRGBO(0, 0, 0, 1.0), fontSize: 15.0)),
-            //     ),
-            //   ],
-            // ),
             ListTile(
               leading: Radio<int>(
                 value: 1,
@@ -528,7 +486,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Cultural Practices'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Cultural Practices", 'hi') :  Text('Cultural Practices'),
             ),
 
             ListTile(
@@ -541,7 +500,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Nutrient Management'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Nutrient Management", 'hi') :  Text('Nutrient Management'),
             ),
 
             ListTile(
@@ -554,7 +514,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Fertilizer Uses'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Fertilizer Uses", 'hi') :  Text('Fertilizer Uses'),
             ),
 
             ListTile(
@@ -567,7 +528,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Varieties'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Varieties", 'hi') :  Text('Varieties'),
             ),
 
             ListTile(
@@ -580,7 +542,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Weed Management'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Weed Management", 'hi') :  Text('Weed Management'),
             ),
 
             ListTile(
@@ -593,7 +556,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Seeds'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Seeds", 'hi') :  Text('Seeds'),
             ),
 
             ListTile(
@@ -606,7 +570,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Water Management'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Water Management", 'hi') :  Text('Water Management'),
             ),
 
             ListTile(
@@ -619,7 +584,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   });
                 },
               ),
-              title: const Text('Plant Protection'),
+              title: (language == 'Hindi') ? buildFutureBuildertr(
+                  "Plant Protection", 'hi') :  Text('Plant Protection'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -740,10 +706,10 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                 width: 300,
                 child: TextField(
                     controller: query,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       //icon: const Icon(Icons.person),
-                      hintText: 'Enter the query',
-                      labelText: 'query',
+                      hintText: (language == 'Hindi') ? 'प्रश्न दर्ज करें ': 'Enter the query',
+                      labelText: (language == 'Hindi') ? 'प्रश्न': 'query',
                     ))),
             AvatarGlow(
               animate: _isListening,
@@ -775,7 +741,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                   '10');
             });
           },
-          child: const Text('get answer'),
+          child: (language == 'Hindi') ? buildFutureBuildertr(
+              "get the answer", 'hi'): Text('get answer'),
         ),
       ],
     );
@@ -808,80 +775,69 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
                         //       style: const TextStyle(fontSize: 15.0))]),
                         // ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Similarity Score with our database',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              "Message", 'hi'):
+                          Text('Message',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Similar_score}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Message}', 'hi'):Text('${dbResponse?.Message}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Message',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              'Your Question', 'hi'):
+                          Text('Your Question',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Message}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Question}', 'hi'):Text('${dbResponse?.Question}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Your Question',
+                          Column(children:  [
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                'Similar question that we find', 'hi'):Text('Similar question that we find',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
                                     fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Question}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Question_Database}', 'hi'):Text('${dbResponse?.Question_Database}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Similar question that we find',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              "Answer", 'hi'):Text('Answer',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Question_Database}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Answer',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Answer}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Reference',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Reference}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Answer}', 'hi'):Text('${dbResponse?.Answer}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
@@ -901,8 +857,8 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
               //     style: const TextStyle(fontSize: 25.0)),
               // Text('Answer : ${dbResponse?.Answer}',
               //     style: const TextStyle(fontSize: 25.0)),
-              // Text('Reference : ${dbResponse?.Reference}',
-              //     style: const TextStyle(fontSize: 25.0)),
+              Text('Reference : ${dbResponse?.Reference}',
+                  style: const TextStyle(fontSize: 10.0)),
             ],
           );
         } else if (snapshot.hasError) {
@@ -910,6 +866,58 @@ class _ChatPulsesScreenState extends State<ChatPulsesScreen> {
         }
 
         return const CircularProgressIndicator();
+      },
+    );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuildertr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuildergr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuilderans(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              fontSize: 15.0,
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }

@@ -11,7 +11,8 @@ import 'package:onlinefasal/mandirate.dart';
 import 'package:onlinefasal/models/dbresponse.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
-
+import 'package:onlinefasal/Content/constants.dart';
+import 'package:translator/translator.dart';
 
 
 class govtSchemeScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
   Future<DBResponse>? futureresponse;
   int _selectedscheme = 25;
   int _selectedQueryType = 2;
-
+  final translator = GoogleTranslator();
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = '';
@@ -77,8 +78,11 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                         ],
                       ),
                     ),
-                    const Expanded(
-                      child: Text("Fasal Online",
+                    Expanded(
+                      child: (language=='Hindi') ?Text("फसल औनलाईन",
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 194, 146, 1),
+                              fontSize: 25.0)):Text("Fasal Online",
                           style: TextStyle(
                               color: Color.fromRGBO(0, 194, 146, 1),
                               fontSize: 25.0)),
@@ -107,6 +111,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                   ],
                 )
               ]),
+
               Column(children: <Widget>[
                 Container(
                     decoration: const BoxDecoration(
@@ -123,7 +128,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                                 Image.asset(
                                   'assets/images/home.png',
                                 ),
-                                const Text('Home')
+                                (language == 'Hindi') ? Text('होम') : Text('Home')
                               ],
                             ),
                             onTap: () {
@@ -140,7 +145,8 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                               child: Column(
                                 children: <Widget>[
                                   Image.asset('assets/images/weather.png'),
-                                  const Text('Weather')
+                                  (language == 'Hindi') ? buildFutureBuildertr(
+                                      "Weather", 'hi') : Text('Weather')
                                 ],
                               ),
                               onTap: () {
@@ -156,7 +162,8 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                               child: Column(
                                 children: <Widget>[
                                   Image.asset('assets/images/Farming.png'),
-                                  const Text('Farming')
+                                  (language == 'Hindi') ? buildFutureBuildertr(
+                                      "Farming", 'hi') : Text('Farming')
                                 ],
                               ),
                               onTap: () {
@@ -177,7 +184,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                                     height: 20,
                                     //fit: BoxFit.cover,
                                   ),
-                                  const Text('AskBhaisaab')
+                                  (language == 'Hindi') ?Text('आस्क भाईसाब') : Text('AskBhaisaab')
                                   //const Text('Farming')
                                 ],
                               ),
@@ -214,7 +221,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                                     height: 20,
                                     width: 20,
                                   ),
-                                  const Text('Govt.Scheme')
+                                  (language == 'Hindi') ? Text('सरकारी योजना')  : Text('Govt.Scheme')
                                 ],
                               ),
                             ),
@@ -234,7 +241,8 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                                 children: <Widget>[
                                   Image.asset('assets/images/rupee-sign.png',
                                       height: 20, width: 20),
-                                  const Text('Mandi Rates')
+                                  (language == 'Hindi') ? buildFutureBuildertr(
+                                      "Mandi Rates", 'hi') : Text('Mandi Rates')
                                 ],
                               ),
                               onTap: () {
@@ -299,9 +307,13 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children:  [
                     Expanded(
-                      child: Text("Scheme Names",
+                      child: (language == 'Hindi') ? Text("योजनाओं के नाम",
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 128, 128, 1.0),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold)) : Text("Scheme Names",
                           style: TextStyle(
                               color: Color.fromRGBO(0, 128, 128, 1.0),
                               fontSize: 20.0,
@@ -330,7 +342,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                       });
                     },
                   ),
-                  title: const Text('Pradhan Mantri Fasal Bima Yojana (PMFBY)'),
+                  title: (language == 'Hindi') ? Text('प्रधानमंत्री फसल बीमा योजना (पीएमएफबीवाई)') : Text('Pradhan Mantri Fasal Bima Yojana (PMFBY)'),
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -353,7 +365,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                       });
                     },
                   ),
-                  title: const Text('PM Kisan Credit card Yojna'),
+                  title: (language == 'Hindi') ?  Text('पीएम किसान क्रेडिट कार्ड योजना')  : Text('PM Kisan Credit card Yojna'),
                 ),
                 ListTile(
                   leading: Radio<int>(
@@ -365,7 +377,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                       });
                     },
                   ),
-                  title: const Text('Pradhan Mantri KISAN Samman Nidhi Yojana'),
+                  title: (language == 'Hindi') ?   Text('प्रधानमंत्री किसान सम्मान निधि योजना')  : Text('Pradhan Mantri KISAN Samman Nidhi Yojana'),
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -397,7 +409,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                       });
                     },
                   ),
-                  title: const Text('Pradhan Mantri Kisan Maan-Dhan Yojana'),
+                  title: (language == 'Hindi') ? Text('प्रधानमंत्री किसान मान-धन योजना') : Text('Pradhan Mantri Kisan Maan-Dhan Yojana'),
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -420,7 +432,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                       });
                     },
                   ),
-                  title: const Text('PM Kusum Yojana'),
+                  title: (language == 'Hindi') ? Text('पीएम कुसुम योजना') : Text('PM Kusum Yojana'),
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -433,18 +445,18 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                 //     ),
                 //   ],
                 // ),
-                ListTile(
-                  leading: Radio<int>(
-                    value: 30,
-                    groupValue: _selectedscheme,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedscheme = value!;
-                      });
-                    },
-                  ),
-                  title: const Text('Pardhan Mantri Kisan SAMPADA Yojana'),
-                ),
+                // ListTile(
+                //   leading: Radio<int>(
+                //     value: 30,
+                //     groupValue: _selectedscheme,
+                //     onChanged: (value) {
+                //       setState(() {
+                //         _selectedscheme = value!;
+                //       });
+                //     },
+                //   ),
+                //   title: const Text('Pardhan Mantri Kisan SAMPADA Yojana'),
+                // ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //   children: const [
@@ -465,7 +477,7 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                       });
                     },
                   ),
-                  title: const Text('Machinery/Equipment Subsidy'),
+                  title: (language == 'Hindi') ?  Text('मशीनरी/उपकरण सब्सिडी')  : Text('Machinery/Equipment Subsidy'),
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -652,10 +664,10 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                 width: 300,
                 child: TextField(
                     controller: query,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       //icon: const Icon(Icons.person),
-                      hintText: 'Enter the query:',
-                      labelText: 'query',
+                      hintText: (language == 'Hindi') ? 'प्रश्न दर्ज करें ': 'Enter the query',
+                      labelText: (language == 'Hindi') ? 'प्रश्न': 'query',
                     ))),
             AvatarGlow(
               animate: _isListening,
@@ -687,7 +699,8 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                   '5');
             });
           },
-          child: const Text('get answer'),
+          child: (language == 'Hindi') ? buildFutureBuildertr(
+              "get the answer", 'hi'): Text('get answer'),
         ),
       ],
     );
@@ -713,99 +726,78 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
                           width: 2),
                       children: [
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Scheme',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              "Message", 'hi'):
+                          Text('Message',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('$_selectedscheme',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Message}', 'hi'):Text('${dbResponse?.Message}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Similarity Score with our database',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              'Your Question', 'hi'):
+                          Text('Your Question',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Similar_score}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Question}', 'hi'):Text('${dbResponse?.Question}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Message',
+                          Column(children:  [
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                'Similar question that we find', 'hi'):Text('Similar question that we find',
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Color.fromRGBO(0, 128, 128, 1.0),
                                     fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Message}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Question_Database}', 'hi'):Text('${dbResponse?.Question_Database}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
                         TableRow(children: [
-                          Column(children: const [
-                            Text('Your Question',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
+                          Column(children:  [(language=='Hindi')?
+                          buildFutureBuilderans(
+                              "Answer", 'hi'):Text('Answer',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color.fromRGBO(0, 128, 128, 1.0),
+                                  fontWeight: FontWeight.bold))
                           ]),
                           Column(children: [
-                            Text('${dbResponse?.Question}',
+                            (language=='Hindi')?
+                            buildFutureBuilderans(
+                                '${dbResponse?.Answer}', 'hi'):Text('${dbResponse?.Answer}',
                                 style: const TextStyle(fontSize: 15.0))
                           ]),
                         ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Similar question that we find',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Question_Database}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Answer',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Answer}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Column(children: const [
-                            Text('Reference',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Color.fromRGBO(0, 128, 128, 1.0),
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                          Column(children: [
-                            Text('${dbResponse?.Reference}',
-                                style: const TextStyle(fontSize: 15.0))
-                          ]),
-                        ]),
+
                       ],
                     ),
                   )),
+              Text('Reference : ${dbResponse?.Reference}',
+                  style: const TextStyle(fontSize: 10.0)),
             ],
           );
         } else if (snapshot.hasError) {
@@ -813,6 +805,58 @@ class _govtSchemeScreenState extends State<govtSchemeScreen> {
         }
 
         return const CircularProgressIndicator();
+      },
+    );
+  }
+  Future<String> translate(String text, String toLanguage) async {
+    var translation = await translator.translate(text, to: toLanguage);
+    return translation.text;
+  }
+  FutureBuilder<String> buildFutureBuildertr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(fontSize: 20));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuildergr(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+  FutureBuilder<String> buildFutureBuilderans(textToTranslate, toLanguage){
+    return FutureBuilder<String>(
+      future: translate(textToTranslate, toLanguage),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!,style: const TextStyle(
+              fontSize: 15.0,
+              color: Color.fromRGBO(0, 128, 128, 1.0),
+              fontWeight: FontWeight.bold));
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }
